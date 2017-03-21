@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Lista zadań">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+                     <children>
+                        <TableView prefHeight="330.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn prefWidth="136.0" text="Kto ma wykonać?">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="Imię" />
+                                  <TableColumn prefWidth="75.0" text="Nazwisko" />
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn prefWidth="127.0" text="Nazwa samochodu" />
+                              <TableColumn prefWidth="127.0" text="Do zrobienia" />
+                              <TableColumn prefWidth="106.0" text="Data dodawania" />
+                              <TableColumn prefWidth="89.0" text="Stan zadania" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Lista samochodów">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+                     <children>
+                        <TableView prefHeight="330.0" prefWidth="600.0">
+                          <columns>
+                              <TableColumn prefWidth="142.0" text="Nazwa samochodu" />
+                            <TableColumn prefWidth="87.0" text="Właściciel" />
+                              <TableColumn prefWidth="128.0" text="Numer telefonu" />
+                              <TableColumn prefWidth="127.0" text="Do zrobienia" />
+                              <TableColumn prefWidth="115.0" text="Stan samochodu" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="531.0" layoutY="368.0" mnemonicParsing="false" text="Odśwież" />
+   </children>
+</AnchorPane>
