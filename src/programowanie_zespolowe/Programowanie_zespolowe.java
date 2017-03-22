@@ -24,15 +24,18 @@ public class Programowanie_zespolowe extends Application {
         Scene scene2 = new Scene(root2);
         
         stage.setScene(scene);
+        stage.show();
+        
         pracownikStage.setTitle("Panel Pracownika");
         pracownikStage.setScene(scene1);
-        stage.show();
+        pracownikStage.setResizable(false);
+        pracownikStage.sizeToScene();
         pracownikStage.show();
         
-        stage.setScene(scene);
         dyrektorStage.setTitle("Panel Dyrektora");
         dyrektorStage.setScene(scene2);
-        stage.show();
+        pracownikStage.setResizable(false);
+        pracownikStage.sizeToScene();
         dyrektorStage.show();
     }
     

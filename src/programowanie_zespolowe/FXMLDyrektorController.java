@@ -27,13 +27,13 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class FXMLDyrektorController implements Initializable {
     
     
-   private Label label;
+    private Label label;
     
-   @FXML
+    @FXML
     private Button edycja;
-   @FXML
+    @FXML
     private Button wprowadzZmiany;
-   @FXML
+    @FXML
     private Button usunPracownika;
    
     @FXML
@@ -43,11 +43,11 @@ public class FXMLDyrektorController implements Initializable {
     }
     @FXML
     private void zmiana(ActionEvent event)  {
-        showMessageDialog(null, "Edyja zatwierdzona!");
+        showMessageDialog(null, "Edycja zatwierdzona!");
         
     }
    
-         @FXML
+    @FXML
     private void  usunPracownika(ActionEvent event)  {
         showMessageDialog(null, "Pracownik Zwolniony!");
         
@@ -55,9 +55,12 @@ public class FXMLDyrektorController implements Initializable {
      @FXML
     private void onkoEdycji(ActionEvent event) throws IOException {
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
-        Scene edit_scene= new Scene(loader);
-        Stage edit_stage =new Stage();
+        Scene edit_scene = new Scene(loader);
+        Stage edit_stage = new Stage();
+        edit_stage.setTitle("Edycja Pracownika");
         edit_stage.setScene(edit_scene);
+        edit_stage.setResizable(false);
+        edit_stage.sizeToScene();
         edit_stage.initModality(Modality.APPLICATION_MODAL);
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
