@@ -34,8 +34,8 @@ public class Programowanie_zespolowe extends Application {
         
         dyrektorStage.setTitle("Panel Dyrektora");
         dyrektorStage.setScene(scene2);
-        pracownikStage.setResizable(false);
-        pracownikStage.sizeToScene();
+        dyrektorStage.setResizable(false);
+        dyrektorStage.sizeToScene();
         dyrektorStage.show();
     }
     
