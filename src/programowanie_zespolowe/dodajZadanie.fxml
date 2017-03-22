@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="458.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLKierownikController">
+   <children>
+      <Button layoutX="86.0" layoutY="408.0" mnemonicParsing="false" text="Dodaj Zadanie" />
+      <ChoiceBox layoutX="57.0" layoutY="35.0" prefWidth="150.0" />
+      <TextArea layoutX="32.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" text="Do zrobienia" />
+      <TextField layoutX="58.0" layoutY="372.0" text="Stan zadania" />
+      <TextField layoutX="58.0" layoutY="322.0" text="Data dodania" />
+      <Label layoutX="72.0" layoutY="39.0" text="Wybor samochodu" />
+   </children>
+</AnchorPane>

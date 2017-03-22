@@ -57,10 +57,10 @@
                           <columns>
                               <TableColumn prefWidth="93.0" text="Imie " />
                       <TableColumn prefWidth="95.0" text="Nazwisko" />
-                        <TableColumn prefWidth="168.0" text="Staż pracy" />
+                        <TableColumn prefWidth="168.0" text="Specjalizacja" />
                         <TableColumn prefWidth="148.0" text="Nr. tel" />
-                        <TableColumn minWidth="0.0" prefWidth="94.0" text="Wynagrodzenie" />
-                        <TableColumn prefWidth="100.0" text="Stanowisko" />
+                        <TableColumn minWidth="0.0" prefWidth="94.0" text="Status" />
+                        <TableColumn prefWidth="100.0" text="Aktualnie wykonywane zadanie" />
                           </columns>
                         </TableView>
                      </children>
@@ -69,9 +69,9 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="620.0" layoutY="516.0" mnemonicParsing="false" text="Odśwież" />
+      <Button layoutX="612.0" layoutY="516.0" mnemonicParsing="false" text="Odśwież" />
       <Button layoutX="489.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj samochód" />
       <Button layoutX="380.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj zadanie" />
-      <Button layoutX="274.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj " />
+      <Button layoutX="254.0" layoutY="516.0" mnemonicParsing="false" text="Przydziel zadanie" />
    </children>
 </AnchorPane>
