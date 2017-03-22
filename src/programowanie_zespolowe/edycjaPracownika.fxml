@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLDyrektorController">
+   <children>
+      <Button fx:id="wprowadzZmiany" layoutX="24.0" layoutY="282.0" mnemonicParsing="false" onAction="#zmiana" text="Wprowadź zmiany" />
+      <TextField layoutX="14.0" layoutY="14.0" text="Imie" />
+      <TextField layoutX="14.0" layoutY="60.0" text="Nazwisko" />
+      <TextField layoutX="14.0" layoutY="105.0" text="Staż pracy" />
+      <TextField layoutX="14.0" layoutY="151.0" text="nr.tel" />
+      <TextField layoutX="14.0" layoutY="200.0" text="Wynagrodzenie" />
+      <TextField layoutX="14.0" layoutY="246.0" text="Stanowisko" />
+      <Button fx:id="usunPracownika" layoutX="22.0" layoutY="328.0" mnemonicParsing="false" onAction="#usunPracownika" text="Zwolnij pracownika" />
+   </children>
+</AnchorPane>
