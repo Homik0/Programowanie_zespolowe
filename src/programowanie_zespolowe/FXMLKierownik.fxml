@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLKierownikController">
+  <children>
+      <TabPane prefHeight="508.0" prefWidth="699.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Lista zadań">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+                     <children>
+                        <TableView prefHeight="485.0" prefWidth="699.0">
+                          <columns>
+                            <TableColumn prefWidth="136.0" text="Kto ma wykonać?">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="Imię" />
+                                  <TableColumn prefWidth="75.0" text="Nazwisko" />
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn prefWidth="166.0" text="Nazwa samochodu" />
+                              <TableColumn prefWidth="169.0" text="Do zrobienia" />
+                              <TableColumn prefWidth="114.0" text="Data dodawania" />
+                              <TableColumn prefWidth="99.0" text="Stan zadania" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Lista samochodów">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+                     <children>
+                        <TableView prefHeight="480.0" prefWidth="699.0">
+                          <columns>
+                              <TableColumn prefWidth="142.0" text="Nazwa samochodu" />
+                            <TableColumn prefWidth="103.0" text="Właściciel" />
+                              <TableColumn prefWidth="138.0" text="Numer telefonu" />
+                              <TableColumn prefWidth="207.0" text="Do zrobienia" />
+                              <TableColumn prefWidth="108.0" text="Stan samochodu" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Lista Pracowników">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+                     <children>
+                        <TableView prefHeight="480.0" prefWidth="699.0">
+                          <columns>
+                              <TableColumn prefWidth="93.0" text="Imie " />
+                      <TableColumn prefWidth="95.0" text="Nazwisko" />
+                        <TableColumn prefWidth="168.0" text="Staż pracy" />
+                        <TableColumn prefWidth="148.0" text="Nr. tel" />
+                        <TableColumn minWidth="0.0" prefWidth="94.0" text="Wynagrodzenie" />
+                        <TableColumn prefWidth="100.0" text="Stanowisko" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="620.0" layoutY="516.0" mnemonicParsing="false" text="Odśwież" />
+      <Button layoutX="489.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj samochód" />
+      <Button layoutX="380.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj zadanie" />
+      <Button layoutX="274.0" layoutY="516.0" mnemonicParsing="false" text="Dodaj " />
+   </children>
+</AnchorPane>

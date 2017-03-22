@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane id="AnchorPane" prefHeight="407.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXML_LogowanieController">
+   <children>
+      <Button fx:id="Zaloguj" layoutX="20.0" layoutY="346.0" mnemonicParsing="false" onAction="#logowanie" text="Zaloguj się" />
+      <Label layoutX="24.0" layoutY="82.0" prefHeight="96.0" prefWidth="246.0" text="Warsztat samochodowy" textAlignment="RIGHT" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="20.0" layoutY="178.0" text="Nazwa użytkownika" />
+      <ChoiceBox fx:id="cb" layoutX="20.0" layoutY="306.0" prefWidth="150.0">
+      <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Dyrektor" />
+                    <String fx:value="Kierownik" />
+                    <String fx:value="Pracownik" />
+                </FXCollections>
+      </items>
+   </ChoiceBox>
+      <Button layoutX="20.0" layoutY="266.0" mnemonicParsing="false" onAction="#zmianaHasla" text="Zmiana hasła" />
+      <PasswordField layoutX="20.0" layoutY="220.0" />
+      <Label layoutX="24.0" layoutY="224.0" prefHeight="17.0" prefWidth="41.0" text="Hasło" />
+   </children>
+</AnchorPane>

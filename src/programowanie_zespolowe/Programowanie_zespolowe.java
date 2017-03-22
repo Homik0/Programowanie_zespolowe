@@ -11,34 +11,47 @@ import javafx.stage.Stage;
  * @author Homik
  */
 public class Programowanie_zespolowe extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Stage pracownikStage = new Stage();
+        Stage kierownikStage = new Stage();
         Stage dyrektorStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Stage logowanieStage = new Stage();
         Parent root1 = FXMLLoader.load(getClass().getResource("FXMLPracownik.fxml"));
         Parent root2 = FXMLLoader.load(getClass().getResource("FXMLDyrektor.fxml"));
+        Parent root3 = FXMLLoader.load(getClass().getResource("FXMLKierownik.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Logowanie.fxml"));
         Scene scene = new Scene(root);
         Scene scene1 = new Scene(root1);
         Scene scene2 = new Scene(root2);
-        
-        stage.setScene(scene);
-        stage.show();
-        
+        Scene scene3 = new Scene(root3);
+
         pracownikStage.setTitle("Panel Pracownika");
         pracownikStage.setScene(scene1);
         pracownikStage.setResizable(false);
         pracownikStage.sizeToScene();
         pracownikStage.show();
         
+        kierownikStage.setTitle("Panel Kierownika");
+        kierownikStage.setScene(scene3);
+        kierownikStage.setResizable(false);
+        kierownikStage.sizeToScene();
+        kierownikStage.show();
+
         dyrektorStage.setTitle("Panel Dyrektora");
         dyrektorStage.setScene(scene2);
-        pracownikStage.setResizable(false);
-        pracownikStage.sizeToScene();
+        dyrektorStage.setResizable(false);
+        dyrektorStage.sizeToScene();
         dyrektorStage.show();
+
+        logowanieStage.setTitle("Logowanie");
+        logowanieStage.setScene(scene);
+        logowanieStage.setResizable(false);
+        logowanieStage.sizeToScene();
+        logowanieStage.show();
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="262.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXML_LogowanieController">
+   <children>
+      <TextField layoutX="5.0" layoutY="131.0" text="Nowe hasło" />
+      <TextField layoutX="5.0" layoutY="174.0" text="Powtórz hasło" />
+      <TextField layoutX="5.0" layoutY="70.0" text="Podaj Pesel" />
+      <Button layoutX="5.0" layoutY="214.0" mnemonicParsing="false" text="Zatwierdź zmiany" />
+   </children>
+</AnchorPane>
