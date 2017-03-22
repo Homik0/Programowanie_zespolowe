@@ -6,15 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="277.0" prefWidth="265.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="programowanie_zespolowe.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="196.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLKierownikController">
    <children>
-      <Button layoutX="83.0" layoutY="229.0" mnemonicParsing="false" text="Przydziel Zadanie" />
-      <ChoiceBox layoutX="62.0" layoutY="108.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="62.0" layoutY="51.0" prefWidth="150.0" />
-      <Label layoutX="87.0" layoutY="55.0" text="Wybor samochodu" />
-      <Label layoutX="97.0" layoutY="112.0" text="Wybor zadania" />
-      <ChoiceBox layoutX="62.0" layoutY="176.0" prefWidth="150.0" />
-      <Label layoutX="88.0" layoutY="180.0" text="Wybor pracownika" />
+      <Button fx:id="infoAddPrzydzielPracownika" layoutX="43.0" layoutY="171.0" mnemonicParsing="false" onAction="#infoAddPrzydzielPracownika" text="Przydziel Zadanie" />
+      <ChoiceBox layoutX="23.0" layoutY="75.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="22.0" layoutY="31.0" prefWidth="150.0" />
+      <Label layoutX="47.0" layoutY="35.0" text="Wybor samochodu" />
+      <Label layoutX="58.0" layoutY="79.0" text="Wybor zadania" />
+      <ChoiceBox layoutX="22.0" layoutY="126.0" prefWidth="150.0" />
+      <Label layoutX="48.0" layoutY="130.0" text="Wybor pracownika" />
    </children>
 </AnchorPane>

@@ -8,8 +8,9 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Homik
+ * @author Damian Kawka, Kamil Dudek, Marcin Patyka, Andrzej Patlewicz
  */
+
 public class Programowanie_zespolowe extends Application {
 
     @Override

@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package programowanie_zespolowe;
-import javafx.event.ActionEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,19 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-/**
- *
- * @author Homik
- */
 public class FXMLDyrektorController implements Initializable {
-    
-    
-    private Label label;
     
     @FXML
     private Button edycja;
@@ -38,9 +25,10 @@ public class FXMLDyrektorController implements Initializable {
    
     @FXML
     private void dodajPracownika(ActionEvent event)  {
-        showMessageDialog(null, "Pracownik Dodany!");
+        showMessageDialog(null, "Pracownik dodany!");
         
     }
+    
     @FXML
     private void zmiana(ActionEvent event)  {
         showMessageDialog(null, "Edycja zatwierdzona!");
@@ -48,11 +36,11 @@ public class FXMLDyrektorController implements Initializable {
     }
    
     @FXML
-    private void  usunPracownika(ActionEvent event)  {
-        showMessageDialog(null, "Pracownik Zwolniony!");
-        
+    private void usunPracownika(ActionEvent event)  {
+        showMessageDialog(null, "Pracownik zwolniony!"); 
     }
-     @FXML
+    
+    @FXML
     private void onkoEdycji(ActionEvent event) throws IOException {
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
         Scene edit_scene = new Scene(loader);
@@ -66,10 +54,8 @@ public class FXMLDyrektorController implements Initializable {
         edit_stage.showAndWait();
     }
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
 }
