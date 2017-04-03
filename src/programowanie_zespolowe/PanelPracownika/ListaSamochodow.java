@@ -10,7 +10,6 @@ public class ListaSamochodow {
     private final StringProperty todo;
     private final StringProperty stancar;
 
-    //Default constructor
     public ListaSamochodow(String namecar, String owner, String nrtel, String todo, String stancar) {
         this.namecar = new SimpleStringProperty(namecar);
         this.owner = new SimpleStringProperty(owner);
@@ -19,7 +18,6 @@ public class ListaSamochodow {
         this.stancar = new SimpleStringProperty(stancar);
     }
 
-    //Getters
     public String getNameCar() {
         return namecar.get();
     }
@@ -36,7 +34,6 @@ public class ListaSamochodow {
         return stancar.get();
     }
     
-    //Setters
     public void setNameCar(String value) {
         namecar.set(value);
     }
@@ -53,7 +50,6 @@ public class ListaSamochodow {
         stancar.set(value);
     }
     
-    //Property values
     public StringProperty namecarProperty() {
         return namecar;
     }

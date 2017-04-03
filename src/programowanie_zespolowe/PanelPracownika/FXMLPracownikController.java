@@ -51,10 +51,8 @@ public class FXMLPracownikController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
-            // Execute query and store result in a resultset
             ResultSet rs = conn.createStatement().executeQuery("select * from zlecenia");
             while (rs.next()) {
-                //get string from db, whichever way 
                 data.add(new ListaSamochodow(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
         } catch (SQLException ex) {
