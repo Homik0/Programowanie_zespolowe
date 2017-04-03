@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS `listazadan` (
 
 /*!40000 ALTER TABLE `listazadan` DISABLE KEYS */;
 INSERT INTO `listazadan` (`id_zadania`, `id_pracownik`, `id_zlecenia`, `to_do`, `specjalizacja`, `stan_zadania`, `data_dodawania`) VALUES
-	(1, 1, 1, 'Wymieniac opony', 'Technik sam.', 'Gotowy', '2017-04-02 23:36:15');
+	(1, 1, 1, 'Wymieniac opony', 'Technik sam.', 'Gotowy', '2017-04-02 23:36:15'),
+	(2, 3, 3, 'Tak jak w opisie pojazdu', 'Mechanik', 'Zajęty', '2017-04-04 00:07:12');
 /*!40000 ALTER TABLE `listazadan` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `pracownik` (
@@ -42,7 +43,8 @@ CREATE TABLE IF NOT EXISTS `pracownik` (
 /*!40000 ALTER TABLE `pracownik` DISABLE KEYS */;
 INSERT INTO `pracownik` (`id_pracownik`, `id_user`, `staz_pracy`, `nr_tel`, `wynagrodzenie`, `specjalizacja`, `status`) VALUES
 	(1, 5, '5 years', '12312321', '2300zl', 'technik komp.', 'wolny'),
-	(2, 3, '4 years', '12312321', '3300zl', 'technik komp.', 'wolny');
+	(2, 3, '4 years', '12312321', '3300zl', 'technik komp.', 'wolny'),
+	(3, 7, '8 years', '545772877', '3000zl', 'Mechanik', 'Zajęty');
 /*!40000 ALTER TABLE `pracownik` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -60,7 +62,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id_user`, `imie`, `nazwisko`, `login`, `password`, `stan_user`, `data_dolaczenia`, `data_zalogowania`) VALUES
 	(3, 'Jan', 'Kowalski', 'jkowal', 'kowal44', 'Kierownik', '2017-04-02 22:18:09', '2017-04-02 22:18:09'),
-	(5, 'Tomek', 'Kowalski', 'tomek1', 't9esd', 'Pracownik', '2017-04-02 23:31:34', '2017-04-02 23:31:34');
+	(5, 'Tomek', 'Kowalski', 'tomek1', 't9esd', 'Pracownik', '2017-04-02 23:31:34', '2017-04-02 23:31:34'),
+	(6, 'Andrzej', 'Duda', 'rpduda', 'pr3zyd3nt', 'Dyrektor', '2017-04-03 23:56:56', '2017-04-03 23:56:56'),
+	(7, 'Janusz', 'Klimosz', 'janus', 'kli1m0', 'pracownik', '2017-04-04 00:03:49', '2017-04-04 00:03:49');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `zlecenia` (
@@ -75,7 +79,9 @@ CREATE TABLE IF NOT EXISTS `zlecenia` (
 
 /*!40000 ALTER TABLE `zlecenia` DISABLE KEYS */;
 INSERT INTO `zlecenia` (`id_zlecenia`, `name_car`, `owner`, `nr_tel`, `to_do`, `stan_car`) VALUES
-	(1, 'BMW', 'Jan Kowalski', '123123', 'Wymieniać opony', 'Oczekuje');
+	(1, 'BMW', 'Jan Kowalski', '123123', 'Wymieniać opony', 'Oczekuje'),
+	(2, 'Mercedes', 'Szef BOR Michał Kulasa', '997997997', 'Wymieniać silnika i lampy', 'W trakcie'),
+	(3, 'Audi', 'Wladimir Putin', '423423423', 'Układ hamulcowy do wymiany', 'Wolny');
 /*!40000 ALTER TABLE `zlecenia` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
