@@ -1,4 +1,4 @@
-package programowanie_zespolowe;
+package programowanie_zespolowe.PanelDyrektora;
 
 import java.io.IOException;
 import java.net.URL;

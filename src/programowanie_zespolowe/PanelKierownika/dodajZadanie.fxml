@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="458.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="458.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
    <children>
       <Button fx:id="infoAddZadanie" layoutX="86.0" layoutY="408.0" mnemonicParsing="false" onAction="#infoAddZadanie" text="Dodaj Zadanie" />
       <ChoiceBox layoutX="57.0" layoutY="35.0" prefWidth="150.0" />
