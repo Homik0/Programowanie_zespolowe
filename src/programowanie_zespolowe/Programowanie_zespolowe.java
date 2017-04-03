@@ -19,7 +19,7 @@ public class Programowanie_zespolowe extends Application {
         Stage kierownikStage = new Stage();
         Stage dyrektorStage = new Stage();
         Stage logowanieStage = new Stage();
-        Parent root1 = FXMLLoader.load(getClass().getResource("FXMLPracownik.fxml"));
+        Parent root1 = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
         Parent root2 = FXMLLoader.load(getClass().getResource("FXMLDyrektor.fxml"));
         Parent root3 = FXMLLoader.load(getClass().getResource("FXMLKierownik.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Logowanie.fxml"));

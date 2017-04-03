@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXMLPracownikController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelPracownika.FXMLPracownikController">
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -34,13 +34,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
                      <children>
-                        <TableView prefHeight="330.0" prefWidth="600.0">
+                        <TableView fx:id="tableCar" prefHeight="330.0" prefWidth="600.0">
                           <columns>
-                              <TableColumn prefWidth="142.0" text="Nazwa samochodu" />
-                            <TableColumn prefWidth="87.0" text="Właściciel" />
-                              <TableColumn prefWidth="128.0" text="Numer telefonu" />
-                              <TableColumn prefWidth="127.0" text="Do zrobienia" />
-                              <TableColumn prefWidth="115.0" text="Stan samochodu" />
+                              <TableColumn fx:id="columnNamecar" prefWidth="142.0" text="Nazwa samochodu" />
+                              <TableColumn fx:id="columnOwner" prefWidth="87.0" text="Właściciel" />
+                              <TableColumn fx:id="columnNrtel" prefWidth="128.0" text="Numer telefonu" />
+                              <TableColumn fx:id="columnTodo" prefWidth="127.0" text="Do zrobienia" />
+                              <TableColumn fx:id="columnStancar" prefWidth="115.0" text="Stan samochodu" />
                           </columns>
                         </TableView>
                      </children>
@@ -49,6 +49,6 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="531.0" layoutY="368.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
+      <Button fx:id="btnOdswClick" layoutX="531.0" layoutY="368.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
    </children>
 </AnchorPane>
