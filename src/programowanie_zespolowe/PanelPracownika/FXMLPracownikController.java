@@ -67,6 +67,8 @@ public class FXMLPracownikController implements Initializable {
         
         tableCar.setItems(null);
         tableCar.setItems(data);
+        
+        showMessageDialog(null, "Już właśnie odświeżyłeś!");
     }
     
     @Override
