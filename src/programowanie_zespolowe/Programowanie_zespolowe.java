@@ -21,7 +21,7 @@ public class Programowanie_zespolowe extends Application {
         Stage logowanieStage = new Stage();
         Parent root1 = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
         Parent root2 = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektor.fxml"));
-        Parent root3 = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
+         Parent root3 = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Logowanie.fxml"));
         Scene scene = new Scene(root);
         Scene scene1 = new Scene(root1);

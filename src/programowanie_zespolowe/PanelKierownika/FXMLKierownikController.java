@@ -27,9 +27,13 @@ import programowanie_zespolowe.dbConnection;
 public class FXMLKierownikController implements Initializable {
     
     private dbConnection dc;
+   
     private ObservableList<ListaSamochodow> data;
+    private ObservableList<ListaPracownikow> data1;
     @FXML
     private TableView<ListaSamochodow> tableCar;
+     @FXML
+    private TableView<ListaPracownikow> tablePracownik;
     @FXML
     private TableColumn<ListaSamochodow, String> columnNamecar;
     @FXML
@@ -40,6 +44,16 @@ public class FXMLKierownikController implements Initializable {
     private TableColumn<ListaSamochodow, String> columnTodo;
     @FXML
     private TableColumn<ListaSamochodow, String> columnStancar;
+    @FXML
+     private TableColumn<ListaPracownikow, String> columnImie;
+    @FXML
+    private TableColumn<ListaPracownikow, String> columnNazwisko;
+    @FXML
+    private TableColumn<ListaPracownikow, String> columnStatus;
+    @FXML
+    private TableColumn<ListaPracownikow, String> columnNumer;
+    @FXML
+    private TableColumn<ListaPracownikow, String> columnSpecjalizacja;
     @FXML
     private Button btnOdswClick;
     @FXML
@@ -128,6 +142,23 @@ public class FXMLKierownikController implements Initializable {
         tableCar.setItems(null);
         tableCar.setItems(data);
         
+         try {
+            Connection conn = dc.Connect();
+            data1 = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user");
+            while (rs.next()) {
+                data1.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        columnImie.setCellValueFactory(new PropertyValueFactory<>("imie"));
+        columnNazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        columnSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("specjalizacja"));
+        columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        columnNumer.setCellValueFactory(new PropertyValueFactory<>("numer"));
+        tablePracownik.setItems(null);
+        tablePracownik.setItems(data1);
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
     }
     
