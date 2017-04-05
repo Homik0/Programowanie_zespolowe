@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
+import programowanie_zespolowe.PanelDyrektora.ListaPracownikow;
 import programowanie_zespolowe.dbConnection;
 
 public class FXMLDyrektorController implements Initializable {
@@ -76,7 +77,7 @@ public class FXMLDyrektorController implements Initializable {
         columnWynagrodzenie.setCellValueFactory(new PropertyValueFactory<>("Wynagrodzenie"));
         columnStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
         
-        tablePracownik.setItems(null);
+       
         tablePracownik.setItems(data);
         
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
