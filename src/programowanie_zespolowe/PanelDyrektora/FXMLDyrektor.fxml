@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
   <tabs>
       <Tab fx:id="listaPracownikow" closable="false" text="Lista Pracowników">
         <content>
@@ -17,22 +17,23 @@
                   <Accordion layoutX="76.0" layoutY="75.0" />
                   <TableView prefHeight="329.0" prefWidth="650.0">
                     <columns>
-                      <TableColumn prefWidth="93.0" text="Imie " />
-                      <TableColumn prefWidth="95.0" text="Nazwisko" />
-                        <TableColumn prefWidth="106.0" text="Staż pracy" />
-                        <TableColumn prefWidth="113.0" text="Nr. tel" />
-                        <TableColumn prefWidth="125.0" text="Wynagrodzenie" />
-                        <TableColumn prefWidth="124.0" text="Stanowisko" />
+                      <TableColumn fx:id="columnImie" prefWidth="93.0" text="Imie " />
+                      <TableColumn fx:id="columnNazwisko" prefWidth="95.0" text="Nazwisko" />
+                        <TableColumn fx:id="columnStaz" prefWidth="106.0" text="Staż pracy" />
+                        <TableColumn fx:id="columnNumer" prefWidth="113.0" text="Nr. tel" />
+                        <TableColumn fx:id="columnWynagrodzenie" prefWidth="101.0" text="Wynagrodzenie" />
+                        <TableColumn fx:id="columnStanowisko" prefWidth="100.0" text="Stanowisko" />
                     </columns>
                   </TableView>
-                  <Button fx:id="dodajPracownika" layoutX="538.0" layoutY="338.0" mnemonicParsing="false" onAction="#dodajPracownika" text="Dodaj" />
+                  <Button fx:id="dodajPracownika" layoutX="216.0" layoutY="371.0" mnemonicParsing="false" onAction="#dodajPracownika" text="Dodaj" />
                   <TextField layoutX="14.0" layoutY="338.0" prefHeight="25.0" prefWidth="52.0" text="Imie" />
-                  <TextField layoutX="66.0" layoutY="338.0" prefHeight="25.0" prefWidth="66.0" text="Nazwisko" />
-                  <TextField layoutX="132.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" text="Staż pracy" />
-                  <TextField layoutX="208.0" layoutY="338.0" prefHeight="25.0" prefWidth="81.0" text="Nr. tel" />
-                  <TextField layoutX="289.0" layoutY="338.0" prefHeight="25.0" prefWidth="97.0" text="Wynagrodzenie" />
-                  <TextField layoutX="386.0" layoutY="338.0" text="Stanowisko" />
-                  <Button fx:id="edycja" layoutX="586.0" layoutY="338.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Edytuj" />
+                  <TextField layoutX="84.0" layoutY="338.0" prefHeight="25.0" prefWidth="66.0" text="Nazwisko" />
+                  <TextField layoutX="164.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" text="Staż pracy" />
+                  <TextField layoutX="259.0" layoutY="338.0" prefHeight="25.0" prefWidth="108.0" text="Nr. tel" />
+                  <TextField layoutX="389.0" layoutY="338.0" prefHeight="25.0" prefWidth="97.0" text="Wynagrodzenie" />
+                  <TextField layoutX="501.0" layoutY="338.0" text="Stanowisko" />
+                  <Button fx:id="edycja" layoutX="289.0" layoutY="371.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Edytuj" />
+                  <Button fx:id="odswiezanie" layoutX="362.0" layoutY="371.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
                </children></AnchorPane>
         </content>
       </Tab>
