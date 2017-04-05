@@ -64,7 +64,7 @@ public class FXMLKierownikController implements Initializable {
         showMessageDialog(null, "Już przydzieliłeś!"); 
     }
     
-    @FXML
+    /*@FXML
     private void dodajSamochod(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("dodajSamochod.fxml"));
         Scene add_scene = new Scene(load);
@@ -74,9 +74,9 @@ public class FXMLKierownikController implements Initializable {
         add_stage.setResizable(false);
         add_stage.sizeToScene();
         add_stage.initModality(Modality.APPLICATION_MODAL);
-        add_stage.initOwner(samochod.getScene().getWindow());
+        add_stage.initOwner(zadanie.getScene().getWindow());
         add_stage.showAndWait();
-    }
+    }*/
     
     @FXML
     private void dodajZadanie(ActionEvent event) throws IOException {
@@ -92,7 +92,7 @@ public class FXMLKierownikController implements Initializable {
         add_stage.showAndWait();
     }
     
-    @FXML
+    /*@FXML
     private void przydzielZadanie(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("przydzielPracownika.fxml"));
         Scene edit_scene = new Scene(load);
@@ -104,7 +104,7 @@ public class FXMLKierownikController implements Initializable {
         edit_stage.initModality(Modality.APPLICATION_MODAL);
         edit_stage.initOwner(przydziel.getScene().getWindow());
         edit_stage.showAndWait();
-    }
+    }*/
     
     @FXML
     private void odswiezClick(ActionEvent event) {

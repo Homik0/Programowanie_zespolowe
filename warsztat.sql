@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `listazadan` (
 
 /*!40000 ALTER TABLE `listazadan` DISABLE KEYS */;
 INSERT INTO `listazadan` (`id_zadania`, `id_pracownik`, `id_zlecenia`, `to_do`, `specjalizacja`, `stan_zadania`, `data_dodawania`) VALUES
-	(1, 1, 1, 'Wymieniac opony', 'Technik sam.', 'Gotowy', '2017-04-02 23:36:15'),
+	(1mysqlinformation_schema, 1, 1, 'Wymieniac opony', 'Technik sam.', 'Gotowy', '2017-04-02 23:36:15'),
 	(2, 3, 3, 'Tak jak w opisie pojazdu', 'Mechanik', 'Zajęty', '2017-04-04 00:07:12');
 /*!40000 ALTER TABLE `listazadan` ENABLE KEYS */;
 
