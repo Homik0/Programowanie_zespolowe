@@ -49,6 +49,25 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Lista Pracowników">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="483.0" prefWidth="699.0">
+                          <columns>
+                            <TableColumn prefWidth="100.0" text="Imie" />
+                            <TableColumn prefWidth="93.0" text="Nazwisko" />
+                              <TableColumn prefWidth="83.0" text="Staż pracy" />
+                              <TableColumn prefWidth="85.0" text="Nr. tel" />
+                              <TableColumn prefWidth="112.0" text="Wynagrodzenie" />
+                              <TableColumn prefWidth="88.0" text="Specjalizacja" />
+                              <TableColumn prefWidth="137.0" text="Stanowisko" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button layoutX="612.0" layoutY="516.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
