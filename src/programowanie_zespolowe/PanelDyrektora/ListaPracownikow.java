@@ -11,16 +11,18 @@ public class ListaPracownikow {
     private final StringProperty Staz;
     private final StringProperty Numer;
     private final StringProperty Wynagrodzenie;
+    private final StringProperty Specjalizacja;
     private final StringProperty Stanowisko;
     
 
- public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Stanowisko) {
+ public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Specjalizacja,String Stanowisko) {
         this.Imie = new SimpleStringProperty(Imie);
         this.Nazwisko = new SimpleStringProperty(Nazwisko);
         this.Staz = new SimpleStringProperty(Staz);
         this.Numer = new SimpleStringProperty(Numer);
         this.Wynagrodzenie = new SimpleStringProperty(Wynagrodzenie);
-        this.Stanowisko = new SimpleStringProperty(Stanowisko);
+        this.Specjalizacja = new SimpleStringProperty(Specjalizacja);
+        this.Stanowisko= new SimpleStringProperty(Stanowisko);
     }
 
     public StringProperty getImie() {
@@ -43,9 +45,14 @@ public class ListaPracownikow {
         return Wynagrodzenie;
     }
 
+    public StringProperty getSpecjalizacja() {
+        return Specjalizacja;
+    }
+
     public StringProperty getStanowisko() {
         return Stanowisko;
     }
+    
     public void setImie(String value) {
         Imie.set(value);
     }
@@ -61,7 +68,10 @@ public class ListaPracownikow {
     public void setWynagrodzenie(String value) {
         Wynagrodzenie.set(value);
     }
-    public void setStanowisko(String value) {
+    public void setSpecjalizacja(String value) {
+        Specjalizacja.set(value);
+    }
+    public void setStanowisko(String value){
         Stanowisko.set(value);
     }
     public StringProperty ImieProperty() {
@@ -78,6 +88,9 @@ public class ListaPracownikow {
     }
     public StringProperty WynagrodzenieProperty() {
         return Wynagrodzenie;
+    }
+    public StringProperty SpecjalizacjaProperty() {
+        return Specjalizacja;
     }
     public StringProperty StanowiskoProperty() {
         return Stanowisko;

@@ -8,21 +8,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
   <tabs>
       <Tab fx:id="listaPracownikow" closable="false" text="Lista Pracowników">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="657.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="703.0">
                <children>
                   <Accordion layoutX="76.0" layoutY="75.0" />
-                  <TableView fx:id="tablePracownik" prefHeight="329.0" prefWidth="650.0">
+                  <TableView fx:id="tablePracownik" layoutX="7.0" prefHeight="329.0" prefWidth="743.0">
                     <columns>
-                      <TableColumn fx:id="columnImie" prefWidth="93.0" text="Imie " />
-                      <TableColumn fx:id="columnNazwisko" prefWidth="95.0" text="Nazwisko" />
-                        <TableColumn fx:id="columnStaz" prefWidth="106.0" text="Staż pracy" />
-                        <TableColumn fx:id="columnNumer" prefWidth="113.0" text="Nr. tel" />
-                        <TableColumn fx:id="columnWynagrodzenie" prefWidth="101.0" text="Wynagrodzenie" />
-                        <TableColumn fx:id="columnStanowisko" prefWidth="100.0" text="Stanowisko" />
+                      <TableColumn fx:id="columnImie" prefWidth="98.0" text="Imie " />
+                      <TableColumn fx:id="columnNazwisko" prefWidth="102.0" text="Nazwisko" />
+                        <TableColumn fx:id="columnStaz" prefWidth="94.0" text="Staż pracy" />
+                        <TableColumn fx:id="columnNumer" prefWidth="121.0" text="Nr. tel" />
+                        <TableColumn fx:id="columnWynagrodzenie" prefWidth="127.0" text="Wynagrodzenie" />
+                        <TableColumn fx:id="coulumSpecjalizacja" prefWidth="112.0" text="Specjalizacja" />
+                        <TableColumn fx:id="coulumStanowisko" prefWidth="88.0" text="Stanowisko" />
                     </columns>
                   </TableView>
                   <Button fx:id="dodajPracownika" layoutX="216.0" layoutY="371.0" mnemonicParsing="false" onAction="#dodajPracownika" text="Dodaj" />
@@ -31,9 +32,10 @@
                   <TextField layoutX="164.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" text="Staż pracy" />
                   <TextField layoutX="259.0" layoutY="338.0" prefHeight="25.0" prefWidth="108.0" text="Nr. tel" />
                   <TextField layoutX="389.0" layoutY="338.0" prefHeight="25.0" prefWidth="97.0" text="Wynagrodzenie" />
-                  <TextField layoutX="501.0" layoutY="338.0" text="Stanowisko" />
+                  <TextField layoutX="494.0" layoutY="338.0" prefHeight="25.0" prefWidth="130.0" text="Specjalizacja" />
                   <Button fx:id="edycja" layoutX="289.0" layoutY="371.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Edytuj" />
                   <Button fx:id="odswiezanie" layoutX="362.0" layoutY="371.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
+                  <TextField layoutX="640.0" layoutY="338.0" prefHeight="25.0" prefWidth="96.0" text="Stanowisko" />
                </children></AnchorPane>
         </content>
       </Tab>

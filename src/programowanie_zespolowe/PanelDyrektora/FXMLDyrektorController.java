@@ -48,7 +48,9 @@ public class FXMLDyrektorController implements Initializable {
     @FXML
     private TableColumn<ListaPracownikow, String> columnWynagrodzenie;
      @FXML
-    private TableColumn<ListaPracownikow, String> columnStanowisko;
+    private TableColumn<ListaPracownikow, String> coulumSpecjalizacja;
+     @FXML
+    private TableColumn<ListaPracownikow, String> coulumStanowisko;
    
     
    
@@ -62,9 +64,9 @@ public class FXMLDyrektorController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja from users,pracownik where users.id_user=pracownik.id_user");
+            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,users.stan_user from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6)));
+                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -75,7 +77,8 @@ public class FXMLDyrektorController implements Initializable {
         columnStaz.setCellValueFactory(new PropertyValueFactory<>("Staz"));
         columnNumer.setCellValueFactory(new PropertyValueFactory<>("Numer"));
         columnWynagrodzenie.setCellValueFactory(new PropertyValueFactory<>("Wynagrodzenie"));
-        columnStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
+        coulumSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("Specjalizacja"));
+        coulumStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
         
        
         tablePracownik.setItems(data);
