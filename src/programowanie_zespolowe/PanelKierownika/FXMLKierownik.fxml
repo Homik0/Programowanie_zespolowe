@@ -14,18 +14,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
                      <children>
-                        <TableView prefHeight="485.0" prefWidth="699.0">
+                        <TableView fx:id="tableZadania" layoutX="2.0" layoutY="-3.0" prefHeight="485.0" prefWidth="699.0">
                           <columns>
                             <TableColumn prefWidth="136.0" text="Kto ma wykonać?">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Imię" />
-                                    <TableColumn prefWidth="75.0" text="Nazwisko" />
+                                    <TableColumn fx:id="columnImieZ" prefWidth="86.0" text="Imię" />
+                                    <TableColumn fx:id="columnNazwiskoZ" prefWidth="64.0" text="Nazwisko" />
                                  </columns>
                               </TableColumn>
-                              <TableColumn prefWidth="166.0" text="Nazwa samochodu" />
-                              <TableColumn prefWidth="169.0" text="Do zrobienia" />
-                              <TableColumn prefWidth="114.0" text="Data dodawania" />
-                              <TableColumn prefWidth="99.0" text="Stan zadania" />
+                              <TableColumn fx:id="columnNameCarZ" prefWidth="166.0" text="Nazwa samochodu" />
+                              <TableColumn fx:id="columnToDoZ" prefWidth="169.0" text="Do zrobienia" />
+                              <TableColumn fx:id="columnDateZ" prefWidth="114.0" text="Data dodawania" />
+                              <TableColumn fx:id="columnStatusZ" prefWidth="99.0" text="Stan zadania" />
                           </columns>
                         </TableView>
                      </children>

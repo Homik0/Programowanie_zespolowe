@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
  * @author Misiek
  */
 public class ListaPracownikow {
-     private final StringProperty Imie;
+    private final StringProperty Imie;
     private final StringProperty Nazwisko;
     private final StringProperty Numer;
     private final StringProperty Specjalizacja;
@@ -21,20 +21,20 @@ public class ListaPracownikow {
         this.Status= new SimpleStringProperty(Status);
     }
 
-    public StringProperty getImie() {
-        return Imie;
+    public String getImie() {
+        return Imie.getValue();
     }
-    public StringProperty getNazwisko() {
-        return Nazwisko;
+    public String getNazwisko() {
+        return Nazwisko.getValue();
     }
-    public StringProperty getNumer() {
-        return Numer;
+    public String getNumer() {
+        return Numer.getValue();
     }
-    public StringProperty getSpecjalizacja() {
-        return Specjalizacja;
+    public String getSpecjalizacja() {
+        return Specjalizacja.getValue();
     }
-    public StringProperty getStatus() {
-        return Status;
+    public String getStatus() {
+        return Status.getValue();
     }
     
     public void setImie(String value) {
@@ -53,22 +53,22 @@ public class ListaPracownikow {
     public void setStatus(String value){
         Status.set(value);
     }
-    public StringProperty ImieProperty() {
-        return Imie;
-    }
-    public StringProperty NazwiskoProperty() {
-        return Nazwisko;
-    }
-   
-    public StringProperty NumerProperty() {
-        return Numer;
-    }
-    public StringProperty SpecjalizacjaProperty() {
-        return Specjalizacja;
-    }
-    public StringProperty StatusProperty() {
-        return Status;
-    }
+//    public StringProperty ImieProperty() {
+//        return Imie;
+//    }
+//    public StringProperty NazwiskoProperty() {
+//        return Nazwisko;
+//    }
+//   
+//    public StringProperty NumerProperty() {
+//        return Numer;
+//    }
+//    public StringProperty SpecjalizacjaProperty() {
+//        return Specjalizacja;
+//    }
+//    public StringProperty StatusProperty() {
+//        return Status;
+//    }
     
  
 }

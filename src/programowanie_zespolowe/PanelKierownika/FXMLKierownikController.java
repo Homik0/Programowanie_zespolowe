@@ -30,10 +30,13 @@ public class FXMLKierownikController implements Initializable {
    
     private ObservableList<ListaSamochodow> data;
     private ObservableList<ListaPracownikow> data1;
+    private ObservableList<ListaZadan> data2;
     @FXML
     private TableView<ListaSamochodow> tableCar;
      @FXML
     private TableView<ListaPracownikow> tablePracownik;
+     @FXML
+    private TableView<ListaZadan> tableZadania;
     @FXML
     private TableColumn<ListaSamochodow, String> columnNamecar;
     @FXML
@@ -54,6 +57,18 @@ public class FXMLKierownikController implements Initializable {
     private TableColumn<ListaPracownikow, String> columnNumer;
     @FXML
     private TableColumn<ListaPracownikow, String> columnSpecjalizacja;
+    @FXML
+     private TableColumn<ListaZadan, String> columnImieZ;
+    @FXML
+    private TableColumn<ListaZadan, String> columnNazwiskoZ;
+    @FXML
+    private TableColumn<ListaZadan, String> columnNameCarZ;
+    @FXML
+    private TableColumn<ListaZadan, String> columnToDoZ;
+    @FXML
+    private TableColumn<ListaZadan, String> columnDateZ;
+    @FXML
+    private TableColumn<ListaZadan, String> columnStatusZ;
     @FXML
     private Button btnOdswClick;
     @FXML
@@ -122,6 +137,7 @@ public class FXMLKierownikController implements Initializable {
     
     @FXML
     private void odswiezClick(ActionEvent event) {
+        //wyswietlanie listy zlecen
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
@@ -141,13 +157,13 @@ public class FXMLKierownikController implements Initializable {
         
         tableCar.setItems(null);
         tableCar.setItems(data);
-        
+        //wyswietlanie listy pracownikow
          try {
             Connection conn = dc.Connect();
             data1 = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user");
-            while (rs.next()) {
-                data1.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            ResultSet rs1 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user");
+            while (rs1.next()) {
+                data1.add(new ListaPracownikow(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -157,8 +173,27 @@ public class FXMLKierownikController implements Initializable {
         columnSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("specjalizacja"));
         columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         columnNumer.setCellValueFactory(new PropertyValueFactory<>("numer"));
-        tablePracownik.setItems(null);
+   
         tablePracownik.setItems(data1);
+        //wyswietlanie listy zadan
+        try {
+            Connection conn = dc.Connect();
+            data2 = FXCollections.observableArrayList();
+            ResultSet rs2 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,zlecenia.name_car,zlecenia.to_do,listazadan.data_dodawania,listazadan.stan_zadania from users,pracownik,zlecenia ,listazadan where users.id_user=pracownik.id_user and listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik");
+            while (rs2.next()) {
+                data2.add(new ListaZadan(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5),rs2.getString(6)));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        columnImieZ.setCellValueFactory(new PropertyValueFactory<>("imie"));
+        columnNazwiskoZ.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        columnNameCarZ.setCellValueFactory(new PropertyValueFactory<>("NameCar"));
+        columnToDoZ.setCellValueFactory(new PropertyValueFactory<>("ToDo"));
+        columnDateZ.setCellValueFactory(new PropertyValueFactory<>("date"));
+        columnStatusZ.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+        tableZadania.setItems(data2);
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
     }
     
