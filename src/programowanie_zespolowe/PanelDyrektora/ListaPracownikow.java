@@ -6,16 +6,17 @@ import javafx.beans.property.StringProperty;
  * @author Misiek
  */
 public class ListaPracownikow {
-     private final StringProperty Imie;
+    private final StringProperty Imie;
     private final StringProperty Nazwisko;
     private final StringProperty Staz;
     private final StringProperty Numer;
     private final StringProperty Wynagrodzenie;
     private final StringProperty Specjalizacja;
     private final StringProperty Stanowisko;
+    private final StringProperty Login;
     
 
- public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Specjalizacja,String Stanowisko) {
+ public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Specjalizacja,String Stanowisko,String Login) {
         this.Imie = new SimpleStringProperty(Imie);
         this.Nazwisko = new SimpleStringProperty(Nazwisko);
         this.Staz = new SimpleStringProperty(Staz);
@@ -23,6 +24,7 @@ public class ListaPracownikow {
         this.Wynagrodzenie = new SimpleStringProperty(Wynagrodzenie);
         this.Specjalizacja = new SimpleStringProperty(Specjalizacja);
         this.Stanowisko= new SimpleStringProperty(Stanowisko);
+        this.Login= new SimpleStringProperty(Login);
     }
 
     public StringProperty getImie() {
@@ -52,9 +54,16 @@ public class ListaPracownikow {
     public StringProperty getStanowisko() {
         return Stanowisko;
     }
+
+    public String getLogin() {
+        return Login.getValue();
+    }
     
     public void setImie(String value) {
         Imie.set(value);
+    }
+    public void setLogin(String value) {
+        Login.set(value);
     }
     public void setNazwisko(String value) {
         Nazwisko.set(value);
