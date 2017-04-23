@@ -3,6 +3,7 @@ package programowanie_zespolowe.PanelDyrektora;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -15,8 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +36,30 @@ public class FXMLDyrektorController implements Initializable {
     private Button wprowadzZmiany;
     @FXML
     private Button usunPracownika;
+    
     @FXML
     private Button odswiezanie;
+    
+    @FXML
+    private TextField ImieField;
+
+    @FXML
+    private TextField NazwiskoField;
+    @FXML
+    private TextField StazPracyField;
+    @FXML
+    private TextField NrTelField;
+    @FXML
+    private TextField WynagrodzenieField;
+    @FXML
+    private TextField StanowiskoField; 
+    @FXML
+    private TextField SpecjalizacjaField;
+    @FXML
+    private TextField LoginField;
+    @FXML
+    private PasswordField HasloField;
+    
     @FXML
     private TableView<ListaPracownikow> tablePracownik;
     @FXML
@@ -87,10 +112,49 @@ public class FXMLDyrektorController implements Initializable {
     }
     
     @FXML
-    private void zmiana(ActionEvent event)  {
-        showMessageDialog(null, "Edycja zatwierdzona!");
-        
+    private void zmiana(ActionEvent event) throws SQLException  {
+
+           String imie;
+           String nazwisko;
+           String stazPracy;
+           String nrTel;
+           String wynagrodzenie;
+           String stanowisko;
+           String specjalizacja;
+           String login;
+           String haslo;
+           int ind=0;
+           imie= ImieField.getText();
+           nazwisko= NazwiskoField.getText();
+           stazPracy= StazPracyField.getText();
+           nrTel= NrTelField.getText();
+           wynagrodzenie= WynagrodzenieField.getText();
+           stanowisko= StanowiskoField.getText();
+           specjalizacja=SpecjalizacjaField.getText();
+           login= LoginField.getText();
+           haslo= HasloField.getText();
+            try{        
+        Connection conn = dc.Connect();
+        Statement st = conn.createStatement();
+        try{
+      
+       
+        st.executeUpdate("insert into users (imie,nazwisko,login,password) values ('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"')");
+         ResultSet rs = conn.createStatement().executeQuery("select max(id_user) from users");
+       if(rs.next()){
+       ind = rs.getInt(1);
+       }
+        st.executeUpdate("insert into pracownik (id_user,staz_pracy,nr_tel,wynagrodzenie,specjalizacja) values ('"+ind+"','"+stazPracy+" years','"+nrTel+"','"+wynagrodzenie+" zł','"+specjalizacja+"')");
+
+        }
+        catch (SQLException e) {
+       System.err.println("Error" + e);  
+        }
+        }catch (SQLException e) {
+        System.out.println("Uwaga! Mamy problemy z połączeniem!");
+        }
     }
+    
    
     @FXML
     private void usunPracownika(ActionEvent event)  {

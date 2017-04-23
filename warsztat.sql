@@ -4,7 +4,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE DATABASE IF NOT EXISTS `warsztat` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci */;
+CREATE DATABASE IF NOT EXISTS `warsztat` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `warsztat`;
 
 CREATE TABLE IF NOT EXISTS `listazadan` (
@@ -20,12 +20,9 @@ CREATE TABLE IF NOT EXISTS `listazadan` (
   KEY `id_zlecenia` (`id_zlecenia`),
   CONSTRAINT `FKPracownik` FOREIGN KEY (`id_pracownik`) REFERENCES `pracownik` (`id_pracownik`),
   CONSTRAINT `FKZlecenia` FOREIGN KEY (`id_zlecenia`) REFERENCES `zlecenia` (`id_zlecenia`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 /*!40000 ALTER TABLE `listazadan` DISABLE KEYS */;
-INSERT INTO `listazadan` (`id_zadania`, `id_pracownik`, `id_zlecenia`, `to_do`, `specjalizacja`, `stan_zadania`, `data_dodawania`) VALUES
-	(1mysqlinformation_schema, 1, 1, 'Wymieniac opony', 'Technik sam.', 'Gotowy', '2017-04-02 23:36:15'),
-	(2, 3, 3, 'Tak jak w opisie pojazdu', 'Mechanik', 'Zajęty', '2017-04-04 00:07:12');
 /*!40000 ALTER TABLE `listazadan` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `pracownik` (
@@ -35,16 +32,16 @@ CREATE TABLE IF NOT EXISTS `pracownik` (
   `nr_tel` varchar(50) COLLATE utf8_polish_ci DEFAULT NULL,
   `wynagrodzenie` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `specjalizacja` varchar(50) COLLATE utf8_polish_ci NOT NULL,
-  `status` varchar(50) COLLATE utf8_polish_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT 'jeszcze nie przydzielony',
   PRIMARY KEY (`id_pracownik`),
-  KEY `FKUser` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+  KEY `FK_pracownik_users` (`id_user`),
+  CONSTRAINT `FK_pracownik_users` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 /*!40000 ALTER TABLE `pracownik` DISABLE KEYS */;
 INSERT INTO `pracownik` (`id_pracownik`, `id_user`, `staz_pracy`, `nr_tel`, `wynagrodzenie`, `specjalizacja`, `status`) VALUES
-	(1, 5, '5 years', '12312321', '2300zl', 'technik komp.', 'wolny'),
-	(2, 3, '4 years', '12312321', '3300zl', 'technik komp.', 'wolny'),
-	(3, 7, '8 years', '545772877', '3000zl', 'Mechanik', 'Zajęty');
+	(6, 17, '4 years', '3334445555', '2000 zł', 'Dyrektor', 'jeszcze nie przydzielony'),
+	(11, 22, '4 years', '555444333', '3000 zł', 'Kierownik', 'jeszcze nie przydzielony');
 /*!40000 ALTER TABLE `pracownik` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -53,18 +50,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `nazwisko` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
   `login` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
   `password` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
-  `stan_user` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT '0',
+  `stan_user` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT 'wolny',
   `data_dolaczenia` datetime DEFAULT CURRENT_TIMESTAMP,
   `data_zalogowania` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id_user`, `imie`, `nazwisko`, `login`, `password`, `stan_user`, `data_dolaczenia`, `data_zalogowania`) VALUES
-	(3, 'Jan', 'Kowalski', 'jkowal', 'kowal44', 'Kierownik', '2017-04-02 22:18:09', '2017-04-02 22:18:09'),
-	(5, 'Tomek', 'Kowalski', 'tomek1', 't9esd', 'Pracownik', '2017-04-02 23:31:34', '2017-04-02 23:31:34'),
-	(6, 'Andrzej', 'Duda', 'rpduda', 'pr3zyd3nt', 'Dyrektor', '2017-04-03 23:56:56', '2017-04-03 23:56:56'),
-	(7, 'Janusz', 'Klimosz', 'janus', 'kli1m0', 'pracownik', '2017-04-04 00:03:49', '2017-04-04 00:03:49');
+	(17, 'Andrzej', 'Duda', 'ADdyr', '123asd', 'wolny', '2017-04-23 13:08:45', '2017-04-23 13:08:45'),
+	(22, 'Damian2', 'Kawka', 'DKkier', '123asd', 'wolny', '2017-04-23 13:24:33', '2017-04-23 13:24:33');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `zlecenia` (
@@ -75,13 +70,9 @@ CREATE TABLE IF NOT EXISTS `zlecenia` (
   `to_do` varchar(250) COLLATE utf8_polish_ci NOT NULL,
   `stan_car` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id_zlecenia`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 /*!40000 ALTER TABLE `zlecenia` DISABLE KEYS */;
-INSERT INTO `zlecenia` (`id_zlecenia`, `name_car`, `owner`, `nr_tel`, `to_do`, `stan_car`) VALUES
-	(1, 'BMW', 'Jan Kowalski', '123123', 'Wymieniać opony', 'Oczekuje'),
-	(2, 'Mercedes', 'Szef BOR Michał Kulasa', '997997997', 'Wymieniać silnika i lampy', 'W trakcie'),
-	(3, 'Audi', 'Wladimir Putin', '423423423', 'Układ hamulcowy do wymiany', 'Wolny');
 /*!40000 ALTER TABLE `zlecenia` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

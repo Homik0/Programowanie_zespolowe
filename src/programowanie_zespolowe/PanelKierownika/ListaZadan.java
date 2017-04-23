@@ -37,7 +37,7 @@ public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String
     public String getDate() {
         return Date.getValue();
     }
-
+//ccsc
     public String getStatus() {
         return Status.getValue();
     }

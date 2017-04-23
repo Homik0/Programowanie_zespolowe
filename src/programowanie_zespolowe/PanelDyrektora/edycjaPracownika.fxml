@@ -8,13 +8,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="361.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
    <children>
-      <Button fx:id="wprowadzZmiany" layoutX="32.0" layoutY="286.0" mnemonicParsing="false" onAction="#zmiana" text="Wprowadź zmiany" />
-      <TextField layoutX="14.0" layoutY="14.0" text="Imie" />
-      <TextField layoutX="14.0" layoutY="60.0" text="Nazwisko" />
-      <TextField layoutX="14.0" layoutY="105.0" text="Staż pracy" />
-      <TextField layoutX="14.0" layoutY="151.0" text="Nr. tel" />
-      <TextField layoutX="14.0" layoutY="200.0" text="Wynagrodzenie" />
-      <TextField layoutX="14.0" layoutY="246.0" text="Stanowisko" />
-      <Button fx:id="usunPracownika" layoutX="30.0" layoutY="322.0" mnemonicParsing="false" onAction="#usunPracownika" text="Zwolnij pracownika" />
+      <Button fx:id="wprowadzZmiany" layoutX="26.0" layoutY="322.0" mnemonicParsing="false" onAction="#zmiana" prefHeight="25.0" prefWidth="104.0" text="Dodaj" />
+      <TextField fx:id="ImieField" layoutX="14.0" layoutY="14.0" promptText="Imie" />
+      <TextField fx:id="NazwiskoField" layoutX="14.0" layoutY="46.0" promptText="Nazwisko" />
+      <TextField fx:id="StazPracyField" layoutX="14.0" layoutY="80.0" promptText="Staz prac" />
+      <TextField fx:id="NrTelField" layoutX="15.0" layoutY="113.0" promptText="Nr. tel" />
+      <TextField fx:id="WynagrodzenieField" layoutX="14.0" layoutY="147.0" promptText="Wynagrodzenie" />
+      <TextField fx:id="StanowiskoField" layoutX="15.0" layoutY="181.0" promptText="Stanowisko" />
+      <TextField fx:id="LoginField" layoutX="15.0" layoutY="247.0" promptText="Login" />
+      <PasswordField fx:id="HasloField" layoutX="15.0" layoutY="283.0" promptText="Haslo" />
+      <TextField fx:id="SpecjalizacjaField" layoutX="14.0" layoutY="214.0" promptText="Specjalizacja" />
    </children>
 </AnchorPane>

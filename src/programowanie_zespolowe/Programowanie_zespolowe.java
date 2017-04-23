@@ -28,17 +28,17 @@ public class Programowanie_zespolowe extends Application {
         Scene scene2 = new Scene(root2);
         Scene scene3 = new Scene(root3);
 
-        pracownikStage.setTitle("Panel Pracownika");
-        pracownikStage.setScene(scene1);
-        pracownikStage.setResizable(false);
-        pracownikStage.sizeToScene();
-        pracownikStage.show();
-        
-        kierownikStage.setTitle("Panel Kierownika");
-        kierownikStage.setScene(scene3);
-        kierownikStage.setResizable(false);
-        kierownikStage.sizeToScene();
-        kierownikStage.show();
+//        pracownikStage.setTitle("Panel Pracownika");
+//        pracownikStage.setScene(scene1);
+//        pracownikStage.setResizable(false);
+//        pracownikStage.sizeToScene();
+//        pracownikStage.show();
+//        
+//        kierownikStage.setTitle("Panel Kierownika");
+//        kierownikStage.setScene(scene3);
+//        kierownikStage.setResizable(false);
+//        kierownikStage.sizeToScene();
+//        kierownikStage.show();
 
         dyrektorStage.setTitle("Panel Dyrektora");
         dyrektorStage.setScene(scene2);
@@ -46,11 +46,11 @@ public class Programowanie_zespolowe extends Application {
         dyrektorStage.sizeToScene();
         dyrektorStage.show();
 
-        logowanieStage.setTitle("Logowanie");
-        logowanieStage.setScene(scene);
-        logowanieStage.setResizable(false);
-        logowanieStage.sizeToScene();
-        logowanieStage.show();
+//        logowanieStage.setTitle("Logowanie");
+//        logowanieStage.setScene(scene);
+//        logowanieStage.setResizable(false);
+//        logowanieStage.sizeToScene();
+//        logowanieStage.show();
     }
 
     public static void main(String[] args) {
