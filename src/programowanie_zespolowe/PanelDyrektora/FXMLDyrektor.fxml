@@ -22,12 +22,12 @@
                         <TableColumn fx:id="columnStaz" prefWidth="95.0" text="Staż pracy" />
                         <TableColumn fx:id="columnNumer" prefWidth="112.0" text="Nr. tel" />
                         <TableColumn fx:id="columnWynagrodzenie" prefWidth="112.0" text="Wynagrodzenie" />
-                        <TableColumn fx:id="coulumSpecjalizacja" prefWidth="94.0" text="Stanowisko" />
-                        <TableColumn fx:id="coulumStanowisko" prefWidth="84.0" text="Status" />
+                        <TableColumn fx:id="coulumStanowisko" prefWidth="94.0" text="Stanowisko" />
+                        <TableColumn fx:id="coulumSpecjalizacja" prefWidth="84.0" text="Specjalizacja" />
                         <TableColumn fx:id="coulumLogin" prefWidth="95.0" text="Login" />
                     </columns>
                   </TableView>
-                  <Button fx:id="edycja" layoutX="624.0" layoutY="372.0" mnemonicParsing="false" onAction="#edytujAction" text="Edytuj" />
+                  <Button fx:id="edycja" layoutX="569.0" layoutY="372.0" mnemonicParsing="false" onAction="#edytujAction" text="Edytuj" />
                   <TextField fx:id="Imie2Field" layoutX="14.0" layoutY="338.0" prefHeight="25.0" prefWidth="81.0" text="Imie" />
                   <TextField fx:id="Nazwisko2Field" layoutX="95.0" layoutY="338.0" prefHeight="25.0" prefWidth="110.0" text="Nazwisko" />
                   <TextField fx:id="StazPracy2Field" layoutX="205.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" text="Staż pracy" />
@@ -35,10 +35,11 @@
                   <TextField fx:id="Wynagrodzenie2Field" layoutX="381.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" text="Wynagrodzenie" />
                   <TextField fx:id="Specjalizacja2Field" layoutX="479.0" layoutY="338.0" prefHeight="25.0" prefWidth="90.0" text="Specjalizacja" />
                   <Button fx:id="dodaj" layoutX="687.0" layoutY="372.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Dodaj" />
-                  <Button fx:id="odswiezanie" layoutX="486.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
+                  <Button fx:id="odswiezanie" layoutX="425.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
                   <TextField fx:id="Stanowisko2Field" layoutX="569.0" layoutY="338.0" prefHeight="25.0" prefWidth="96.0" text="Stanowisko" />
-                  <Button fx:id="wczytaj" layoutX="551.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
+                  <Button fx:id="wczytaj" layoutX="495.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
                   <TextField fx:id="Login2Field" layoutX="665.0" layoutY="338.0" prefHeight="25.0" prefWidth="59.0" text="Login" />
+                  <Button fx:id="usunPracownika" layoutX="630.0" layoutY="372.0" mnemonicParsing="false" onAction="#usunAction" text="Usuń" />
                </children></AnchorPane>
         </content>
       </Tab>
