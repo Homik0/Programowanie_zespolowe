@@ -15,7 +15,7 @@ public class dbConnection {
         try {
             String url = "jdbc:mariadb://localhost:3306/warsztat";
             String user = "root";
-            String password = "root";
+            String password = "root123";
 
             Class.forName("org.mariadb.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, user, password);
