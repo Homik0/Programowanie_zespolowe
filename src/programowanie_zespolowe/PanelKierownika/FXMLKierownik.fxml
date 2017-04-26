@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
   <children>
       <TabPane prefHeight="508.0" prefWidth="699.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -14,7 +14,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
                      <children>
-                        <TableView fx:id="tableZadania" layoutX="2.0" layoutY="-3.0" prefHeight="485.0" prefWidth="699.0">
+                        <TableView fx:id="tableZadania" layoutY="-3.0" prefHeight="450.0" prefWidth="699.0">
                           <columns>
                             <TableColumn prefWidth="136.0" text="Kto ma wykonać?">
                                  <columns>
@@ -34,9 +34,9 @@
           </Tab>
           <Tab text="Lista Zleceń">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="699.0">
                      <children>
-                        <TableView fx:id="tableCar" prefHeight="480.0" prefWidth="699.0">
+                        <TableView fx:id="tableCar" prefHeight="450.0" prefWidth="699.0">
                           <columns>
                               <TableColumn fx:id="columnNamecar" prefWidth="142.0" text="Nazwa samochodu" />
                               <TableColumn fx:id="columnOwner" prefWidth="103.0" text="Właściciel" />
@@ -45,6 +45,7 @@
                               <TableColumn fx:id="columnStancar" prefWidth="108.0" text="Stan samochodu" />
                           </columns>
                         </TableView>
+                        <Button fx:id="zlecenie" layoutX="591.0" layoutY="453.0" mnemonicParsing="false" onAction="#dodajZlecenie" text="Dodaj zlecenie" />
                      </children>
                   </AnchorPane>
             </content>
@@ -53,7 +54,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tablePracownik" prefHeight="485.0" prefWidth="699.0">
+                        <TableView fx:id="tablePracownik" prefHeight="450.0" prefWidth="699.0">
                           <columns>
                             <TableColumn fx:id="columnImie" prefWidth="113.0" text="Imie " />
                             <TableColumn fx:id="columnNazwisko" prefWidth="154.0" text="Nazwisko" />
@@ -68,7 +69,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="612.0" layoutY="516.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
-      <Button fx:id="zadanie" layoutX="498.0" layoutY="516.0" mnemonicParsing="false" onAction="#dodajZadanie" text="Dodaj zlecenie" />
+      <Button layoutX="624.0" layoutY="508.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
    </children>
 </AnchorPane>
