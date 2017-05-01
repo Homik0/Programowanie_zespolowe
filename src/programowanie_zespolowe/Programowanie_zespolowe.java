@@ -1,7 +1,10 @@
 package programowanie_zespolowe;
 
+import static java.lang.Boolean.FALSE;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -70,8 +73,14 @@ public class Programowanie_zespolowe extends Application {
                         + "PRIMARY KEY (id_user))"
                         + "COLLATE='utf8_polish_ci';");
                 //Create konto Administratora (jako Dyrektor)
-                st.executeUpdate("INSERT INTO users (imie, nazwisko, login, password, stan_user) VALUES"
-                        + "('admin', 'admin', 'admin', 'admin', 'Dyrektor')");
+                String sql = "SELECT login FROM users WHERE login='admin' and password='admin'";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next() == FALSE) {
+                    st.executeUpdate("INSERT INTO users (imie, nazwisko, login, password, stan_user) VALUES"
+                            + "('admin', 'admin', 'admin', 'admin', 'Dyrektor')");
+                } else {
+                }
                 //Create table Zlecenia
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS zlecenia ("
                         + "id_zlecenia INT(64) NOT NULL AUTO_INCREMENT,"

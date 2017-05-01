@@ -57,18 +57,16 @@ public class FXML_LogowanieController implements Initializable {
                 + "' AND password = '"
                 + password
                 + "'";
-        
+
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1, userName);
-            ps.setString(2, password);
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 if (rs.getString(1).equals("Dyrektor")) {
                     Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                     stageCloseLogowanie.close();
-        
+
                     Parent root = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektor.fxml"));
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
@@ -80,7 +78,7 @@ public class FXML_LogowanieController implements Initializable {
                     if (rs.getString(1).equals("Pracownik")) {
                         Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                         stageCloseLogowanie.close();
-                        
+
                         Parent root = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
                         Stage stage = new Stage();
                         stage.setScene(new Scene(root));
@@ -92,7 +90,7 @@ public class FXML_LogowanieController implements Initializable {
                         if (rs.getString(1).equals("Kierownik")) {
                             Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                             stageCloseLogowanie.close();
-                            
+
                             Parent root = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
                             Stage stage = new Stage();
                             stage.setScene(new Scene(root));
