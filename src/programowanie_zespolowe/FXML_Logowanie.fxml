@@ -17,7 +17,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="login" layoutX="20.0" layoutY="178.0" prefHeight="25.0" prefWidth="140.0" text="Nazwa użytkownika" />
+      <TextField fx:id="login" layoutX="20.0" layoutY="178.0" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
       <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" prefHeight="25.0" prefWidth="140.0" />
       <Label id="error" layoutX="20.0" layoutY="309.0" prefHeight="69.0" prefWidth="174.0" text="" wrapText="true" />
       <CheckBox layoutX="174.0" layoutY="224.0" mnemonicParsing="false" text="Pokaż hasło" />

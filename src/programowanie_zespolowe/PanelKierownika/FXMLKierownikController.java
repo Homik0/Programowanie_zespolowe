@@ -120,10 +120,8 @@ public class FXMLKierownikController implements Initializable {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-
                 st.executeUpdate("insert into zlecenia (name_car, owner, nr_tel, to_do, stan_car) values ('" + nazwasamochodu + "','" + wlasciciel + "','" + nrtel + "','" + stansamochodu + "','" + dozrobienia + "')");
-                
-                
+
             } catch (SQLException e) {
                 System.err.println("Error" + e);
             }

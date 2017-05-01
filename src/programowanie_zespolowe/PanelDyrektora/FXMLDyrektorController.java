@@ -26,10 +26,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
-import programowanie_zespolowe.PanelDyrektora.ListaPracownikow;
 import programowanie_zespolowe.dbConnection;
 
 public class FXMLDyrektorController implements Initializable {
+
     private dbConnection dc;
     private String ZmiennaLogin;
     private ObservableList<ListaPracownikow> data;
@@ -43,7 +43,7 @@ public class FXMLDyrektorController implements Initializable {
     private Button wprowadzZmiany;
     @FXML
     private Button usunPracownika;
-    
+
     @FXML
     private Button odswiezanie;
     //pola w oknie edit
@@ -58,7 +58,7 @@ public class FXMLDyrektorController implements Initializable {
     @FXML
     private TextField WynagrodzenieField;
     @FXML
-    private TextField StanowiskoField; 
+    private TextField StanowiskoField;
     @FXML
     private TextField SpecjalizacjaField;
     @FXML
@@ -80,7 +80,7 @@ public class FXMLDyrektorController implements Initializable {
     private TextField Specjalizacja2Field;
     @FXML
     private TextField Stanowisko2Field;
-     @FXML
+    @FXML
     private TextField Login2Field;
     @FXML
     private Tab listaPracownikow;
@@ -97,35 +97,33 @@ public class FXMLDyrektorController implements Initializable {
     private TableColumn<ListaPracownikow, String> columnNumer;
     @FXML
     private TableColumn<ListaPracownikow, String> columnWynagrodzenie;
-     @FXML
-    private TableColumn<ListaPracownikow, String> coulumSpecjalizacja;
-     @FXML
-    private TableColumn<ListaPracownikow, String> coulumStanowisko;
-     @FXML
-    private TableColumn<ListaPracownikow, String> coulumLogin;
-     
-   
-    
-   
     @FXML
-    private void dodajPracownika(ActionEvent event)  {
+    private TableColumn<ListaPracownikow, String> coulumSpecjalizacja;
+    @FXML
+    private TableColumn<ListaPracownikow, String> coulumStanowisko;
+    @FXML
+    private TableColumn<ListaPracownikow, String> coulumLogin;
+
+    @FXML
+    private void dodajPracownika(ActionEvent event) {
         showMessageDialog(null, "Pracownik dodany!");
-        
+
     }
+
     @FXML
     private void odswiezClick(ActionEvent event) {
-        
+
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
+                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
         }
-        
+
         columnImie.setCellValueFactory(new PropertyValueFactory<>("Imie"));
         columnNazwisko.setCellValueFactory(new PropertyValueFactory<>("Nazwisko"));
         columnStaz.setCellValueFactory(new PropertyValueFactory<>("Staz"));
@@ -134,7 +132,7 @@ public class FXMLDyrektorController implements Initializable {
         coulumStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
         coulumSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("Specjalizacja"));
         coulumLogin.setCellValueFactory(new PropertyValueFactory<>("Login"));
-       
+
         tablePracownik.setItems(data);
         Imie2Field.setText(columnImie.getCellData(0));
         Nazwisko2Field.setText(columnNazwisko.getCellData(0));
@@ -146,9 +144,9 @@ public class FXMLDyrektorController implements Initializable {
         Login2Field.setText(coulumLogin.getCellData(0));
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
     }
+
     @FXML
-    private void wczytajAction(ActionEvent event)
-    {
+    private void wczytajAction(ActionEvent event) {
         int selectedIndex = tablePracownik.getSelectionModel().getSelectedIndex();
         Imie2Field.setText(columnImie.getCellData(selectedIndex));
         Nazwisko2Field.setText(columnNazwisko.getCellData(selectedIndex));
@@ -158,103 +156,101 @@ public class FXMLDyrektorController implements Initializable {
         Specjalizacja2Field.setText(coulumSpecjalizacja.getCellData(selectedIndex));
         Stanowisko2Field.setText(coulumStanowisko.getCellData(selectedIndex));
         Login2Field.setText(coulumLogin.getCellData(selectedIndex));
-        ZmiennaLogin=coulumLogin.getCellData(selectedIndex);
+        ZmiennaLogin = coulumLogin.getCellData(selectedIndex);
     }
-    @FXML
-    private void zmiana(ActionEvent event) throws SQLException  {
 
-           String imie;
-           String nazwisko;
-           String stazPracy;
-           String nrTel;
-           String wynagrodzenie;
-           String stanowisko;
-           String specjalizacja;
-           String login;
-           String haslo;
-           int ind=0;
-           imie= ImieField.getText();
-           nazwisko= NazwiskoField.getText();
-           stazPracy= StazPracyField.getText();
-           nrTel= NrTelField.getText();
-           wynagrodzenie= WynagrodzenieField.getText();
-           stanowisko= StanowiskoField.getText();
-           specjalizacja=SpecjalizacjaField.getText();
-           login= LoginField.getText();
-           haslo= HasloField.getText();
-            try{        
-        Connection conn = dc.Connect();
-        Statement st = conn.createStatement();
-        try{
-      
-       
-        st.executeUpdate("insert into users (imie,nazwisko,login,password) values ('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"')");
-         ResultSet rs = conn.createStatement().executeQuery("select max(id_user) from users");
-       if(rs.next()){
-       ind = rs.getInt(1);
-       }
-        st.executeUpdate("insert into pracownik (id_user,staz_pracy,nr_tel,wynagrodzenie,specjalizacja,stanowisko) values ('"+ind+"','"+stazPracy+" years','"+nrTel+"','"+wynagrodzenie+" zł','"+specjalizacja+"','"+stanowisko+"')");
+    @FXML
+    private void zmiana(ActionEvent event) throws SQLException {
 
-        }
-        catch (SQLException e) {
-       System.err.println("Error" + e);  
-        }
-        }catch (SQLException e) {
-        System.out.println("Uwaga! Mamy problemy z połączeniem!");
+        String imie;
+        String nazwisko;
+        String stazPracy;
+        String nrTel;
+        String wynagrodzenie;
+        String stanowisko;
+        String specjalizacja;
+        String login;
+        String haslo;
+        int ind = 0;
+        imie = ImieField.getText();
+        nazwisko = NazwiskoField.getText();
+        stazPracy = StazPracyField.getText();
+        nrTel = NrTelField.getText();
+        wynagrodzenie = WynagrodzenieField.getText();
+        stanowisko = StanowiskoField.getText();
+        specjalizacja = SpecjalizacjaField.getText();
+        login = LoginField.getText();
+        haslo = HasloField.getText();
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+
+                st.executeUpdate("insert into users (imie,nazwisko,login,password) values ('" + imie + "','" + nazwisko + "','" + login + "','" + haslo + "')");
+                ResultSet rs = conn.createStatement().executeQuery("select max(id_user) from users");
+                if (rs.next()) {
+                    ind = rs.getInt(1);
+                }
+                st.executeUpdate("insert into pracownik (id_user,staz_pracy,nr_tel,wynagrodzenie,specjalizacja,stanowisko) values ('" + ind + "','" + stazPracy + " years','" + nrTel + "','" + wynagrodzenie + " zł','" + specjalizacja + "','" + stanowisko + "')");
+
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
     }
-    
-   
+
     @FXML
-    private void edytujAction(ActionEvent event)  {
-        String temp="";
-       try{        
-        Connection conn = dc.Connect();
-        Statement st = conn.createStatement();
-        try{
-        ResultSet rs = conn.createStatement().executeQuery("select id_user from users where login='"+Login2Field.getText()+"'");
-       if(rs.next()){
-       temp = rs.getString(1);
-       }
-       
-        st.executeUpdate("update users set imie='"+Imie2Field.getText()+"',nazwisko='"+Nazwisko2Field.getText()+"',login='"+Login2Field.getText()+"' where login='"+ZmiennaLogin+"'");
-        st.executeUpdate("update pracownik set staz_pracy='"+StazPracy2Field.getText()+"',nr_tel='"+NrTel2Field.getText()+"',wynagrodzenie='"+Wynagrodzenie2Field.getText()+"',stanowisko='"+Stanowisko2Field.getText()+"',specjalizacja='"+Specjalizacja2Field.getText()+"' where id_user='"+temp+"'");
-      
+    private void edytujAction(ActionEvent event) {
+        String temp = "";
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+                ResultSet rs = conn.createStatement().executeQuery("select id_user from users where login='" + Login2Field.getText() + "'");
+                if (rs.next()) {
+                    temp = rs.getString(1);
+                }
+
+                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "' where login='" + ZmiennaLogin + "'");
+                st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + Stanowisko2Field.getText() + "',specjalizacja='" + Specjalizacja2Field.getText() + "' where id_user='" + temp + "'");
+
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
-        catch (SQLException e) {
-        System.err.println("Error" + e);  
-        }
-        }catch (SQLException e) {
-        System.out.println("Uwaga! Mamy problemy z połączeniem!");
-        }
-        
+
     }
+
     @FXML
-    private void usunAction(ActionEvent event)  {
-        
-        String temp="";
-       try{        
-        Connection conn = dc.Connect();
-        Statement st = conn.createStatement();
-        try{
-        ResultSet rs = conn.createStatement().executeQuery("select id_user from users where login='"+Login2Field.getText()+"'");
-       if(rs.next()){
-       temp = rs.getString(1);
-       }
-       
-        st.executeUpdate("DELETE from pracownik where id_user="+temp);
-        st.executeUpdate("DELETE from users where id_user="+temp);
+    private void usunAction(ActionEvent event) {
+
+        String temp = "";
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+                ResultSet rs = conn.createStatement().executeQuery("select id_user from users where login='" + Login2Field.getText() + "'");
+                if (rs.next()) {
+                    temp = rs.getString(1);
+                }
+
+                st.executeUpdate("DELETE from pracownik where id_user=" + temp);
+                st.executeUpdate("DELETE from users where id_user=" + temp);
 //        st.executeUpdate("update pracownik set staz_pracy='"+StazPracy2Field.getText()+"',nr_tel='"+NrTel2Field.getText()+"',wynagrodzenie='"+Wynagrodzenie2Field.getText()+"' where id_user='"+temp+"'");
-      
+
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
-        catch (SQLException e) {
-        System.err.println("Error" + e);  
-        }
-        }catch (SQLException e) {
-        System.out.println("Uwaga! Mamy problemy z połączeniem!");
-        }
-        
+
     }
+
     @FXML
     private void onkoEdycji(ActionEvent event) throws IOException {
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
@@ -268,12 +264,11 @@ public class FXMLDyrektorController implements Initializable {
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
 
-        
-    }    
+    }
 }

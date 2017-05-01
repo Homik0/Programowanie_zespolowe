@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package programowanie_zespolowe;
 
 import java.net.URL;
@@ -16,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -47,6 +43,8 @@ public class FXML_LogowanieController implements Initializable {
     private TextField login;
     @FXML
     private PasswordField passwordfx;
+    @FXML
+    private Button Zaloguj;
 
     @FXML
     private void logowanie(ActionEvent event) throws Exception {
@@ -54,7 +52,12 @@ public class FXML_LogowanieController implements Initializable {
         String password = passwordfx.getText().trim();
         Connection conn = dc.Connect();
 
-        String sql = "SELECT stan_user FROM users WHERE login = ? AND password = ?";
+        String sql = "SELECT stan_user FROM users WHERE login = '"
+                + userName
+                + "' AND password = '"
+                + password
+                + "'";
+        
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, userName);
@@ -63,23 +66,38 @@ public class FXML_LogowanieController implements Initializable {
 
             if (rs.next()) {
                 if (rs.getString(1).equals("Dyrektor")) {
-                    Parent root = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektora.fxml"));
+                    Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
+                    stageCloseLogowanie.close();
+        
+                    Parent root = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektor.fxml"));
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
+                    stage.setResizable(false);
+                    stage.sizeToScene();
                     stage.setTitle("Panel Dyrektora");
                     stage.show();
                 } else {
-                    if (rs.getString(1).equals("pracownik")) {
+                    if (rs.getString(1).equals("Pracownik")) {
+                        Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
+                        stageCloseLogowanie.close();
+                        
                         Parent root = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
                         Stage stage = new Stage();
                         stage.setScene(new Scene(root));
+                        stage.setResizable(false);
+                        stage.sizeToScene();
                         stage.setTitle("Panel Pracownika");
                         stage.show();
                     } else {
                         if (rs.getString(1).equals("Kierownik")) {
+                            Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
+                            stageCloseLogowanie.close();
+                            
                             Parent root = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
                             Stage stage = new Stage();
                             stage.setScene(new Scene(root));
+                            stage.setResizable(false);
+                            stage.sizeToScene();
                             stage.setTitle("Panel Kierownika");
                             stage.show();
                         } else {
