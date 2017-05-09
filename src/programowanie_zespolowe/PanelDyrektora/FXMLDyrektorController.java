@@ -194,7 +194,7 @@ public class FXMLDyrektorController implements Initializable {
             Statement st = conn.createStatement();
             try {
 
-                st.executeUpdate("insert into users (imie,nazwisko,login,password) values ('" + imie + "','" + nazwisko + "','" + login + "','" + haslo + "')");
+                st.executeUpdate("insert into users (imie,nazwisko,login,password,stan_user) values ('" + imie + "','" + nazwisko + "','" + login + "','" + haslo + "','"+stanowisko+"')");
                 ResultSet rs = conn.createStatement().executeQuery("select max(id_user) from users");
                 if (rs.next()) {
                     ind = rs.getInt(1);
