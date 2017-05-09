@@ -17,9 +17,9 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="login" layoutX="20.0" layoutY="178.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
-        <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Hasło" />
-        <TextField id="password" fx:id="password" editable="false" layoutX="20.0" layoutY="220.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" visible="false" />
+        <TextField fx:id="login" layoutX="20.0" layoutY="178.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
+        <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Hasło" />
+        <TextField id="password" fx:id="password" editable="false" layoutX="20.0" layoutY="220.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" visible="false" />
         <Label fx:id="error" layoutX="24.0" layoutY="311.0" prefHeight="69.0" prefWidth="246.0" text="" wrapText="true">
             <font>
                 <Font size="18.0" />
