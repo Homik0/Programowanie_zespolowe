@@ -10,16 +10,21 @@
 <?import javafx.collections.FXCollections?>
 
 <AnchorPane id="AnchorPane" prefHeight="407.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXML_LogowanieController">
-   <children>
-      <Button fx:id="Zaloguj" layoutX="20.0" layoutY="268.0" mnemonicParsing="false" onAction="#logowanie" text="Zaloguj się" />
-      <Label layoutX="24.0" layoutY="82.0" prefHeight="96.0" prefWidth="246.0" text="Warsztat samochodowy" textAlignment="RIGHT" wrapText="true">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="login" layoutX="20.0" layoutY="178.0" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
-      <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" prefHeight="25.0" prefWidth="140.0" />
-      <Label id="error" layoutX="20.0" layoutY="309.0" prefHeight="69.0" prefWidth="174.0" text="" wrapText="true" />
-      <CheckBox layoutX="174.0" layoutY="224.0" mnemonicParsing="false" text="Pokaż hasło" />
-   </children>
+    <children>
+        <Button fx:id="Zaloguj" layoutX="20.0" layoutY="268.0" mnemonicParsing="false" onAction="#logowanie" text="Zaloguj się" />
+        <Label layoutX="24.0" layoutY="82.0" prefHeight="96.0" prefWidth="246.0" text="Warsztat samochodowy" textAlignment="RIGHT" wrapText="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="login" layoutX="20.0" layoutY="178.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
+        <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Hasło" />
+        <TextField id="password" fx:id="password" editable="false" layoutX="20.0" layoutY="220.0" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" visible="false" />
+        <Label fx:id="error" layoutX="24.0" layoutY="311.0" prefHeight="69.0" prefWidth="246.0" text="" wrapText="true">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <CheckBox fx:id="checkbox" layoutX="174.0" layoutY="224.0" mnemonicParsing="false" onAction="#hidePassword" text="Pokaż hasło" />
+    </children>
 </AnchorPane>

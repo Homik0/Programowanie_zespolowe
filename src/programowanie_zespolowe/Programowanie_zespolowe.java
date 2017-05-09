@@ -33,6 +33,7 @@ public class Programowanie_zespolowe extends Application {
         logowanieStage.setResizable(false);
         logowanieStage.sizeToScene();
         logowanieStage.show();
+        
     }
 
     public static void main(String[] args) {

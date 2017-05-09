@@ -1,5 +1,6 @@
 package programowanie_zespolowe;
 
+import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -39,8 +41,13 @@ public class FXML_LogowanieController implements Initializable {
     }
     @FXML
     private Label error;
+
+    @FXML
+    private CheckBox checkbox;
     @FXML
     private TextField login;
+    @FXML
+    private TextField password;
     @FXML
     private PasswordField passwordfx;
     @FXML
@@ -75,7 +82,7 @@ public class FXML_LogowanieController implements Initializable {
                     stage.setTitle("Panel Dyrektora");
                     stage.show();
                 } else {
-                    if (rs.getString(1).equals("Pracownik")) {
+                    if (rs.getString(1).equals("Pracownik") || rs.getString(1).equals("Wolny")) {
                         Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                         stageCloseLogowanie.close();
 
@@ -98,17 +105,35 @@ public class FXML_LogowanieController implements Initializable {
                             stage.sizeToScene();
                             stage.setTitle("Panel Kierownika");
                             stage.show();
-                        } else {
-                            error.setText("Niewłaściwa nazwa użytkownika lub hasło");
-                            error.setTextFill(Color.web("#ff0000"));
+
                         }
+                        
                     }
+                    
                 }
+
             }
+            error.setText("Niewłaściwa nazwa użytkownika lub hasło");
+                    error.setTextFill(Color.web("#ff0000"));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    private void hide(MouseEvent event
+    ) {
+        error.setText("");
+    }
+
+    @FXML
+    private void hidePassword(ActionEvent event) throws Exception {
+        password.managedProperty().bind(checkbox.selectedProperty());
+        password.visibleProperty().bind(checkbox.selectedProperty());
+        passwordfx.managedProperty().bind(checkbox.selectedProperty().not());
+        passwordfx.visibleProperty().bind(checkbox.selectedProperty().not());
+        password.textProperty().bindBidirectional(passwordfx.textProperty());
     }
 
 }
