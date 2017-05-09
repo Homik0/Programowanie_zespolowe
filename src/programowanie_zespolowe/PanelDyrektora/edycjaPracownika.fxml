@@ -5,8 +5,9 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="361.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
+<AnchorPane id="AnchorPane" prefHeight="418.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
    <children>
       <Button fx:id="wprowadzZmiany" layoutX="26.0" layoutY="322.0" mnemonicParsing="false" onAction="#zmiana" prefHeight="25.0" prefWidth="104.0" text="Dodaj" />
       <TextField fx:id="ImieField" layoutX="14.0" layoutY="14.0" promptText="Imie" />
@@ -14,9 +15,27 @@
       <TextField fx:id="StazPracyField" layoutX="14.0" layoutY="80.0" promptText="Staz prac" />
       <TextField fx:id="NrTelField" layoutX="15.0" layoutY="113.0" promptText="Nr. tel" />
       <TextField fx:id="WynagrodzenieField" layoutX="14.0" layoutY="147.0" promptText="Wynagrodzenie" />
-      <TextField fx:id="StanowiskoField" layoutX="15.0" layoutY="181.0" promptText="Stanowisko" />
       <TextField fx:id="LoginField" layoutX="15.0" layoutY="247.0" promptText="Login" />
       <PasswordField fx:id="HasloField" layoutX="15.0" layoutY="283.0" promptText="Haslo" />
-      <TextField fx:id="SpecjalizacjaField" layoutX="14.0" layoutY="214.0" promptText="Specjalizacja" />
+      <ChoiceBox fx:id="choiseStanowisko" layoutX="14.0" layoutY="178.0" prefWidth="150.0">
+         <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Dyrektor" />
+            <String fx:value="Kierownik" />
+            <String fx:value="Pracownik" />
+        </FXCollections>
+    </items>
+      </ChoiceBox>
+      <ChoiceBox fx:id="choiseSpecjalizacja" layoutX="15.0" layoutY="209.0" prefWidth="150.0" >
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Mechanik" />
+            <String fx:value="Lakiernik" />
+            <String fx:value="Elektryk" />
+            <String fx:value="Wlukanizator" />
+            
+        </FXCollections>
+    </items>
+      </ChoiceBox>
    </children>
 </AnchorPane>

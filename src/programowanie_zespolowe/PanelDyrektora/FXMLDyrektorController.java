@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -46,6 +47,7 @@ public class FXMLDyrektorController implements Initializable {
 
     @FXML
     private Button odswiezanie;
+    
     //pola w oknie edit
     @FXML
     private TextField ImieField;
@@ -65,6 +67,10 @@ public class FXMLDyrektorController implements Initializable {
     private TextField LoginField;
     @FXML
     private PasswordField HasloField;
+    @FXML
+    private ChoiceBox choiseStanowisko;
+    @FXML
+    private ChoiceBox choiseSpecjalizacja;
     //pola textfield w panelu dyrektora
     @FXML
     private TextField Imie2Field;
@@ -142,7 +148,7 @@ public class FXMLDyrektorController implements Initializable {
         Specjalizacja2Field.setText(coulumSpecjalizacja.getCellData(0));
         Stanowisko2Field.setText(coulumStanowisko.getCellData(0));
         Login2Field.setText(coulumLogin.getCellData(0));
-        showMessageDialog(null, "Już właśnie odświeżyłeś!");
+   
     }
 
     @FXML
@@ -171,14 +177,15 @@ public class FXMLDyrektorController implements Initializable {
         String specjalizacja;
         String login;
         String haslo;
+       
         int ind = 0;
         imie = ImieField.getText();
         nazwisko = NazwiskoField.getText();
         stazPracy = StazPracyField.getText();
         nrTel = NrTelField.getText();
         wynagrodzenie = WynagrodzenieField.getText();
-        stanowisko = StanowiskoField.getText();
-        specjalizacja = SpecjalizacjaField.getText();
+        stanowisko = (String)choiseStanowisko.getValue();
+        specjalizacja = (String)choiseSpecjalizacja.getValue();
         login = LoginField.getText();
         haslo = HasloField.getText();
         try {
@@ -199,6 +206,8 @@ public class FXMLDyrektorController implements Initializable {
         } catch (SQLException e) {
             System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
+        showMessageDialog(null, "Pracownik dodany!");
+        
     }
 
     @FXML
@@ -222,7 +231,8 @@ public class FXMLDyrektorController implements Initializable {
         } catch (SQLException e) {
             System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
-
+        showMessageDialog(null, "Edytowałeś pracownika");
+        odswiezClick(event);
     }
 
     @FXML
@@ -248,7 +258,9 @@ public class FXMLDyrektorController implements Initializable {
         } catch (SQLException e) {
             System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
-
+        showMessageDialog(null, "Usunięto");
+        odswiezClick(event);
+        
     }
 
     @FXML
@@ -269,6 +281,6 @@ public class FXMLDyrektorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
-
+        
     }
 }
