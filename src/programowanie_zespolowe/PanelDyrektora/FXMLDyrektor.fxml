@@ -40,6 +40,7 @@
                   <Button fx:id="wczytaj" layoutX="495.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
                   <TextField fx:id="Login2Field" layoutX="666.0" layoutY="338.0" prefHeight="25.0" prefWidth="59.0" promptText="Login" />
                   <Button fx:id="usunPracownika" layoutX="630.0" layoutY="372.0" mnemonicParsing="false" onAction="#usunAction" text="Usuń" />
+                  <Button fx:id="btnWyloguj" layoutX="10.0" layoutY="372.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />
                </children></AnchorPane>
         </content>
       </Tab>

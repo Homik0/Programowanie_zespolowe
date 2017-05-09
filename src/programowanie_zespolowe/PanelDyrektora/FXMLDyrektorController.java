@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
+import programowanie_zespolowe.Programowanie_zespolowe;
 import programowanie_zespolowe.dbConnection;
 
 public class FXMLDyrektorController implements Initializable {
@@ -44,10 +45,10 @@ public class FXMLDyrektorController implements Initializable {
     private Button wprowadzZmiany;
     @FXML
     private Button usunPracownika;
-
     @FXML
     private Button odswiezanie;
-    
+    @FXML
+    private Button btnWyloguj;
     //pola w oknie edit
     @FXML
     private TextField ImieField;
@@ -275,6 +276,20 @@ public class FXMLDyrektorController implements Initializable {
         edit_stage.initModality(Modality.APPLICATION_MODAL);
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
+    }
+    
+    @FXML
+    private void wylogujClick(ActionEvent event) throws IOException {
+        Stage stageCloseWindow = (Stage) btnWyloguj.getScene().getWindow();
+        stageCloseWindow.close();
+
+        Parent root = FXMLLoader.load(Programowanie_zespolowe.class.getResource("FXML_Logowanie.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.sizeToScene();
+        stage.setTitle("Logowanie");
+        stage.show();
     }
 
     @Override

@@ -25,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
 import programowanie_zespolowe.PanelPracownika.ListaSamochodow;
+import programowanie_zespolowe.Programowanie_zespolowe;
 import programowanie_zespolowe.dbConnection;
 
 public class FXMLKierownikController implements Initializable {
@@ -80,6 +81,8 @@ public class FXMLKierownikController implements Initializable {
     private Button zlecenie;
     @FXML
     private Button przydziel;
+    @FXML
+    private Button btnWyloguj;
     @FXML
     private TextField NazwasamochoduField;
     @FXML
@@ -237,6 +240,20 @@ public class FXMLKierownikController implements Initializable {
 
         tableZadania.setItems(data2);
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
+    }
+    
+    @FXML
+    private void wylogujClick(ActionEvent event) throws IOException {
+        Stage stageCloseWindow = (Stage) btnWyloguj.getScene().getWindow();
+        stageCloseWindow.close();
+
+        Parent root = FXMLLoader.load(Programowanie_zespolowe.class.getResource("FXML_Logowanie.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.sizeToScene();
+        stage.setTitle("Logowanie");
+        stage.show();
     }
 
     @Override

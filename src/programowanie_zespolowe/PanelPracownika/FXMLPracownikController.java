@@ -1,5 +1,6 @@
 package programowanie_zespolowe.PanelPracownika;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,13 +10,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import programowanie_zespolowe.dbConnection;
 import static javax.swing.JOptionPane.showMessageDialog;
+import programowanie_zespolowe.Programowanie_zespolowe;
 
 public class FXMLPracownikController implements Initializable {
     
@@ -35,6 +41,8 @@ public class FXMLPracownikController implements Initializable {
     private TableColumn<ListaSamochodow, String> columnStancar;
     @FXML
     private Button btnOdswClick;
+    @FXML
+    private Button btnWyloguj;
     
     @FXML
     private void odswiezClick1(ActionEvent event) {
@@ -69,6 +77,20 @@ public class FXMLPracownikController implements Initializable {
         tableCar.setItems(data);
         
         showMessageDialog(null, "Już właśnie odświeżyłeś!");
+    }
+    
+    @FXML
+    private void wylogujClick(ActionEvent event) throws IOException {
+        Stage stageCloseWindow = (Stage) btnWyloguj.getScene().getWindow();
+        stageCloseWindow.close();
+
+        Parent root = FXMLLoader.load(Programowanie_zespolowe.class.getResource("FXML_Logowanie.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.sizeToScene();
+        stage.setTitle("Logowanie");
+        stage.show();
     }
     
     @Override
