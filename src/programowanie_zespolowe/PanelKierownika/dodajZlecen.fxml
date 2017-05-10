@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+    <children>
+        <TextField fx:id="NazwasamochoduField" layoutX="60.0" layoutY="21.0" promptText="Nazwa samochodu" />
+        <TextField fx:id="WlascicielField" layoutX="60.0" layoutY="56.0" promptText="Wlasciciel" />
+        <TextField fx:id="NrtelField" layoutX="59.0" layoutY="89.0" promptText="Numer telefonu" />
+        <TextArea fx:id="DozrobieniaField" layoutX="34.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" promptText="Do zrobienia">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </TextArea>
+        <Button fx:id="infoAddZlecenie" contentDisplay="CENTER" layoutX="87.0" layoutY="380.0" mnemonicParsing="false" onAction="#infoAddZlecenie" text="Dodaj zlecenie" />
+        <ChoiceBox fx:id="StanField" layoutX="59.0" layoutY="333.0" prefWidth="150.0">
+            <String fx:value="Gotowy" />
+            <String fx:value="W naprawie" />
+            <String fx:value="Oczekujacy" />
+        </ChoiceBox>
+    </children>
+</AnchorPane>

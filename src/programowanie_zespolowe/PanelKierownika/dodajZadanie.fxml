@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="458.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="264.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
    <children>
-      <Button fx:id="infoAddZadanie" layoutX="86.0" layoutY="359.0" mnemonicParsing="false" onAction="#infoAddZadanie" text="Dodaj Zadanie" />
-      <TextArea layoutX="32.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0" text="Do zrobienia" />
-      <TextField layoutX="59.0" layoutY="14.0" text="Nazwa samochodu" />
-      <TextField layoutX="59.0" layoutY="39.0" text="Wlasciciel" />
-      <TextField layoutX="59.0" layoutY="64.0" text="Numer samochodu" />
-      <TextField layoutX="59.0" layoutY="89.0" text="Stan samochodu" />
+      <Button fx:id="infoAddZadanie" layoutX="86.0" layoutY="225.0" mnemonicParsing="false" onAction="#infoAddZadanie" text="Dodaj Zadanie" />
+      <ComboBox fx:id="idPracField" layoutX="58.0" layoutY="14.0" prefWidth="150.0" />
+      <ComboBox fx:id="specField" layoutX="57.0" layoutY="141.0" prefWidth="150.0" />
+      <ComboBox fx:id="idZlecField" layoutX="57.0" layoutY="57.0" prefWidth="150.0" />
+      <TextField fx:id="todoField" layoutX="58.0" layoutY="98.0" />
+      <ComboBox fx:id="stanZadField" layoutX="57.0" layoutY="182.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

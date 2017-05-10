@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,11 +18,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -31,7 +35,8 @@ import programowanie_zespolowe.dbConnection;
 public class FXMLKierownikController implements Initializable {
 
     private dbConnection dc;
-
+    private String temp;
+    private String temp2;
     private ObservableList<ListaSamochodow> data;
     private ObservableList<ListaPracownikow> data1;
     private ObservableList<ListaZadan> data2;
@@ -74,8 +79,6 @@ public class FXMLKierownikController implements Initializable {
     @FXML
     private TableColumn<ListaZadan, String> columnStatusZ;
     @FXML
-    private Button btnOdswClick;
-    @FXML
     private Button zadanie;
     @FXML
     private Button zlecenie;
@@ -90,14 +93,19 @@ public class FXMLKierownikController implements Initializable {
     @FXML
     private TextField NrtelField;
     @FXML
-    private TextField StansamochoduField;
-    @FXML
     private TextArea DozrobieniaField;
-
     @FXML
-    private void infoAddZadanie(ActionEvent event) {
-        showMessageDialog(null, "Zadanie zostało dodane!");
-    }
+    private ComboBox<String> StanField;
+    @FXML
+    private ComboBox<String> idPracField;
+    @FXML
+    private ComboBox<String> idZlecField;
+    @FXML
+    private TextField todoField;
+    @FXML
+    private ComboBox<String> specField;
+    @FXML
+    private ComboBox<String> stanZadField;
 
     @FXML
     private void infoAddZlecenie(ActionEvent event) {
@@ -106,17 +114,11 @@ public class FXMLKierownikController implements Initializable {
         String nrtel;
         String stansamochodu;
         String dozrobienia;
-        String stanowisko;
-        String specjalizacja;
-        String login;
-        String haslo;
-
-        int ind = 0;
 
         nazwasamochodu = NazwasamochoduField.getText();
         wlasciciel = WlascicielField.getText();
         nrtel = NrtelField.getText();
-        stansamochodu = StansamochoduField.getText();
+        stansamochodu = StanField.getValue().toString();
         dozrobienia = DozrobieniaField.getText();
 
         try {
@@ -135,13 +137,46 @@ public class FXMLKierownikController implements Initializable {
     }
 
     @FXML
-    private void infoAddPrzydzielPracownika(ActionEvent event) {
-        showMessageDialog(null, "Już przydzieliłeś!");
+    private void selectAction(MouseEvent event) {
+        int selectedIndex = tableCar.getSelectionModel().getSelectedIndex();
+        temp2 = (columnNamecar.getCellData(selectedIndex));
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+                ResultSet rs = conn.createStatement().executeQuery("select id_zlecenia from zlecenia where name_car='" + temp2 + "'");
+                if (rs.next()) {
+                    temp = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Mamy problemy z polaczeniem!");
+        }
+    }
+
+    @FXML
+    private void usunAction(ActionEvent event) {
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+                st.executeUpdate("DELETE from zlecenia where id_zlecenia=" + temp);
+                st.executeUpdate("DELETE from listazadan where id_zlecenia=" + temp);
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Mamy problemy z polaczeniem!");
+        }
+        showMessageDialog(null, "Usunieto");
+        odswiezClick(event);
     }
 
     @FXML
     private void dodajZlecenie(ActionEvent event) throws IOException {
-        Parent load = FXMLLoader.load(getClass().getResource("dodajZlecenie.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("dodajZlecen.fxml"));
         Scene add_scene = new Scene(load);
         Stage add_stage = new Stage();
         add_stage.setTitle("Dodaj zlecenie");
@@ -153,33 +188,71 @@ public class FXMLKierownikController implements Initializable {
         add_stage.showAndWait();
     }
 
-//    @FXML
-//    private void dodajZadanie(ActionEvent event) throws IOException {
-//        Parent load = FXMLLoader.load(getClass().getResource("dodajZadanie.fxml"));
-//        Scene add_scene = new Scene(load);
-//        Stage add_stage = new Stage();
-//        add_stage.setTitle("Dodaj zadanie");
-//        add_stage.setScene(add_scene);
-//        add_stage.setResizable(false);
-//        add_stage.sizeToScene();
-//        add_stage.initModality(Modality.APPLICATION_MODAL);
-//        add_stage.initOwner(zadanie.getScene().getWindow());
-//        add_stage.showAndWait();
-//    }
+    @FXML
+    private void infoAddZadanie(ActionEvent event) {
+        String id_prac;
+        String id_zlec;
+        String todo;
+        String specjalizacja;
+        String stan_zadania;
+        String data;
 
-    /*@FXML
-     private void przydzielZadanie(ActionEvent event) throws IOException {
-     Parent load = FXMLLoader.load(getClass().getResource("przydzielPracownika.fxml"));
-     Scene edit_scene = new Scene(load);
-     Stage edit_stage = new Stage();
-     edit_stage.setTitle("Przydziel pracownika");
-     edit_stage.setScene(edit_scene);
-     edit_stage.setResizable(false);
-     edit_stage.sizeToScene();
-     edit_stage.initModality(Modality.APPLICATION_MODAL);
-     edit_stage.initOwner(przydziel.getScene().getWindow());
-     edit_stage.showAndWait();
-     }*/
+        id_prac = idPracField.getValue();
+        id_zlec = idZlecField.getValue();
+        todo = todoField.getText();
+        specjalizacja = specField.getValue();
+        stan_zadania = stanZadField.getValue();
+        data = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+        try {
+            Connection conn = dc.Connect();
+            Statement st = conn.createStatement();
+            try {
+                st.executeUpdate("insert into listazadan (id_pracownik, id_zlecenia, to_do, specjalizacja, stan_zadania, data_dodawania) values ('" + id_prac + "','" + id_zlec + "','" + todo + "','" + specjalizacja + "','" + stan_zadania + "','" + data + "')");
+
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        } catch (SQLException e) {
+            System.out.println("Uwaga! Błąd z połączeniem!");
+        }
+        showMessageDialog(null, "Zadanie zostało dodane!");
+    }
+
+    @FXML
+    private void dodajZadanie(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("dodajZadanie.fxml"));
+        Scene add_scene = new Scene(load);
+        Stage add_stage = new Stage();
+        add_stage.setTitle("Dodaj zadanie");
+        add_stage.setScene(add_scene);
+        add_stage.setResizable(false);
+        add_stage.sizeToScene();
+        add_stage.initModality(Modality.APPLICATION_MODAL);
+        add_stage.initOwner(zadanie.getScene().getWindow());
+        add_stage.showAndWait();
+
+    }
+
+    @FXML
+    private void przydzielZadanie(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("przydzielPracownika.fxml"));
+        Scene edit_scene = new Scene(load);
+        Stage edit_stage = new Stage();
+        edit_stage.setTitle("Przydziel pracownika");
+        edit_stage.setScene(edit_scene);
+        edit_stage.setResizable(false);
+        edit_stage.sizeToScene();
+        edit_stage.initModality(Modality.APPLICATION_MODAL);
+        edit_stage.initOwner(przydziel.getScene().getWindow());
+        edit_stage.showAndWait();
+    }
+
+    @FXML
+    private void infoAddPrzydzielPracownika(ActionEvent event) {
+        showMessageDialog(null, "Już przydzieliłeś!");
+    }
+
     @FXML
     private void odswiezClick(ActionEvent event) {
         //wyswietlanie listy zlecen
@@ -206,7 +279,7 @@ public class FXMLKierownikController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data1 = FXCollections.observableArrayList();
-            ResultSet rs1 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user");
+            ResultSet rs1 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user and users.stan_user!='Kierownik'and users.stan_user!='Dyrektor'");
             while (rs1.next()) {
                 data1.add(new ListaPracownikow(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5)));
             }
@@ -224,7 +297,7 @@ public class FXMLKierownikController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data2 = FXCollections.observableArrayList();
-            ResultSet rs2 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,zlecenia.name_car,zlecenia.to_do,listazadan.data_dodawania,listazadan.stan_zadania from users,pracownik,zlecenia ,listazadan where users.id_user=pracownik.id_user and listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik");
+            ResultSet rs2 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,zlecenia.name_car,listazadan.data_dodawania,zlecenia.to_do,pracownik.specjalizacja,listazadan.stan_zadania from users,pracownik,zlecenia ,listazadan where users.id_user=pracownik.id_user and listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik");
             while (rs2.next()) {
                 data2.add(new ListaZadan(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5), rs2.getString(6)));
             }
@@ -239,9 +312,8 @@ public class FXMLKierownikController implements Initializable {
         columnStatusZ.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         tableZadania.setItems(data2);
-        showMessageDialog(null, "Już właśnie odświeżyłeś!");
     }
-    
+
     @FXML
     private void wylogujClick(ActionEvent event) throws IOException {
         Stage stageCloseWindow = (Stage) btnWyloguj.getScene().getWindow();
@@ -260,5 +332,23 @@ public class FXMLKierownikController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
+
     }
+//
+//    private void buildData() {
+//        ObservableList<String> data = FXCollections.observableArrayList(); //List of String
+//
+//        Connection conn = dc.Connect();
+//        try {
+//            String SQL = "Select status from pracownik where status=" + "'Jeszcze nie przydzielony'";
+//            ResultSet rs = conn.createStatement().executeQuery(SQL);
+//            while (rs.next()) {
+//                data.add(rs.getString("Feature")); //add the String to the list                                     
+//            }
+//            StanField.setItems(data); //Set the list of String as the data for your combo box
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("Error on Building Data");
+//        }
+//    }
 }

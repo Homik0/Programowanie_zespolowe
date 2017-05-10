@@ -18,6 +18,10 @@ public class ListaSamochodow {
         this.stancar = new SimpleStringProperty(stancar);
     }
 
+    public ListaSamochodow(String string, String string0, String string1, String string2, String string3, String string4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getNameCar() {
         return namecar.get();
     }
