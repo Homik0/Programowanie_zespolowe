@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -69,10 +70,14 @@ public class FXMLDyrektorController implements Initializable {
     @FXML
     private PasswordField HasloField;
     @FXML
-    private ChoiceBox choiseStanowisko;
+    private ComboBox choiseStanowisko;
     @FXML
-    private ChoiceBox choiseSpecjalizacja;
+    private ComboBox choiseSpecjalizacja;
     //pola textfield w panelu dyrektora
+    @FXML
+    private ComboBox comboStanowisko;
+     @FXML
+    private ComboBox comboSpecjalizacja;
     @FXML
     private TextField Imie2Field;
     @FXML
@@ -84,7 +89,7 @@ public class FXMLDyrektorController implements Initializable {
     @FXML
     private TextField Wynagrodzenie2Field;
     @FXML
-    private TextField Specjalizacja2Field;
+    private TextField Haslo2Field;
     @FXML
     private TextField Stanowisko2Field;
     @FXML
@@ -110,6 +115,8 @@ public class FXMLDyrektorController implements Initializable {
     private TableColumn<ListaPracownikow, String> coulumStanowisko;
     @FXML
     private TableColumn<ListaPracownikow, String> coulumLogin;
+    @FXML
+    private TableColumn<ListaPracownikow, String> coulumHaslo;
 
     @FXML
     private void dodajPracownika(ActionEvent event) {
@@ -123,9 +130,9 @@ public class FXMLDyrektorController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login from users,pracownik where users.id_user=pracownik.id_user");
+            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -139,17 +146,11 @@ public class FXMLDyrektorController implements Initializable {
         coulumStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
         coulumSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("Specjalizacja"));
         coulumLogin.setCellValueFactory(new PropertyValueFactory<>("Login"));
+        coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
 
         tablePracownik.setItems(data);
-        Imie2Field.setText(columnImie.getCellData(0));
-        Nazwisko2Field.setText(columnNazwisko.getCellData(0));
-        StazPracy2Field.setText(columnStaz.getCellData(0));
-        NrTel2Field.setText(columnNumer.getCellData(0));
-        Wynagrodzenie2Field.setText(columnWynagrodzenie.getCellData(0));
-        Specjalizacja2Field.setText(coulumSpecjalizacja.getCellData(0));
-        Stanowisko2Field.setText(coulumStanowisko.getCellData(0));
-        Login2Field.setText(coulumLogin.getCellData(0));
-   
+        
+
     }
 
     @FXML
@@ -159,11 +160,12 @@ public class FXMLDyrektorController implements Initializable {
         Nazwisko2Field.setText(columnNazwisko.getCellData(selectedIndex));
         StazPracy2Field.setText(columnStaz.getCellData(selectedIndex));
         NrTel2Field.setText(columnNumer.getCellData(selectedIndex));
-        Wynagrodzenie2Field.setText(columnWynagrodzenie.getCellData(selectedIndex));
-        Specjalizacja2Field.setText(coulumSpecjalizacja.getCellData(selectedIndex));
-        Stanowisko2Field.setText(coulumStanowisko.getCellData(selectedIndex));
+        Wynagrodzenie2Field.setText(columnWynagrodzenie.getCellData(selectedIndex));      
         Login2Field.setText(coulumLogin.getCellData(selectedIndex));
         ZmiennaLogin = coulumLogin.getCellData(selectedIndex);
+        Haslo2Field.setText(coulumHaslo.getCellData(selectedIndex));
+        comboStanowisko.setValue(coulumStanowisko.getCellData(selectedIndex));
+        comboSpecjalizacja.setValue(coulumSpecjalizacja.getCellData(selectedIndex));
     }
 
     @FXML
@@ -178,15 +180,15 @@ public class FXMLDyrektorController implements Initializable {
         String specjalizacja;
         String login;
         String haslo;
-       
+
         int ind = 0;
         imie = ImieField.getText();
         nazwisko = NazwiskoField.getText();
         stazPracy = StazPracyField.getText();
         nrTel = NrTelField.getText();
         wynagrodzenie = WynagrodzenieField.getText();
-        stanowisko = (String)choiseStanowisko.getValue();
-        specjalizacja = (String)choiseSpecjalizacja.getValue();
+        stanowisko = (String) choiseStanowisko.getValue();
+        specjalizacja = (String) choiseSpecjalizacja.getValue();
         login = LoginField.getText();
         haslo = HasloField.getText();
         try {
@@ -194,7 +196,7 @@ public class FXMLDyrektorController implements Initializable {
             Statement st = conn.createStatement();
             try {
 
-                st.executeUpdate("insert into users (imie,nazwisko,login,password,stan_user) values ('" + imie + "','" + nazwisko + "','" + login + "','" + haslo + "','"+stanowisko+"')");
+                st.executeUpdate("insert into users (imie,nazwisko,login,password,stan_user) values ('" + imie + "','" + nazwisko + "','" + login + "','" + haslo + "','" + stanowisko + "')");
                 ResultSet rs = conn.createStatement().executeQuery("select max(id_user) from users");
                 if (rs.next()) {
                     ind = rs.getInt(1);
@@ -208,7 +210,7 @@ public class FXMLDyrektorController implements Initializable {
             System.out.println("Uwaga! Mamy problemy z połączeniem!");
         }
         showMessageDialog(null, "Pracownik dodany!");
-        
+
     }
 
     @FXML
@@ -223,8 +225,8 @@ public class FXMLDyrektorController implements Initializable {
                     temp = rs.getString(1);
                 }
 
-                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "' where login='" + ZmiennaLogin + "'");
-                st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + Stanowisko2Field.getText() + "',specjalizacja='" + Specjalizacja2Field.getText() + "' where id_user='" + temp + "'");
+                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "',password='"+Haslo2Field.getText() +"' where login='" + ZmiennaLogin + "'");
+                st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + (String)comboStanowisko.getValue() + "',specjalizacja='" + (String)comboSpecjalizacja.getValue() + "' where id_user='" + temp + "'");
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -261,7 +263,7 @@ public class FXMLDyrektorController implements Initializable {
         }
         showMessageDialog(null, "Usunięto");
         odswiezClick(event);
-        
+
     }
 
     @FXML
@@ -277,7 +279,7 @@ public class FXMLDyrektorController implements Initializable {
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
     }
-    
+
     @FXML
     private void wylogujClick(ActionEvent event) throws IOException {
         Stage stageCloseWindow = (Stage) btnWyloguj.getScene().getWindow();

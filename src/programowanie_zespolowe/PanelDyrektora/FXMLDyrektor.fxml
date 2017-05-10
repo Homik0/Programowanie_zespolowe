@@ -7,42 +7,66 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
-  <tabs>
-      <Tab fx:id="listaPracownikow" closable="false" text="Lista Pracowników">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="703.0">
-               <children>
-                  <Accordion layoutX="76.0" layoutY="75.0" />
-                  <TableView fx:id="tablePracownik" prefHeight="329.0" prefWidth="743.0">
-                    <columns>
-                      <TableColumn fx:id="columnImie" prefWidth="82.0" text="Imie " />
-                      <TableColumn fx:id="columnNazwisko" prefWidth="68.0" text="Nazwisko" />
-                        <TableColumn fx:id="columnStaz" prefWidth="95.0" text="Staż pracy" />
-                        <TableColumn fx:id="columnNumer" prefWidth="112.0" text="Nr. tel" />
-                        <TableColumn fx:id="columnWynagrodzenie" prefWidth="112.0" text="Wynagrodzenie" />
-                        <TableColumn fx:id="coulumStanowisko" prefWidth="94.0" text="Stanowisko" />
-                        <TableColumn fx:id="coulumSpecjalizacja" prefWidth="84.0" text="Specjalizacja" />
-                        <TableColumn fx:id="coulumLogin" prefWidth="95.0" text="Login" />
-                    </columns>
-                  </TableView>
-                  <Button fx:id="edycja" layoutX="569.0" layoutY="372.0" mnemonicParsing="false" onAction="#edytujAction" text="Edytuj" />
-                  <TextField fx:id="Imie2Field" layoutX="14.0" layoutY="338.0" prefHeight="25.0" prefWidth="81.0" promptText="Imie" />
-                  <TextField fx:id="Nazwisko2Field" layoutX="95.0" layoutY="338.0" prefHeight="25.0" prefWidth="110.0" promptText="Nazwisko" />
-                  <TextField fx:id="StazPracy2Field" layoutX="205.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" promptText="Staż pracy" />
-                  <TextField fx:id="NrTel2Field" layoutX="281.0" layoutY="338.0" prefHeight="25.0" prefWidth="101.0" promptText="Nr. tel" />
-                  <TextField fx:id="Wynagrodzenie2Field" layoutX="382.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" promptText="Wynagrodzenie" />
-                  <TextField fx:id="Specjalizacja2Field" layoutX="576.0" layoutY="338.0" prefHeight="25.0" prefWidth="90.0" promptText="Specjalizacja" />
-                  <Button fx:id="dodaj" layoutX="687.0" layoutY="372.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Dodaj" />
-                  <Button fx:id="odswiezanie" layoutX="425.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
-                  <TextField fx:id="Stanowisko2Field" layoutX="480.0" layoutY="338.0" prefHeight="25.0" prefWidth="96.0" promptText="Stanowisko" />
-                  <Button fx:id="wczytaj" layoutX="495.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
-                  <TextField fx:id="Login2Field" layoutX="666.0" layoutY="338.0" prefHeight="25.0" prefWidth="59.0" promptText="Login" />
-                  <Button fx:id="usunPracownika" layoutX="630.0" layoutY="372.0" mnemonicParsing="false" onAction="#usunAction" text="Usuń" />
-                  <Button fx:id="btnWyloguj" layoutX="10.0" layoutY="372.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />
-               </children></AnchorPane>
-        </content>
-      </Tab>
-  </tabs>
+    <tabs>
+        <Tab fx:id="listaPracownikow" closable="false" text="Lista Pracowników">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="703.0">
+                    <children>
+                        <Accordion layoutX="76.0" layoutY="75.0" />
+                        <TableView fx:id="tablePracownik" prefHeight="329.0" prefWidth="841.0">
+                            <columns>
+                                <TableColumn fx:id="columnImie" prefWidth="62.0" text="Imie " />
+                                <TableColumn fx:id="columnNazwisko" prefWidth="64.0" text="Nazwisko" />
+                                <TableColumn fx:id="columnStaz" prefWidth="86.0" text="Staż pracy" />
+                                <TableColumn fx:id="columnNumer" prefWidth="88.0" text="Nr. tel" />
+                                <TableColumn fx:id="columnWynagrodzenie" prefWidth="94.0" text="Wynagrodzenie" />
+                                <TableColumn fx:id="coulumStanowisko" prefWidth="95.0" text="Stanowisko" />
+                                <TableColumn fx:id="coulumSpecjalizacja" prefWidth="78.0" text="Specjalizacja" />
+                                <TableColumn fx:id="coulumLogin" prefWidth="105.0" text="Login" />
+                        <TableColumn fx:id="coulumHaslo" prefWidth="75.0" text="Haslo" />
+                            </columns>
+                        </TableView>
+                        <Button fx:id="edycja" layoutX="569.0" layoutY="372.0" mnemonicParsing="false" onAction="#edytujAction" text="Edytuj" />
+                        <TextField fx:id="Imie2Field" layoutY="338.0" prefHeight="25.0" prefWidth="67.0" promptText="Imie" />
+                        <TextField fx:id="Nazwisko2Field" layoutX="67.0" layoutY="338.0" prefHeight="25.0" prefWidth="82.0" promptText="Nazwisko" />
+                        <TextField fx:id="StazPracy2Field" layoutX="149.0" layoutY="338.0" prefHeight="25.0" prefWidth="76.0" promptText="Staż pracy" />
+                        <TextField fx:id="NrTel2Field" layoutX="225.0" layoutY="338.0" prefHeight="25.0" prefWidth="101.0" promptText="Nr. tel" />
+                        <TextField fx:id="Wynagrodzenie2Field" layoutX="326.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" promptText="Wynagrodzenie" />
+                        <Button fx:id="dodaj" layoutX="687.0" layoutY="372.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Dodaj" />
+                        <Button fx:id="odswiezanie" layoutX="425.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
+                        <Button fx:id="wczytaj" layoutX="495.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
+                        <TextField fx:id="Login2Field" layoutX="616.0" layoutY="338.0" prefHeight="25.0" prefWidth="59.0" promptText="Login" />
+                        <Button fx:id="usunPracownika" layoutX="630.0" layoutY="372.0" mnemonicParsing="false" onAction="#usunAction" text="Usuń" />
+                        <Button fx:id="btnWyloguj" layoutX="10.0" layoutY="372.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />
+                        <ComboBox fx:id="comboStanowisko" layoutX="425.0" layoutY="338.0" prefHeight="25.0" prefWidth="102.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Dyrektor" />
+                                    <String fx:value="Kierownik" />
+                                    <String fx:value="Pracownik" />
+                                    
+            
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                  <ComboBox fx:id="comboSpecjalizacja" layoutX="527.0" layoutY="338.0" prefHeight="25.0" prefWidth="89.0"> 
+                      <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Mechanik" />
+            <String fx:value="Lakiernik" />
+            <String fx:value="Elektryk" />
+            <String fx:value="Wlukanizator" />
+            
+        </FXCollections>
+    </items>
+                  </ComboBox>
+                  <TextField fx:id="Haslo2Field" layoutX="673.0" layoutY="338.0" prefHeight="25.0" prefWidth="68.0" promptText="Hasło" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
 </TabPane>

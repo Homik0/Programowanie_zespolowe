@@ -14,9 +14,10 @@ public class ListaPracownikow {
     private final StringProperty Specjalizacja;
     private final StringProperty Stanowisko;
     private final StringProperty Login;
+    private final StringProperty Haslo;
     
 
- public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Specjalizacja,String Stanowisko,String Login) {
+ public ListaPracownikow(String Imie, String Nazwisko, String Staz, String Numer,String Wynagrodzenie,String Specjalizacja,String Stanowisko,String Login,String Haslo) {
         this.Imie = new SimpleStringProperty(Imie);
         this.Nazwisko = new SimpleStringProperty(Nazwisko);
         this.Staz = new SimpleStringProperty(Staz);
@@ -25,6 +26,7 @@ public class ListaPracownikow {
         this.Specjalizacja = new SimpleStringProperty(Specjalizacja);
         this.Stanowisko= new SimpleStringProperty(Stanowisko);
         this.Login= new SimpleStringProperty(Login);
+        this.Haslo= new SimpleStringProperty(Haslo);
     }
 
     public StringProperty getImie() {
@@ -58,6 +60,9 @@ public class ListaPracownikow {
     public String getLogin() {
         return Login.getValue();
     }
+     public String getHaslo() {
+        return Haslo.getValue();
+    }
     
     public void setImie(String value) {
         Imie.set(value);
@@ -79,6 +84,9 @@ public class ListaPracownikow {
     }
     public void setSpecjalizacja(String value) {
         Specjalizacja.set(value);
+    }
+     public void setHaslo(String value){
+        Haslo.set(value);
     }
     public void setStanowisko(String value){
         Stanowisko.set(value);
@@ -103,6 +111,9 @@ public class ListaPracownikow {
     }
     public StringProperty StanowiskoProperty() {
         return Stanowisko;
+    }
+    public StringProperty HasloProperty() {
+        return Haslo;
     }
     
  

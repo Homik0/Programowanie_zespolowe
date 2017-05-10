@@ -15,9 +15,7 @@
       <TextField fx:id="StazPracyField" layoutX="14.0" layoutY="80.0" promptText="Staz prac" />
       <TextField fx:id="NrTelField" layoutX="15.0" layoutY="113.0" promptText="Nr. tel" />
       <TextField fx:id="WynagrodzenieField" layoutX="14.0" layoutY="147.0" promptText="Wynagrodzenie" />
-      <TextField fx:id="LoginField" layoutX="15.0" layoutY="247.0" promptText="Login" />
-      <PasswordField fx:id="HasloField" layoutX="15.0" layoutY="283.0" promptText="Haslo" />
-      <ChoiceBox fx:id="choiseStanowisko" layoutX="14.0" layoutY="178.0" prefWidth="150.0">
+      <ComboBox fx:id="choiseStanowisko" layoutX="14.0" layoutY="178.0" prefWidth="150.0">
          <items>
         <FXCollections fx:factory="observableArrayList">
             <String fx:value="Dyrektor" />
@@ -25,8 +23,8 @@
             <String fx:value="Pracownik" />
         </FXCollections>
     </items>
-      </ChoiceBox>
-      <ChoiceBox fx:id="choiseSpecjalizacja" layoutX="15.0" layoutY="209.0" prefWidth="150.0" >
+      </ComboBox>
+      <ComboBox fx:id="choiseSpecjalizacja" layoutX="15.0" layoutY="209.0" prefWidth="150.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
             <String fx:value="Mechanik" />
@@ -36,6 +34,8 @@
             
         </FXCollections>
     </items>
-      </ChoiceBox>
+      </ComboBox>
+      <TextField fx:id="LoginField" layoutX="15.0" layoutY="247.0" promptText="Login" />
+      <PasswordField fx:id="HasloField" layoutX="15.0" layoutY="283.0" promptText="Haslo" />
    </children>
 </AnchorPane>
