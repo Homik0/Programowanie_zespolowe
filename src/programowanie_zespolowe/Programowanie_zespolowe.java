@@ -36,6 +36,14 @@ public class Programowanie_zespolowe extends Application {
         
     }
 
+    /**
+     *
+     * @param args
+     * W metodzie main, najpierw tworzy bazę danych Warsztat,
+     * nastepnie tworzy wszystkie tablice w bazie Warsztat,
+     * a na koniec uruchamia okno launch(args)
+     * 
+     */
     public static void main(String[] args) {
 
         // Create database Warsztat
