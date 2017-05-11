@@ -1,6 +1,11 @@
 package programowanie_zespolowe.PanelKierownika;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+/**
+ *
+ * @author 2marc
+ */
 public class ListaZadan {
     private final StringProperty Imie;
     private final StringProperty Nazwisko;
@@ -10,7 +15,17 @@ public class ListaZadan {
     private final StringProperty Date;
     private final StringProperty Status;
 
-public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String Spec,String Date,String Status) {
+    /**
+     *
+     * @param Imie
+     * @param Nazwisko
+     * @param NameCar
+     * @param ToDo
+     * @param Spec
+     * @param Date
+     * @param Status
+     */
+    public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String Spec,String Date,String Status) {
         this.Imie = new SimpleStringProperty(Imie);
         this.Nazwisko = new SimpleStringProperty(Nazwisko);
         this.NameCar = new SimpleStringProperty(NameCar);
@@ -20,51 +35,116 @@ public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String
         this.Status= new SimpleStringProperty(Status);
     }
 
+    /**
+     *
+     * @return Imie
+     */
     public String getImie() {
         return Imie.getValue();
     }
 
+    /**
+     *
+     * @return Nazwisko
+     */
     public String getNazwisko() {
         return Nazwisko.getValue();
     }
 
+    /**
+     *
+     * @return Nazwe Samochodu
+     */
     public String getNameCar() {
         return NameCar.getValue();
     }
 
+    /**
+     *
+     * @return DO zrobienia
+     */
     public String getToDo() {
         return ToDo.getValue();
     }
+
+    /**
+     *
+     * @return Specjalizacja
+     */
     public String getSpec() {
         return Spec.getValue();
     }
 
+    /**
+     *
+     * @return Data
+     */
     public String getDate() {
         return Date.getValue();
     }
 //ccsc
+
+    /**
+     *
+     * @return Stan Zadania
+     */
     public String getStatus() {
         return Status.getValue();
     }
+
+    /**
+     *
+     * @param value Imie
+     */
     public void setImie(String value) {
         Imie.set(value);
     }
+
+    /**
+     *
+     * @param value Nazwisko
+     */
     public void setNazwisko(String value) {
         Nazwisko.set(value);
     }
-      public void setNameCar(String value) {
+
+    /**
+     *
+     * @param value Nazwa Samochodu
+     */
+    public void setNameCar(String value) {
         NameCar.set(value);
     }
-      public void setToDo(String value) {
+
+    /**
+     *
+     * @param value do zrobienia
+     */
+    public void setToDo(String value) {
         ToDo.set(value);
     }
-      public void setSpec(String value) {
+
+    /**
+     *
+     * @param value specjalizacja
+     */
+    public void setSpec(String value) {
         Spec.set(value);
     }
+
+    /**
+     *
+     * @param value data
+     */
     public void setDate(String value) {
        Date.set(value);
     }
-      public void setStatus(String value) {
+
+    /**
+     *
+     * @param value stan zadania
+     */
+    public void setStatus(String value) {
        Status.set(value);
     }
 

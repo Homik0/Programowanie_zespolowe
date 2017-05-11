@@ -242,28 +242,29 @@ public class FXMLKierownikController implements Initializable {
     @FXML
     private void comboBox_wypelnienie() {
         try {
-            String sql = "select id_pracownik from pracownik where status='Jeszcze nie przydzielony'";
+            
+            String sql = "select id_pracownik, CONCAT(users.imie,' ', users.nazwisko) AS imie_nazwisko from users,pracownik where pracownik.id_user=users.id_user and status='Jeszcze nie przydzielony'";
             PreparedStatement pst = dc.Connect().prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("id_pracownik");
+                String name = rs.getString("imie_nazwisko");
                 idPracField.getItems().add(name);
             }
 
-        } catch (SQLException e) {
-            System.out.println("Error on Building Data1");
+        } catch (Exception e) {
+            System.out.println("Error on comboBox_wypelnienie");
         }
         try {
-            String sql = "select id_zlecenia from zlecenia where stan_car!='Gotowy'";
+            String sql = "select name_car from zlecenia where stan_car!='Gotowy'";
             PreparedStatement pst = dc.Connect().prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("id_zlecenia");
+                String name = rs.getString("name_car");
                 idZlecField.getItems().add(name);
             }
 
-        } catch (SQLException e) {
-            System.out.println("Error on Building Data2");
+        } catch (Exception e) {
+            System.out.println("Error on comboBox_wypelnienie");
         }
     }
 
@@ -370,7 +371,7 @@ public class FXMLKierownikController implements Initializable {
     ) {
         // TODO
         dc = new dbConnection();
-        comboBox_wypelnienie();
+       comboBox_wypelnienie();
 
     }
 }
