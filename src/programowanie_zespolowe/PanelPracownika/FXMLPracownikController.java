@@ -23,6 +23,10 @@ import programowanie_zespolowe.dbConnection;
 import static javax.swing.JOptionPane.showMessageDialog;
 import programowanie_zespolowe.Programowanie_zespolowe;
 
+/**
+ *
+ * Jest to konroler Pracownika
+ */
 public class FXMLPracownikController implements Initializable {
     
     private dbConnection dc;
@@ -43,16 +47,6 @@ public class FXMLPracownikController implements Initializable {
     private Button btnOdswClick;
     @FXML
     private Button btnWyloguj;
-    
-    @FXML
-    private void odswiezClick1(ActionEvent event) {
-        showMessageDialog(null, "Już właśnie odświeżyłeś!");
-//        try (Connection  connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/warsztat", "root", "root")) {
-//            try (Statement stmt = connection.createStatement()) {
-//                stmt.executeUpdate("CREATE TABLE a (id int not null primary key, value varchar(20))");
-//            }
-//        }
-    }
     
     @FXML
     private void odswiezClick(ActionEvent event) {

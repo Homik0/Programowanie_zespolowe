@@ -11,6 +11,13 @@ import java.util.logging.Logger;
  * @author Gomex
  */
 public class dbConnection {
+
+    /**
+     *
+     * @return conn; pozwala połączyć się z bazą danych, podajac dane: 
+     * adres bazy danych, login, haslo i sterownik.
+     *
+     */
     public Connection Connect() {
         try {
             String url = "jdbc:mariadb://localhost:3306/warsztat";
