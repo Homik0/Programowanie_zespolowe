@@ -53,22 +53,22 @@ public class ListaPracownikow {
     public void setStatus(String value){
         Status.set(value);
     }
-//    public StringProperty ImieProperty() {
-//        return Imie;
-//    }
-//    public StringProperty NazwiskoProperty() {
-//        return Nazwisko;
-//    }
-//   
-//    public StringProperty NumerProperty() {
-//        return Numer;
-//    }
-//    public StringProperty SpecjalizacjaProperty() {
-//        return Specjalizacja;
-//    }
-//    public StringProperty StatusProperty() {
-//        return Status;
-//    }
+    public StringProperty ImieProperty() {
+        return Imie;
+    }
+    public StringProperty NazwiskoProperty() {
+        return Nazwisko;
+    }
+   
+    public StringProperty NumerProperty() {
+        return Numer;
+    }
+    public StringProperty SpecjalizacjaProperty() {
+        return Specjalizacja;
+    }
+    public StringProperty StatusProperty() {
+        return Status;
+    }
     
  
 }

@@ -23,13 +23,13 @@
                                  </columns>
                               </TableColumn>
                               <TableColumn fx:id="columnNameCarZ" prefWidth="132.0" text="Nazwa samochodu" />
-                              <TableColumn fx:id="columnDateZ" minWidth="0.0" prefWidth="118.0" text="Data dodawania" />
                               <TableColumn fx:id="columnToDoZ" prefWidth="100.0" text="Do zrobienia" />
-                              <TableColumn fx:id="columnToDoZ1" maxWidth="201.0" prefWidth="87.0" text="Specjalizacja" />
+                              <TableColumn fx:id="columnDateZ" minWidth="0.0" prefWidth="118.0" text="Data dodawania" />
+                              <TableColumn fx:id="columnSpec" maxWidth="201.0" prefWidth="87.0" text="Specjalizacja" />
                               <TableColumn fx:id="columnStatusZ" minWidth="0.0" prefWidth="110.0" text="Stan zadania" />
                           </columns>
                         </TableView>
-                        <Button layoutX="593.0" layoutY="453.0" mnemonicParsing="false" onAction="#dodajZlecenie" text="Dodaj zadanie" />
+                        <Button fx:id="zadanie" layoutX="593.0" layoutY="453.0" mnemonicParsing="false" onAction="#dodajZadanie" text="Dodaj zadanie" />
                         <Button layoutX="480.0" layoutY="453.0" mnemonicParsing="false" text="Usun zadanie" />
                      </children>
                   </AnchorPane>

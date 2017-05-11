@@ -6,14 +6,16 @@ public class ListaZadan {
     private final StringProperty Nazwisko;
     private final StringProperty NameCar;
     private final StringProperty ToDo;
+    private final StringProperty Spec;
     private final StringProperty Date;
     private final StringProperty Status;
 
-public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String Date,String Status) {
+public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String Spec,String Date,String Status) {
         this.Imie = new SimpleStringProperty(Imie);
         this.Nazwisko = new SimpleStringProperty(Nazwisko);
         this.NameCar = new SimpleStringProperty(NameCar);
         this.ToDo = new SimpleStringProperty(ToDo);
+        this.Spec = new SimpleStringProperty(Spec);
         this.Date= new SimpleStringProperty(Date);
         this.Status= new SimpleStringProperty(Status);
     }
@@ -32,6 +34,9 @@ public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String
 
     public String getToDo() {
         return ToDo.getValue();
+    }
+    public String getSpec() {
+        return Spec.getValue();
     }
 
     public String getDate() {
@@ -52,6 +57,9 @@ public ListaZadan(String Imie, String Nazwisko,String NameCar,String ToDo,String
     }
       public void setToDo(String value) {
         ToDo.set(value);
+    }
+      public void setSpec(String value) {
+        Spec.set(value);
     }
     public void setDate(String value) {
        Date.set(value);
