@@ -16,7 +16,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="703.0">
                     <children>
                         <Accordion layoutX="76.0" layoutY="75.0" />
-                        <TableView fx:id="tablePracownik" prefHeight="329.0" prefWidth="841.0">
+                        <TableView fx:id="tablePracownik" onMouseClicked="#wczytajAction" prefHeight="329.0" prefWidth="841.0">
                             <columns>
                                 <TableColumn fx:id="columnImie" prefWidth="62.0" text="Imie " />
                                 <TableColumn fx:id="columnNazwisko" prefWidth="64.0" text="Nazwisko" />
@@ -36,8 +36,7 @@
                         <TextField fx:id="NrTel2Field" layoutX="225.0" layoutY="338.0" prefHeight="25.0" prefWidth="101.0" promptText="Nr. tel" />
                         <TextField fx:id="Wynagrodzenie2Field" layoutX="326.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" promptText="Wynagrodzenie" />
                         <Button fx:id="dodaj" layoutX="687.0" layoutY="372.0" mnemonicParsing="false" onAction="#onkoEdycji" text="Dodaj" />
-                        <Button fx:id="odswiezanie" layoutX="425.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
-                        <Button fx:id="wczytaj" layoutX="495.0" layoutY="372.0" mnemonicParsing="false" onAction="#wczytajAction" text="Wczytaj" />
+                        <Button fx:id="odswiezanie" layoutX="500.0" layoutY="372.0" mnemonicParsing="false" onAction="#odswiezClick" text="Ośwież" />
                         <TextField fx:id="Login2Field" layoutX="616.0" layoutY="338.0" prefHeight="25.0" prefWidth="59.0" promptText="Login" />
                         <Button fx:id="usunPracownika" layoutX="630.0" layoutY="372.0" mnemonicParsing="false" onAction="#usunAction" text="Usuń" />
                         <Button fx:id="btnWyloguj" layoutX="10.0" layoutY="372.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />

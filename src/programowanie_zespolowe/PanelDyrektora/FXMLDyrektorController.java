@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -152,9 +153,36 @@ public class FXMLDyrektorController implements Initializable {
         
 
     }
+     @FXML
+    private void wczytajBaze() {
 
+        try {
+            Connection conn = dc.Connect();
+            data = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
+            while (rs.next()) {
+                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+
+        columnImie.setCellValueFactory(new PropertyValueFactory<>("Imie"));
+        columnNazwisko.setCellValueFactory(new PropertyValueFactory<>("Nazwisko"));
+        columnStaz.setCellValueFactory(new PropertyValueFactory<>("Staz"));
+        columnNumer.setCellValueFactory(new PropertyValueFactory<>("Numer"));
+        columnWynagrodzenie.setCellValueFactory(new PropertyValueFactory<>("Wynagrodzenie"));
+        coulumStanowisko.setCellValueFactory(new PropertyValueFactory<>("Stanowisko"));
+        coulumSpecjalizacja.setCellValueFactory(new PropertyValueFactory<>("Specjalizacja"));
+        coulumLogin.setCellValueFactory(new PropertyValueFactory<>("Login"));
+        coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
+        tablePracownik.setItems(null);
+        tablePracownik.setItems(data);
+        
+
+    }
     @FXML
-    private void wczytajAction(ActionEvent event) {
+    private void wczytajAction(MouseEvent event) {
         int selectedIndex = tablePracownik.getSelectionModel().getSelectedIndex();
         Imie2Field.setText(columnImie.getCellData(selectedIndex));
         Nazwisko2Field.setText(columnNazwisko.getCellData(selectedIndex));
@@ -268,6 +296,7 @@ public class FXMLDyrektorController implements Initializable {
 
     @FXML
     private void onkoEdycji(ActionEvent event) throws IOException {
+        
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
         Scene edit_scene = new Scene(loader);
         Stage edit_stage = new Stage();
@@ -298,6 +327,6 @@ public class FXMLDyrektorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
-        
+       
     }
 }
