@@ -35,6 +35,8 @@ public class FXML_LogowanieController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,90 +111,89 @@ public class FXML_LogowanieController implements Initializable {
                             stage.show();
 
                         }
-                        
+
                     }
-                    
+
                 }
 
             }
             error.setText("Niewłaściwa nazwa użytkownika lub hasło");
-                    error.setTextFill(Color.web("#ff0000"));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     @FXML
     private void logowanieEnter(KeyEvent event) throws Exception {
-        if(event.getCode().equals(KeyCode.ENTER)){
-        String userName = login.getText().trim();
-        String password = passwordfx.getText().trim();
-        Connection conn = dc.Connect();
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            String userName = login.getText().trim();
+            String password = passwordfx.getText().trim();
+            Connection conn = dc.Connect();
 
-        String sql = "SELECT stan_user FROM users WHERE login = '"
-                + userName
-                + "' AND password = '"
-                + password
-                + "'";
+            String sql = "SELECT stan_user FROM users WHERE login = '"
+                    + userName
+                    + "' AND password = '"
+                    + password
+                    + "'";
 
-        try {
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+            try {
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
 
-            if (rs.next()) {
-                if (rs.getString(1).equals("Dyrektor")) {
-                    Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
-                    stageCloseLogowanie.close();
-
-                    Parent root = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektor.fxml"));
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.setResizable(false);
-                    stage.sizeToScene();
-                    stage.setTitle("Panel Dyrektora");
-                    stage.show();
-                } else {
-                    if (rs.getString(1).equals("Pracownik") || rs.getString(1).equals("Wolny")) {
+                if (rs.next()) {
+                    if (rs.getString(1).equals("Dyrektor")) {
                         Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                         stageCloseLogowanie.close();
 
-                        Parent root = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("PanelDyrektora/FXMLDyrektor.fxml"));
                         Stage stage = new Stage();
                         stage.setScene(new Scene(root));
                         stage.setResizable(false);
                         stage.sizeToScene();
-                        stage.setTitle("Panel Pracownika");
+                        stage.setTitle("Panel Dyrektora");
                         stage.show();
                     } else {
-                        if (rs.getString(1).equals("Kierownik")) {
+                        if (rs.getString(1).equals("Pracownik") || rs.getString(1).equals("Wolny")) {
                             Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
                             stageCloseLogowanie.close();
 
-                            Parent root = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("PanelPracownika/FXMLPracownik.fxml"));
                             Stage stage = new Stage();
                             stage.setScene(new Scene(root));
                             stage.setResizable(false);
                             stage.sizeToScene();
-                            stage.setTitle("Panel Kierownika");
+                            stage.setTitle("Panel Pracownika");
                             stage.show();
+                        } else {
+                            if (rs.getString(1).equals("Kierownik")) {
+                                Stage stageCloseLogowanie = (Stage) Zaloguj.getScene().getWindow();
+                                stageCloseLogowanie.close();
+
+                                Parent root = FXMLLoader.load(getClass().getResource("PanelKierownika/FXMLKierownik.fxml"));
+                                Stage stage = new Stage();
+                                stage.setScene(new Scene(root));
+                                stage.setResizable(false);
+                                stage.sizeToScene();
+                                stage.setTitle("Panel Kierownika");
+                                stage.show();
+
+                            }
 
                         }
-                        
-                    }
-                    
-                }
 
+                    }
+
+                }
+                error.setText("Niewłaściwa nazwa użytkownika lub hasło");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            error.setText("Niewłaściwa nazwa użytkownika lub hasło");
-                    error.setTextFill(Color.web("#ff0000"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         }
     }
+
     @FXML
-    private void hide(MouseEvent event
-    ) {
+    private void hide(MouseEvent event) {
         error.setText("");
     }
 

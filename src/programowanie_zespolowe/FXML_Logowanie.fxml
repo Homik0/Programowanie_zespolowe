@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -9,22 +10,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane id="AnchorPane" prefHeight="407.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXML_LogowanieController">
+<AnchorPane id="AnchorPane" prefHeight="395.0" prefWidth="300.0" styleClass="thebackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.FXML_LogowanieController">
     <children>
-        <Button fx:id="Zaloguj" layoutX="20.0" layoutY="268.0" mnemonicParsing="false" onAction="#logowanie" text="Zaloguj się" />
-        <Label layoutX="24.0" layoutY="82.0" prefHeight="96.0" prefWidth="246.0" text="Warsztat samochodowy" textAlignment="RIGHT" wrapText="true">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <TextField fx:id="login" layoutX="20.0" layoutY="178.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Nazwa użytkownika" />
-        <PasswordField fx:id="passwordfx" layoutX="20.0" layoutY="220.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" promptText="Hasło" />
-        <TextField id="password" fx:id="password" editable="false" layoutX="20.0" layoutY="220.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="25.0" prefWidth="140.0" visible="false" />
-        <Label fx:id="error" layoutX="24.0" layoutY="311.0" prefHeight="69.0" prefWidth="246.0" text="" wrapText="true">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <CheckBox fx:id="checkbox" layoutX="174.0" layoutY="224.0" mnemonicParsing="false" onAction="#hidePassword" text="Pokaż hasło" />
+      <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logoWarsztat.png" />
+         </image>
+      </ImageView>
+        <Label layoutX="28.0" layoutY="86.0" prefHeight="100.0" prefWidth="250.0" styleClass="title" text="Warsztat samochodowy" textAlignment="RIGHT" wrapText="true" />
+        <TextField fx:id="login" layoutX="28.0" layoutY="183.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="30.0" prefWidth="140.0" promptText="Nazwa użytkownika" styleClass="inputSection" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <PasswordField fx:id="passwordfx" layoutX="28.0" layoutY="226.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="30.0" prefWidth="140.0" promptText="Hasło" styleClass="inputSection" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <TextField id="password" fx:id="password" editable="false" layoutX="28.0" layoutY="226.0" onKeyPressed="#logowanieEnter" onMouseClicked="#hide" prefHeight="30.0" prefWidth="140.0" styleClass="inputSection" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <CheckBox fx:id="checkbox" layoutX="187.0" layoutY="233.0" mnemonicParsing="false" onAction="#hidePassword" styleClass="letters" text="Pokaż hasło" />
+        <Button fx:id="Zaloguj" layoutX="28.0" layoutY="282.0" styleClass="buttonLogowanie" mnemonicParsing="false" onAction="#logowanie" prefHeight="30.0" prefWidth="140.0" text="Zaloguj się" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+        <Label fx:id="error" layoutX="28.0" layoutY="312.0" prefHeight="70.0" prefWidth="250.0" styleClass="warningText" text="" wrapText="true" />
     </children>
 </AnchorPane>

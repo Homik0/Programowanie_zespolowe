@@ -32,6 +32,10 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import programowanie_zespolowe.Programowanie_zespolowe;
 import programowanie_zespolowe.dbConnection;
 
+/**
+ *
+ * @author atoja
+ */
 public class FXMLDyrektorController implements Initializable {
 
     private dbConnection dc;

@@ -126,6 +126,7 @@ public class ListaSamochodow {
     /**
      *
      * zwraca namecar
+     * @return 
      */
     public StringProperty namecarProperty() {
         return namecar;
@@ -134,6 +135,7 @@ public class ListaSamochodow {
     /**
      *
      * zwraca owner 
+     * @return 
      */
     public StringProperty ownerProperty() {
         return owner;
@@ -142,6 +144,7 @@ public class ListaSamochodow {
     /**
      *
      * zwraca nrtel
+     * @return 
      */
     public StringProperty nrtelProperty() {
         return nrtel;
@@ -150,6 +153,7 @@ public class ListaSamochodow {
     /**
      *
      * zwraca todo
+     * @return 
      */
     public StringProperty todoProperty() {
         return todo;
@@ -158,6 +162,7 @@ public class ListaSamochodow {
     /**
      *
      * zwraca stancar
+     * @return 
      */
     public StringProperty stancarProperty() {
         return stancar;
