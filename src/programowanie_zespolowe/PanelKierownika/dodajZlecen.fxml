@@ -6,22 +6,83 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="651.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
     <children>
-        <TextField fx:id="NazwasamochoduField" layoutX="60.0" layoutY="21.0" promptText="Nazwa samochodu" />
-        <TextField fx:id="WlascicielField" layoutX="60.0" layoutY="56.0" promptText="Wlasciciel" />
-        <TextField fx:id="NrtelField" layoutX="59.0" layoutY="89.0" promptText="Numer telefonu" />
-        <TextArea fx:id="DozrobieniaField" layoutX="34.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" promptText="Do zrobienia">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </TextArea>
-        <Button fx:id="infoAddZlecenie" contentDisplay="CENTER" layoutX="87.0" layoutY="380.0" mnemonicParsing="false" onAction="#infoAddZlecenie" text="Dodaj zlecenie" />
-        <ChoiceBox fx:id="StanField" layoutX="59.0" layoutY="333.0" prefWidth="150.0">
-            <String fx:value="Gotowy" />
-            <String fx:value="W naprawie" />
-            <String fx:value="Oczekujacy" />
-        </ChoiceBox>
+        <AnchorPane fx:id="dodajZadanieA" layoutX="18.0" layoutY="74.0" prefHeight="297.0" prefWidth="218.0" visible="false">
+            <children>
+                <TextField fx:id="todoField" layoutX="35.0" layoutY="172.0" promptText="Zadanie" />
+                <ComboBox fx:id="specialField" layoutX="34.0" layoutY="211.0" prefWidth="150.0" promptText="Specjalizacja">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Mechanik" />
+                            <String fx:value="Lakiernik" />
+                            <String fx:value="Elektryk" />
+                            <String fx:value="Wlukanizator" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            <ComboBox fx:id="idPracField" layoutX="34.0" layoutY="87.0" prefWidth="150.0" promptText="Pracownik" />
+            <TextField fx:id="idZlecField" layoutX="35.0" layoutY="130.0" promptText="Zlecenie" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="dodajZlecenieA" layoutX="18.0" layoutY="129.0" prefHeight="349.0" prefWidth="218.0">
+            <children>
+                <TextField fx:id="NazwasamochoduField" layoutX="35.0" layoutY="59.0" promptText="Nazwa samochodu" />
+                <TextField fx:id="WlascicielField" layoutX="35.0" layoutY="98.0" promptText="Wlasciciel" />
+                <TextField fx:id="NrtelField" layoutX="35.0" layoutY="135.0" promptText="Numer telefonu" />
+                <TextArea fx:id="DozrobieniaField" layoutX="9.0" layoutY="171.0" prefHeight="200.0" prefWidth="200.0" promptText="Do zrobienia" wrapText="true">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </TextArea>
+            </children>
+        </AnchorPane>
+        <Button fx:id="buttonZlecenie" contentDisplay="CENTER" layoutX="80.0" layoutY="28.0" mnemonicParsing="false" onAction="#infoAddZlecenie" text="Dodaj zlecenie" />
+        <Button layoutX="80.0" layoutY="104.0" mnemonicParsing="false" onAction="#odswiez" prefHeight="25.0" prefWidth="94.0" text="Odśwież" />
+        <Button fx:id="buttonZadanie" layoutX="80.0" layoutY="61.0" mnemonicParsing="false" onAction="#infoAddZadanie" prefHeight="25.0" prefWidth="94.0" text="Dodaj zadanie" />
+        <TabPane layoutX="249.0" layoutY="14.0" prefHeight="271.0" prefWidth="701.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Zlecenia">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="331.0">
+                            <children>
+                                <TableView fx:id="tableCar" onMouseClicked="#wyswietlZadanie" prefHeight="243.0" prefWidth="699.0">
+                                    <columns>
+                                        <TableColumn fx:id="columnNamecar" prefWidth="121.0" text="Nazwa samochodu" />
+                                        <TableColumn fx:id="columnOwner" prefWidth="99.0" text="Właściciel" />
+                                        <TableColumn fx:id="columnNrtel" prefWidth="120.0" text="Numer telefonu" />
+                                        <TableColumn fx:id="columnStancar" prefWidth="119.0" text="Stan samochodu" />
+                                        <TableColumn fx:id="columnTodo" prefWidth="239.0" text="Do zrobienia" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <TabPane layoutX="249.0" layoutY="315.0" prefHeight="271.0" prefWidth="701.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Zadania">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tableLista" layoutX="1.0" prefHeight="246.0" prefWidth="701.0">
+                                    <columns>
+                                        <TableColumn fx:id="nameCarZ" prefWidth="121.0" text="Nazwa samochodu" />
+                                        <TableColumn fx:id="ownerZ" prefWidth="99.0" text="Właściciel" />
+                                        <TableColumn fx:id="toDoZ" prefWidth="228.0" text="Zadanie" />
+                                        <TableColumn fx:id="spec" prefWidth="120.0" text="Specjalista" />
+                                        <TableColumn fx:id="statusZ" minWidth="100.0" prefWidth="130.0" text="Stan zadania" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
     </children>
 </AnchorPane>
