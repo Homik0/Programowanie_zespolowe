@@ -214,10 +214,9 @@ public class FXMLKierownikController implements Initializable {
             }
             String sql = "select zlecenia.name_car, zlecenia.owner,listazadan.to_do,pracownik.specjalizacja,listazadan.stan_zadania from pracownik,listazadan,zlecenia where pracownik.id_pracownik=listazadan.id_pracownik and listazadan.id_zlecenia=zlecenia.id_zlecenia and zlecenia.id_zlecenia='"+temp+"'";
             PreparedStatement pst = dc.Connect().prepareStatement(sql);
-            ResultSet rs2 = pst.executeQuery();
+            ResultSet rs2 = pst.executeQuery(sql);
             while (rs2.next()) {
-                data3.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));
-
+                data3.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));         
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -419,7 +418,7 @@ public class FXMLKierownikController implements Initializable {
         try {
             Connection conn = dc.Connect();
             data2 = FXCollections.observableArrayList();
-            ResultSet rs2 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,zlecenia.name_car,listazadan.to_do,pracownik.specjalizacja,listazadan.data_dodawania,listazadan.stan_zadania from users,pracownik,zlecenia ,listazadan where users.id_user=pracownik.id_user and listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and listazadan.stan_zadania='Oczekujace'");
+            ResultSet rs2 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,zlecenia.name_car,listazadan.to_do,pracownik.specjalizacja,listazadan.data_dodawania,listazadan.stan_zadania from users,pracownik,zlecenia ,listazadan where users.id_user=pracownik.id_user and listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and listazadan.stan_zadania='Oczekujacy'");
             while (rs2.next()) {
                 data2.add(new ListaZadan(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5), rs2.getString(6), rs2.getString(7)));
             }

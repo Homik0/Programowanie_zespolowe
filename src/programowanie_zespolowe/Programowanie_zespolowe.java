@@ -117,7 +117,7 @@ public class Programowanie_zespolowe extends Application {
                 //Create table Listazadan
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS listazadan ("
                         + "id_zadania INT(11) NOT NULL AUTO_INCREMENT,"
-                        + "id_pracownik INT(11) NOT NULL COLLATE 'utf8_polish_ci',"
+                        + "id_pracownik INT(11)  NULL DEFAULT NULL COLLATE 'utf8_polish_ci',"
                         + "id_zlecenia INT(11) NOT NULL COLLATE 'utf8_polish_ci',"
                         + "to_do VARCHAR(250) NOT NULL COLLATE 'utf8_polish_ci',"
                         + "specjalizacja VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
