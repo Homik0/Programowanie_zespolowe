@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="418.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
+<AnchorPane id="AnchorPane" prefHeight="418.0" prefWidth="178.0" styleClass="thebackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelDyrektora.FXMLDyrektorController">
    <children>
-      <Button fx:id="wprowadzZmiany" layoutX="26.0" layoutY="322.0" mnemonicParsing="false" onAction="#zmiana" prefHeight="25.0" prefWidth="104.0" text="Dodaj" />
+      <Button fx:id="wprowadzZmiany" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" onAction="#zmiana" prefHeight="25.0" prefWidth="104.0" text="Dodaj" />
       <TextField fx:id="ImieField" layoutX="14.0" layoutY="14.0" promptText="Imie" />
       <TextField fx:id="NazwiskoField" layoutX="14.0" layoutY="46.0" promptText="Nazwisko" />
       <TextField fx:id="StazPracyField" layoutX="14.0" layoutY="80.0" promptText="Staz prac" />

@@ -1,5 +1,8 @@
 package programowanie_zespolowe;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import static java.lang.Boolean.FALSE;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,6 +38,21 @@ public class Programowanie_zespolowe extends Application {
         logowanieStage.show();
         
     }
+    public static String readFile(String filePath) throws IOException {
+        String baza="";
+  FileReader fileReader = new FileReader(filePath);
+  BufferedReader bufferedReader = new BufferedReader(fileReader);
+  
+  String textLine = bufferedReader.readLine();
+  do {
+    baza=baza+textLine;
+  
+    textLine = bufferedReader.readLine();
+  } while(textLine != null);
+
+  bufferedReader.close();
+  return baza;
+}
 
     /**
      *
@@ -44,14 +62,29 @@ public class Programowanie_zespolowe extends Application {
      * a na koniec uruchamia okno launch(args)
      * 
      */
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+       String createUsers="";
+       String createPracownik="";
+       String createZlecenia="";
+       String createZadania="";
+       try{
+       createUsers=readFile("createUsers.txt");
+       createPracownik=readFile("createPracownik.txt");
+       createZlecenia=readFile("createZlecenia.txt");
+       createZadania=readFile("createZadania.txt");
+       
+           
+       }
+       catch(IOException e)
+       {
+           System.out.println("Nie znaleziono pliku");
+       }
         // Create database Warsztat
         try {
             String urlDB = "jdbc:mariadb://localhost:3306/";
             String userDB = "root";
             String passwordDB = "root";
-
+            
             Class.forName("org.mariadb.jdbc.Driver");
             Connection conn1 = DriverManager.getConnection(urlDB, userDB, passwordDB);
             Statement stDB = conn1.createStatement();
@@ -70,17 +103,8 @@ public class Programowanie_zespolowe extends Application {
             Statement st = conn.createStatement();
             try {
                 //Create table Users
-                st.executeUpdate("CREATE TABLE IF NOT EXISTS users ("
-                        + "id_user INT(11) NOT NULL AUTO_INCREMENT,"
-                        + "imie VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "nazwisko VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "login VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "password VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "stan_user VARCHAR(50) NOT NULL DEFAULT 'Pracownik' COLLATE 'utf8_polish_ci',"
-                        + "data_dolaczenia DATETIME NULL DEFAULT CURRENT_TIMESTAMP,"
-                        + "data_zalogowania DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,"
-                        + "PRIMARY KEY (id_user))"
-                        + "COLLATE='utf8_polish_ci';");
+                st.executeUpdate(createUsers);
+                
                 //Create konto Administratora (jako Dyrektor)
                 String sql = "SELECT login FROM users WHERE login='admin' and password='admin'";
                 PreparedStatement ps = conn.prepareStatement(sql);
@@ -91,44 +115,11 @@ public class Programowanie_zespolowe extends Application {
                 } else {
                 }
                 //Create table Zlecenia
-                st.executeUpdate("CREATE TABLE IF NOT EXISTS zlecenia ("
-                        + "id_zlecenia INT(64) NOT NULL AUTO_INCREMENT,"
-                        + "name_car VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "owner VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "nr_tel VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "to_do VARCHAR(250) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "stan_car VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "PRIMARY KEY(id_zlecenia))"
-                        + "COLLATE='utf8_polish_ci';");
+                st.executeUpdate(createZlecenia);
                 //Create table Pracownik
-                st.executeUpdate("CREATE TABLE IF NOT EXISTS pracownik ("
-                        + "id_pracownik INT(11) NOT NULL AUTO_INCREMENT,"
-                        + "id_user INT(11) NOT NULL,"
-                        + "staz_pracy VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "nr_tel VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "wynagrodzenie VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "stanowisko VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "specjalizacja VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "status VARCHAR(50) NOT NULL DEFAULT 'Jeszcze nie przydzielony' COLLATE 'utf8_polish_ci',"
-                        + "PRIMARY KEY (id_pracownik),"
-                        + "INDEX FK_pracownik_users (id_user),"
-                        + "CONSTRAINT FK_pracownik_users FOREIGN KEY (id_user) REFERENCES users (id_user))"
-                        + "COLLATE='utf8_polish_ci';");
+                st.executeUpdate(createPracownik);
                 //Create table Listazadan
-                st.executeUpdate("CREATE TABLE IF NOT EXISTS listazadan ("
-                        + "id_zadania INT(11) NOT NULL AUTO_INCREMENT,"
-                        + "id_pracownik INT(11)  NULL DEFAULT NULL COLLATE 'utf8_polish_ci',"
-                        + "id_zlecenia INT(11) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "to_do VARCHAR(250) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "specjalizacja VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "stan_zadania VARCHAR(50) NOT NULL COLLATE 'utf8_polish_ci',"
-                        + "data_dodawania DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,"
-                        + "PRIMARY KEY (id_zadania),"
-                        + "INDEX id_user (id_pracownik),"
-                        + "INDEX id_zlecenia (id_zlecenia),"
-                        + "CONSTRAINT FKPracownik FOREIGN KEY (id_pracownik) REFERENCES pracownik (id_pracownik),"
-                        + "CONSTRAINT FKZlecenia FOREIGN KEY (id_zlecenia) REFERENCES zlecenia (id_zlecenia))"
-                        + "COLLATE='utf8_polish_ci';");
+                st.executeUpdate(createZadania);
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);

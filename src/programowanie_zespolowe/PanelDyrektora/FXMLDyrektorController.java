@@ -159,7 +159,7 @@ public class FXMLDyrektorController implements Initializable {
     }
      @FXML
     private void wczytajBaze() {
-
+     
         try {
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
@@ -257,7 +257,7 @@ public class FXMLDyrektorController implements Initializable {
                     temp = rs.getString(1);
                 }
 
-                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "',password='"+Haslo2Field.getText() +"' where login='" + ZmiennaLogin + "'");
+                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',stan_user='" + (String)comboStanowisko.getValue() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "',password='"+Haslo2Field.getText() +"' where login='" + ZmiennaLogin + "'");
                 st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + (String)comboStanowisko.getValue() + "',specjalizacja='" + (String)comboSpecjalizacja.getValue() + "' where id_user='" + temp + "'");
 
             } catch (SQLException e) {
@@ -304,13 +304,14 @@ public class FXMLDyrektorController implements Initializable {
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
         Scene edit_scene = new Scene(loader);
         Stage edit_stage = new Stage();
-        edit_stage.setTitle("Edycja Pracownika");
+        edit_stage.setTitle("Dodawanie Pracownika");
         edit_stage.setScene(edit_scene);
         edit_stage.setResizable(false);
         edit_stage.sizeToScene();
         edit_stage.initModality(Modality.APPLICATION_MODAL);
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
+        
     }
 
     @FXML
@@ -331,6 +332,15 @@ public class FXMLDyrektorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
-       
+        
+       try{     
+           wczytajBaze();
+       }
+       catch(Exception e){
+           
+       }
+   
+      
+           
     }
 }
