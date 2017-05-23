@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="651.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="986.0" styleClass="thebackground" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
     <children>
         <AnchorPane fx:id="dodajZadanieA" layoutX="18.0" layoutY="74.0" prefHeight="297.0" prefWidth="218.0" visible="false">
             <children>
@@ -40,8 +40,8 @@
             </children>
         </AnchorPane>
         <Button fx:id="buttonZlecenie" contentDisplay="CENTER" layoutX="80.0" layoutY="28.0" mnemonicParsing="false" onAction="#infoAddZlecenie" text="Dodaj zlecenie" />
-        <Button layoutX="80.0" layoutY="104.0" mnemonicParsing="false" onAction="#odswiez" prefHeight="25.0" prefWidth="94.0" text="Odśwież" />
-        <Button fx:id="buttonZadanie" layoutX="80.0" layoutY="61.0" mnemonicParsing="false" onAction="#infoAddZadanie" prefHeight="25.0" prefWidth="94.0" text="Dodaj zadanie" />
+        <Button layoutX="80.0" layoutY="104.0" mnemonicParsing="false" onAction="#odswiez" prefHeight="26.0" prefWidth="101.0" text="Odśwież" />
+        <Button fx:id="buttonZadanie" layoutX="80.0" layoutY="61.0" mnemonicParsing="false" onAction="#infoAddZadanie" prefHeight="26.0" prefWidth="101.0" text="Dodaj zadanie" />
         <TabPane layoutX="249.0" layoutY="14.0" prefHeight="271.0" prefWidth="701.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Zlecenia">

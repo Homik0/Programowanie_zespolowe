@@ -2,28 +2,8 @@
  * Color Style: Light Blue (Jasnoniebieski)
  */
 
-/* Logowanie*/
 .thebackground {
     -fx-background-color : #B3E5FC;
-    }
-
-.title {
-    -fx-text-fill   : #01579B;
-    -fx-font-weight : bolder;
-    -fx-font-size   : 30px;
-    -fx-font-family : "Segoe UI Light";
-    }
-    
-.letters {
-    -fx-text-fill   : #01579B;
-    -fx-font-weight : bold;
-    -fx-font-family : "Segoe UI Light";
-    }
-
-.inputSection {
-    -fx-background-color : #E1F5FE;
-    -fx-font-family      : "Comic Sans MS";
-    -fx-alignment        : center;
     }
 
 .button {
@@ -38,8 +18,86 @@
 .button:hover {
     -fx-background-color : #01579B;
     }
+    
+.text-field {
+    -fx-background-color : #E1F5FE;
+    -fx-font-family      : "Comic Sans MS";
+    -fx-text-fill        : #0033cc; //kolor znaków do wpisania pole
+    -fx-alignment        : center;
+    }
+    
+.text-area .content{
+    -fx-background-color : #E1F5FE;
+    -fx-font-family      : "Comic Sans MS";
+    -fx-text-fill        : #0033cc;
+    -fx-alignment        : center;
+    }
+    
+.combo-box {
+    -fx-background-color : #E1F5FE;
+    //-fx-font-family      : "Comic Sans MS";
+    //-fx-text-fill        : #29B6F6;
+    //-fx-alignment        : center;
+    }
 
-/*Przycisk w panelu Logowanie*/
+.combo-box .list-cell {
+    -fx-background-color : #E1F5FE;
+    -fx-text-fill        : #0033cc; //albo red
+    //-fx-alignment        : center;
+    }
+
+.combo-box-popup .list-view {
+    -fx-background-color    : #01579B, red;
+    -fx-background-insets   : 0, 3;
+    -fx-effect              : dropshadow(three-pass-box, rgba(0 ,0, 0, 0.6), 8, 0.0, 0, 0);
+    }
+    
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background          : -fx-accent;
+    -fx-background-color    : -fx-selection-bar;
+    -fx-text-fill           : -fx-selection-bar-text;
+    }
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color    : -fx-selection-bar;
+    -fx-text-fill           : -fx-text-inner-color;
+    }
+
+.combo-box-base  {
+    //-fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";
+    -fx-color   : -fx-hover-base;
+}
+
+.combo-box-base:hover
+{
+    -fx-color   : black;
+}
+
+.combo-box-base:showing 
+{
+    -fx-color   : -fx-pressed-base;
+}
+
+/* Only for Panel Logowanie */
+.title {
+    -fx-text-fill   : #01579B;
+    -fx-font-weight : bolder;
+    -fx-font-size   : 30px;
+    -fx-font-family : "Segoe UI Light";
+    }
+    
+.letters {
+    -fx-text-fill   : #01579B;
+    -fx-font-weight : bold;
+    -fx-font-family : "Segoe UI Light";
+    }
+
+.inputLogin {
+    -fx-background-color : #E1F5FE;
+    -fx-font-family      : "Comic Sans MS";
+    -fx-alignment        : center;
+    }
+    
 .buttonLogowanie {
     -fx-font-size        : 15px;
     -fx-font-family      : "Segoe UI Light";
@@ -52,7 +110,7 @@
     -fx-font-family : "Comic Sans MS";
     }
 
-/*------------------------------------------------------ Wygląd Menu+Table*/
+/* Wygląd Menu+Table*/
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
