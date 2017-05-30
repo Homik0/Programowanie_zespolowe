@@ -80,7 +80,7 @@ public class DataBase {
                 System.err.println("Error" + e);
             }
         } catch (SQLException e) {
-            System.out.println("Uwaga! Błąd z połączeniem z bazą!");
+            System.out.println("Uwaga! Błąd z połączeniem z bazą! ");
         }
     }
 
