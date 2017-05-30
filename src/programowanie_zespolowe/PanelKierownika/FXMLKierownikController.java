@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -118,7 +119,15 @@ public class FXMLKierownikController implements Initializable {
     private AnchorPane dodajZadanieA;
     @FXML
     private AnchorPane dodajZlecenieA;
-
+    @FXML
+    private CheckBox pokaz;
+    @FXML
+    private void pokaz(ActionEvent event) throws Exception {
+        dodajZadanieA.managedProperty().bind(pokaz.selectedProperty());
+        dodajZadanieA.visibleProperty().bind(pokaz.selectedProperty());
+        dodajZlecenieA.managedProperty().bind(pokaz.selectedProperty().not());
+        dodajZlecenieA.visibleProperty().bind(pokaz.selectedProperty().not());
+    }
     @FXML
     private void infoAddZlecenie(ActionEvent event) {
         String nazwasamochodu;

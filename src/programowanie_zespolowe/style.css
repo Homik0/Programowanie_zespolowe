@@ -10,7 +10,6 @@
     -fx-background-color : #29B6F6;
     -fx-text-fill        : #E1F5FE;
     -fx-font-weight      : 900;
-    /*-fx-font-size        : 15px;*/
     -fx-alignment        : center;
     -fx-font-family      : "Comic Sans MS";
     }
@@ -22,7 +21,7 @@
 .text-field {
     -fx-background-color : #E1F5FE;
     -fx-font-family      : "Comic Sans MS";
-    -fx-text-fill        : #0033cc; //kolor znaków do wpisania pole
+    -fx-text-fill        : #0033cc;
     -fx-alignment        : center;
     }
     
@@ -35,15 +34,13 @@
     
 .combo-box {
     -fx-background-color : #E1F5FE;
-    //-fx-font-family      : "Comic Sans MS";
-    //-fx-text-fill        : #29B6F6;
-    //-fx-alignment        : center;
+
     }
 
 .combo-box .list-cell {
     -fx-background-color : #E1F5FE;
-    -fx-text-fill        : #0033cc; //albo red
-    //-fx-alignment        : center;
+    -fx-text-fill        : #0033cc; 
+
     }
 
 .combo-box-popup .list-view {
@@ -64,7 +61,7 @@
     }
 
 .combo-box-base  {
-    //-fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";
+
     -fx-color   : -fx-hover-base;
 }
 
