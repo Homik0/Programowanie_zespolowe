@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="986.0" styleClass="thebackground" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
+<AnchorPane id="AnchorPane" prefHeight="651.0" prefWidth="986.0" styleClass="thebackground" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelKierownika.FXMLKierownikController">
     <children>
         <AnchorPane fx:id="dodajZadanieA" layoutX="18.0" layoutY="74.0" prefHeight="297.0" prefWidth="218.0" visible="false">
             <children>
@@ -39,9 +39,9 @@
                 </TextArea>
             </children>
         </AnchorPane>
-        <Button fx:id="buttonZlecenie" contentDisplay="CENTER" layoutX="80.0" layoutY="28.0" mnemonicParsing="false" onAction="#infoAddZlecenie" text="Dodaj zlecenie" />
-        <Button layoutX="80.0" layoutY="104.0" mnemonicParsing="false" onAction="#odswiez" prefHeight="26.0" prefWidth="101.0" text="Odśwież" />
-        <Button fx:id="buttonZadanie" layoutX="80.0" layoutY="61.0" mnemonicParsing="false" onAction="#infoAddZadanie" prefHeight="26.0" prefWidth="101.0" text="Dodaj zadanie" />
+        <Button fx:id="buttonZlecenie" contentDisplay="CENTER" layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#infoAddZlecenie" prefHeight="26.0" prefWidth="129.0" text="Dodaj zlecenie" />
+        <Button layoutX="45.0" layoutY="104.0" mnemonicParsing="false" onAction="#odswiez" prefHeight="26.0" prefWidth="129.0" text="Odśwież" />
+        <Button fx:id="buttonZadanie" layoutX="45.0" layoutY="61.0" mnemonicParsing="false" onAction="#infoAddZadanie" prefHeight="26.0" prefWidth="129.0" text="Dodaj zadanie" />
         <TabPane layoutX="249.0" layoutY="14.0" prefHeight="271.0" prefWidth="701.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Zlecenia">
@@ -50,11 +50,11 @@
                             <children>
                                 <TableView fx:id="tableCar" onMouseClicked="#wyswietlZadanie" prefHeight="243.0" prefWidth="699.0">
                                     <columns>
-                                        <TableColumn fx:id="columnNamecar" prefWidth="121.0" text="Nazwa samochodu" />
-                                        <TableColumn fx:id="columnOwner" prefWidth="99.0" text="Właściciel" />
-                                        <TableColumn fx:id="columnNrtel" prefWidth="120.0" text="Numer telefonu" />
-                                        <TableColumn fx:id="columnStancar" prefWidth="119.0" text="Stan samochodu" />
-                                        <TableColumn fx:id="columnTodo" prefWidth="239.0" text="Do zrobienia" />
+                                        <TableColumn fx:id="columnNamecar" prefWidth="145.0" text="Nazwa samochodu" />
+                                        <TableColumn fx:id="columnOwner" prefWidth="87.0" text="Właściciel" />
+                                        <TableColumn fx:id="columnNrtel" prefWidth="127.0" text="Numer telefonu" />
+                                        <TableColumn fx:id="columnStancar" prefWidth="142.0" text="Stan samochodu" />
+                                        <TableColumn fx:id="columnTodo" prefWidth="197.0" text="Do zrobienia" />
                                     </columns>
                                 </TableView>
                             </children>
@@ -71,10 +71,10 @@
                             <children>
                                 <TableView fx:id="tableLista" layoutX="1.0" prefHeight="246.0" prefWidth="701.0">
                                     <columns>
-                                        <TableColumn fx:id="nameCarZ" prefWidth="121.0" text="Nazwa samochodu" />
-                                        <TableColumn fx:id="ownerZ" prefWidth="99.0" text="Właściciel" />
-                                        <TableColumn fx:id="toDoZ" prefWidth="228.0" text="Zadanie" />
-                                        <TableColumn fx:id="spec" prefWidth="120.0" text="Specjalista" />
+                                        <TableColumn fx:id="nameCarZ" prefWidth="146.0" text="Nazwa samochodu" />
+                                        <TableColumn fx:id="ownerZ" prefWidth="100.0" text="Właściciel" />
+                                        <TableColumn fx:id="toDoZ" prefWidth="202.0" text="Zadanie" />
+                                        <TableColumn fx:id="spec" prefWidth="120.0" text="Specjalizacja" />
                                         <TableColumn fx:id="statusZ" minWidth="100.0" prefWidth="130.0" text="Stan zadania" />
                                     </columns>
                                 </TableView>
