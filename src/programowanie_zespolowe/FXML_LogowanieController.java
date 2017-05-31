@@ -28,7 +28,8 @@ import javafx.stage.Stage;
  * @author Homik
  */
 public class FXML_LogowanieController implements Initializable {
-
+    public static String userNameP;
+    public static String passwordP;
     private dbConnection dc;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -61,6 +62,8 @@ public class FXML_LogowanieController implements Initializable {
     private void logowanie(ActionEvent event) throws Exception {
         String userName = login.getText().trim();
         String password = passwordfx.getText().trim();
+        userNameP=userName;
+        passwordP=password;
         Connection conn = dc.Connect();
 
         String sql = "SELECT stan_user FROM users WHERE login = '"

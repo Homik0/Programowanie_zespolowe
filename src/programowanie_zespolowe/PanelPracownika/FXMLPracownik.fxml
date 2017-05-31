@@ -4,52 +4,31 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" styleClass="thebackground" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelPracownika.FXMLPracownikController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="650.0" styleClass="thebackground" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="programowanie_zespolowe.PanelPracownika.FXMLPracownikController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="419.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Lista zadań">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
-                     <children>
-                        <TableView prefHeight="330.0" prefWidth="650.0">
-                          <columns>
-                            <TableColumn prefWidth="136.0" text="Kto ma wykonać?">
-                                 <columns>
-                                    <TableColumn prefWidth="75.0" text="Imię" />
-                                  <TableColumn prefWidth="75.0" text="Nazwisko" />
-                                 </columns>
-                              </TableColumn>
-                              <TableColumn prefWidth="145.0" text="Nazwa samochodu" />
-                              <TableColumn prefWidth="135.0" text="Do zrobienia" />
-                              <TableColumn prefWidth="119.0" text="Data dodawania" />
-                              <TableColumn prefWidth="101.0" text="Stan zadania" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Lista zleceń">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="600.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="650.0">
                      <children>
                         <TableView fx:id="tableCar" prefHeight="330.0" prefWidth="650.0">
                           <columns>
                               <TableColumn fx:id="columnNamecar" prefWidth="142.0" text="Nazwa samochodu" />
                               <TableColumn fx:id="columnOwner" prefWidth="87.0" text="Właściciel" />
-                              <TableColumn fx:id="columnNrtel" prefWidth="136.0" text="Numer telefonu" />
                               <TableColumn fx:id="columnTodo" prefWidth="165.0" text="Do zrobienia" />
-                              <TableColumn fx:id="columnStancar" prefWidth="120.0" text="Stan samochodu" />
+                              <TableColumn fx:id="columnData" prefWidth="136.0" text="Data Dodania" />
+                              <TableColumn fx:id="columnStancar" prefWidth="120.0" text="Stan zadania" />
                           </columns>
                         </TableView>
+                        <Button fx:id="btnOdswClick" layoutX="572.0" layoutY="350.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
+                        <Button fx:id="btnWyloguj" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />
+                        <Button fx:id="zakoncz" layoutX="425.0" layoutY="350.0" mnemonicParsing="false" onAction="#zakonczZadania" text="Zakończ zadanie" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="btnOdswClick" layoutX="576.0" layoutY="365.0" mnemonicParsing="false" onAction="#odswiezClick" text="Odśwież" />
-      <Button fx:id="btnWyloguj" layoutX="10.0" layoutY="365.0" mnemonicParsing="false" onAction="#wylogujClick" text="Wyloguj się" />
    </children>
 </AnchorPane>
