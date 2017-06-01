@@ -40,7 +40,7 @@ public class FXMLDyrektorController implements Initializable {
 
     private dbConnection dc;
     private String ZmiennaLogin;
-    private ObservableList<ListaPracownikow> data;
+    private ObservableList<ListaPracownikow> listaZadan;
     @FXML
     private Button dodaj;
     @FXML
@@ -134,10 +134,10 @@ public class FXMLDyrektorController implements Initializable {
 
         try {
             Connection conn = dc.Connect();
-            data = FXCollections.observableArrayList();
+            listaZadan = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
+                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -153,7 +153,7 @@ public class FXMLDyrektorController implements Initializable {
         coulumLogin.setCellValueFactory(new PropertyValueFactory<>("Login"));
         coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
 
-        tablePracownik.setItems(data);
+        tablePracownik.setItems(listaZadan);
         
 
     }
@@ -162,10 +162,10 @@ public class FXMLDyrektorController implements Initializable {
      
         try {
             Connection conn = dc.Connect();
-            data = FXCollections.observableArrayList();
+            listaZadan = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                data.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
+                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -181,7 +181,7 @@ public class FXMLDyrektorController implements Initializable {
         coulumLogin.setCellValueFactory(new PropertyValueFactory<>("Login"));
         coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
         tablePracownik.setItems(null);
-        tablePracownik.setItems(data);
+        tablePracownik.setItems(listaZadan);
         
 
     }

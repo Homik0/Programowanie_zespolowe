@@ -39,12 +39,11 @@ import programowanie_zespolowe.dbConnection;
 public class FXMLKierownikController implements Initializable {
 
     private dbConnection dc;
-    private String temp;
-    private String temp2;
-    private ObservableList<ListaSamochodow> data;
-    private ObservableList<ListaPracownikow> data1;
-    private ObservableList<ListaZadan> data2;
-    private ObservableList<Lista> data3;
+    private Stany stan = new Stany();
+    private ObservableList<ListaSamochodow> listaSamochodow;
+    private ObservableList<ListaPracownikow> listaPracownikow;
+    private ObservableList<ListaZadan> listaZadan;
+    private ObservableList<Lista> lista;
     @FXML
     private TableView<ListaSamochodow> tableCar;
     @FXML
@@ -130,22 +129,18 @@ public class FXMLKierownikController implements Initializable {
     }
     @FXML
     private void infoAddZlecenie(ActionEvent event) {
-        String nazwasamochodu;
-        String wlasciciel;
-        String nrtel;
-        String stansamochodu;
-        String dozrobienia;
-
-        nazwasamochodu = NazwasamochoduField.getText();
-        wlasciciel = WlascicielField.getText();
-        nrtel = NrtelField.getText();
-        dozrobienia = DozrobieniaField.getText();
+        String nazwasamochodu = NazwasamochoduField.getText();
+        String wlasciciel = WlascicielField.getText();
+        String nrtel = NrtelField.getText();
+        String dozrobienia = DozrobieniaField.getText();
+        
+        String ask = "insert into zlecenia (name_car, owner, nr_tel, to_do, stan_car) values ('" + nazwasamochodu + "','" + wlasciciel + "','" + nrtel + "','" + dozrobienia + "','Oczekujący')";
 
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                st.executeUpdate("insert into zlecenia (name_car, owner, nr_tel, to_do, stan_car) values ('" + nazwasamochodu + "','" + wlasciciel + "','" + nrtel + "','" + dozrobienia + "','Oczekujący')");
+                st.executeUpdate(ask);
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -153,24 +148,25 @@ public class FXMLKierownikController implements Initializable {
         } catch (SQLException e) {
             System.out.println("Uwaga! Błąd z połączeniem!");
         }
-                
         dodajZlecenieA.setVisible(false);
         dodajZadanieA.setVisible(true);
         odswiez();
-
     }
 
     @FXML
     private void selectAction(MouseEvent event) {
         int selectedIndex = tableCar.getSelectionModel().getSelectedIndex();
-        temp2 = (columnNamecar.getCellData(selectedIndex));
+        stan.setStan2(columnNamecar.getCellData(selectedIndex));
+        
+        String ask = "select id_zlecenia from zlecenia where name_car='" + stan.getStan2() + "'";
+        
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                ResultSet rs = conn.createStatement().executeQuery("select id_zlecenia from zlecenia where name_car='" + temp2 + "'");
+                ResultSet rs = conn.createStatement().executeQuery(ask);
                 if (rs.next()) {
-                    temp = rs.getString(1);
+                    stan.setStan1(rs.getString(1));
                 }
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -186,8 +182,8 @@ public class FXMLKierownikController implements Initializable {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                st.executeUpdate("DELETE from listazadan where id_zlecenia=" + temp);
-                st.executeUpdate("DELETE from zlecenia where id_zlecenia=" + temp);
+                st.executeUpdate("DELETE from listazadan where id_zlecenia=" + stan.getStan1());
+                st.executeUpdate("DELETE from zlecenia where id_zlecenia=" + stan.getStan1());
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -201,24 +197,27 @@ public class FXMLKierownikController implements Initializable {
     @FXML
     private void wyswietlZadanie(MouseEvent event) {
         int selectedIndex = tableCar.getSelectionModel().getSelectedIndex();
-        temp2 = (columnNamecar.getCellData(selectedIndex));
+        stan.setStan2((columnNamecar.getCellData(selectedIndex)));
+        
+        String ask = "select id_zlecenia from zlecenia where name_car='" + stan.getStan2() + "'";
+        
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                ResultSet rs = conn.createStatement().executeQuery("select id_zlecenia from zlecenia where name_car='" + temp2 + "'");
+                ResultSet rs = conn.createStatement().executeQuery(ask);
                 if (rs.next()) {
-                    temp = rs.getString(1);
+                    stan.setStan1(rs.getString(1));
                 }
             } catch (SQLException e) {
                 System.err.println("Error" + e);
             }
-            String sql ="select zlecenia.name_car, zlecenia.owner,listazadan.to_do,listazadan.specjalizacja,listazadan.stan_zadania from listazadan,zlecenia where listazadan.id_zlecenia=zlecenia.id_zlecenia and zlecenia.id_zlecenia='"+temp+"'";
+            String sql ="select zlecenia.name_car, zlecenia.owner,listazadan.to_do,listazadan.specjalizacja,listazadan.stan_zadania from listazadan,zlecenia where listazadan.id_zlecenia=zlecenia.id_zlecenia and zlecenia.id_zlecenia='"+stan.getStan1()+"'";
             PreparedStatement pst = dc.Connect().prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
-            data3 = FXCollections.observableArrayList();
+            lista = FXCollections.observableArrayList();
             while (rs2.next()) {
-               data3.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));         
+               lista.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));         
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -229,9 +228,9 @@ public class FXMLKierownikController implements Initializable {
         spec.setCellValueFactory(new PropertyValueFactory<>("Spec"));
         statusZ.setCellValueFactory(new PropertyValueFactory<>("Status"));
         tableLista.setItems(null);
-        tableLista.setItems(data3);
+        tableLista.setItems(lista);
     
-        idZlecField.setText(temp);    
+        idZlecField.setText(stan.getStan1());    
     }
 
     @FXML
@@ -270,16 +269,20 @@ public class FXMLKierownikController implements Initializable {
         id_zlec = idZlecField.getText();
         todo = todoField.getText();
         specjalizacja = specialField.getValue();
+        
+        String ask1 = "insert into listazadan  (id_zlecenia, to_do, specjalizacja, stan_zadania) values ('" + id_zlec + "','" + todo + "','" + specjalizacja + "','Oczekujace')";
+        String ask2 = "insert into listazadan (id_pracownik, id_zlecenia, to_do, specjalizacja, stan_zadania) values ('" + id_prac + "','" + id_zlec + "','" + todo + "','" + specjalizacja + "','W naprawie')";
+        String ask3 = "update pracownik SET status='Przydzielony'where id_pracownik='"+id_prac+"' ";
 
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
                 if ("".equals(id_prac))
-                st.executeUpdate("insert into listazadan  (id_zlecenia, to_do, specjalizacja, stan_zadania) values ('" + id_zlec + "','" + todo + "','" + specjalizacja + "','Oczekujace')");
+                st.executeUpdate(ask1);
                 else
-                st.executeUpdate("insert into listazadan (id_pracownik, id_zlecenia, to_do, specjalizacja, stan_zadania) values ('" + id_prac + "','" + id_zlec + "','" + todo + "','" + specjalizacja + "','W naprawie')");
-                st.executeUpdate("update pracownik SET status='Przydzielony'where id_pracownik='"+id_prac+"' ");
+                st.executeUpdate(ask2);
+                st.executeUpdate(ask3);
             } catch (SQLException e) {
                 System.err.println("Error" + e);
             }
@@ -318,13 +321,16 @@ public class FXMLKierownikController implements Initializable {
         String toDO = (columnToDoZ.getCellData(selectedIndex));
         String nameCar = (columnNameCarZ.getCellData(selectedIndex2));
         System.out.println(toDO);
+        
+        String ask = "select id_zadania from listazadan ,zlecenia where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.to_do='" + toDO + "' and zlecenia.name_car='"+nameCar+"'";
+        
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                ResultSet rs = conn.createStatement().executeQuery("select id_zadania from listazadan ,zlecenia where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.to_do='" + toDO + "' and zlecenia.name_car='"+nameCar+"'");
+                ResultSet rs = conn.createStatement().executeQuery(ask);
                 if (rs.next()) {
-                    temp = rs.getString(1);
+                    stan.setStan1(rs.getString(1));
                 }
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -336,13 +342,17 @@ public class FXMLKierownikController implements Initializable {
 
     @FXML
     private void infoAddPrzydzielPracownika(ActionEvent event) {
-
+        
+            String ask1 = "UPDATE listazadan SET listazadan.stan_zadania = 'W naprawie',	listazadan.id_pracownik = (select id_pracownik from pracownik, users where  users.id_user=pracownik.id_user and CONCAT(users.imie,' ', users.nazwisko) ='"+ idPracField.getValue()+"')WHERE id_zadania='" + stan.getStan1() + "'";
+            String ask2 = "UPDATE pracownik, users SET pracownik.status = 'Przydzielony' WHERE users.id_user=pracownik.id_user and CONCAT(users.imie,' ', users.nazwisko) ='"+idPracField.getValue()+"'";
+            
+            
             try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                st.executeUpdate("UPDATE listazadan SET listazadan.stan_zadania = 'W naprawie',	listazadan.id_pracownik = (select id_pracownik from pracownik, users where  users.id_user=pracownik.id_user and CONCAT(users.imie,' ', users.nazwisko) ='"+ idPracField.getValue()+"')WHERE id_zadania='" + temp + "'");
-                st.executeUpdate("UPDATE pracownik, users SET pracownik.status = 'Przydzielony' WHERE users.id_user=pracownik.id_user and CONCAT(users.imie,' ', users.nazwisko) ='"+idPracField.getValue()+"'");
+                st.executeUpdate(ask1);
+                st.executeUpdate(ask2);
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -356,12 +366,13 @@ public class FXMLKierownikController implements Initializable {
     @FXML
     private void odswiez() {
         //wyswietlanie listy zlecen
+        String ask = "select * from zlecenia";
         try {
             Connection conn = dc.Connect();
-            data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select * from zlecenia");
+            listaSamochodow = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery(ask);
             while (rs.next()) {
-                data.add(new ListaSamochodow(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+                listaSamochodow.add(new ListaSamochodow(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -374,18 +385,21 @@ public class FXMLKierownikController implements Initializable {
         columnStancar.setCellValueFactory(new PropertyValueFactory<>("stancar"));
 
         tableCar.setItems(null);
-        tableCar.setItems(data);
+        tableCar.setItems(listaSamochodow);
     }
 
     @FXML
     private void odswiezClick(ActionEvent event) {
         //wyswietlanie listy zlecen
+        
+        String ask = "select * from zlecenia";
+        
         try {
             Connection conn = dc.Connect();
-            data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select * from zlecenia");
+            listaSamochodow = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery(ask);
             while (rs.next()) {
-                data.add(new ListaSamochodow(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+                listaSamochodow.add(new ListaSamochodow(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -398,14 +412,16 @@ public class FXMLKierownikController implements Initializable {
         columnStancar.setCellValueFactory(new PropertyValueFactory<>("stancar"));
 
         tableCar.setItems(null);
-        tableCar.setItems(data);
+        tableCar.setItems(listaSamochodow);
         //wyswietlanie listy pracownikow
+        
+        String ask2 = "select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user and users.stan_user!='Dyrektor'";
         try {
             Connection conn = dc.Connect();
-            data1 = FXCollections.observableArrayList();
-            ResultSet rs1 = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.specjalizacja,pracownik.status,pracownik.nr_tel from users,pracownik where users.id_user=pracownik.id_user and users.stan_user!='Dyrektor'");
+            listaPracownikow = FXCollections.observableArrayList();
+            ResultSet rs1 = conn.createStatement().executeQuery(ask2);
             while (rs1.next()) {
-                data1.add(new ListaPracownikow(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5)));
+                listaPracownikow.add(new ListaPracownikow(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -416,14 +432,16 @@ public class FXMLKierownikController implements Initializable {
         columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         columnNumer.setCellValueFactory(new PropertyValueFactory<>("numer"));
 
-        tablePracownik.setItems(data1);
+        tablePracownik.setItems(listaPracownikow);
         //wyswietlanie listy zadan
+        
+        String ask3 = "select zlecenia.name_car,listazadan.to_do,listazadan.specjalizacja,listazadan.data_dodawania,listazadan.stan_zadania from zlecenia ,listazadan where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.stan_zadania='Oczekujace'";
         try {
             Connection conn = dc.Connect();
-            data3 = FXCollections.observableArrayList();
-            ResultSet rs2 = conn.createStatement().executeQuery("select zlecenia.name_car,listazadan.to_do,listazadan.specjalizacja,listazadan.data_dodawania,listazadan.stan_zadania from zlecenia ,listazadan where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.stan_zadania='Oczekujace'");
+            lista = FXCollections.observableArrayList();
+            ResultSet rs2 = conn.createStatement().executeQuery(ask3);
             while (rs2.next()) {
-                data3.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));
+                lista.add(new Lista(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -434,7 +452,7 @@ public class FXMLKierownikController implements Initializable {
         columnDateZ.setCellValueFactory(new PropertyValueFactory<>("Spec"));
         columnStatusZ.setCellValueFactory(new PropertyValueFactory<>("Status"));
 
-        tableZadania.setItems(data3);
+        tableZadania.setItems(lista);
 
     }
 
