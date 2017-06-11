@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -18,23 +20,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author Damian Kawka, Kamil Dudek, Marcin Patyka, Andrzej Patlewicz
  */
 public class Programowanie_zespolowe extends Application {
-
+    
     @Override
     public void start(Stage stage) throws Exception {
         Stage logowanieStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FXML_Logowanie.fxml"));
         Scene scene = new Scene(root);
-
         logowanieStage.setTitle("Logowanie");
         logowanieStage.setScene(scene);
         logowanieStage.setResizable(false);
         logowanieStage.sizeToScene();
         logowanieStage.show();
+
+
+
 
     }
 

@@ -1,13 +1,29 @@
 package programowanie_zespolowe.PanelDyrektora;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +33,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
@@ -29,6 +45,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static javax.swing.JOptionPane.showMessageDialog;
+import static programowanie_zespolowe.FXML_LogowanieController.passwordP;
+import static programowanie_zespolowe.FXML_LogowanieController.userNameP;
 import programowanie_zespolowe.Programowanie_zespolowe;
 import programowanie_zespolowe.dbConnection;
 
@@ -41,6 +59,7 @@ public class FXMLDyrektorController implements Initializable {
     private dbConnection dc;
     private String ZmiennaLogin;
     private ObservableList<ListaPracownikow> listaZadan;
+    private static String FILE = "C:\\Users\\Homik\\Documents\\NetBeansProjects\\Programowanie_zespolowe\\Raporty\\Raport-" + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()) + ".pdf";
     @FXML
     private Button dodaj;
     @FXML
@@ -81,7 +100,7 @@ public class FXMLDyrektorController implements Initializable {
     //pola textfield w panelu dyrektora
     @FXML
     private ComboBox comboStanowisko;
-     @FXML
+    @FXML
     private ComboBox comboSpecjalizacja;
     @FXML
     private TextField Imie2Field;
@@ -130,6 +149,161 @@ public class FXMLDyrektorController implements Initializable {
     }
 
     @FXML
+    public void GenerowanieRaportów(ActionEvent event) throws Exception, DocumentException {
+        String sql = "";
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(FILE));
+        document.open();
+        Font titleFont = FontFactory.getFont(FontFactory.COURIER_BOLD, 28, BaseColor.BLACK);
+        Font smallFont = FontFactory.getFont(FontFactory.COURIER_BOLD, 11, BaseColor.BLACK);
+        Paragraph docTitle = new Paragraph("RAPORT", titleFont);
+        docTitle.add(new Paragraph(""));
+        docTitle.add(new Paragraph("Raport wygenerowany dnia: " + new Date(), smallFont));
+        docTitle.add(new Paragraph(""));
+        try {
+            Connection conn = dc.Connect();
+            ResultSet rs = conn.createStatement().executeQuery("select concat(imie,' ',nazwisko) from users where login='" + userNameP + "' and password='" + passwordP + "'");
+            if (rs.next()) {
+                sql = rs.toString();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error" + e);
+        }
+        docTitle.add(new Paragraph("Raport wygenerowany przez:" +" "+ sql, smallFont));
+        docTitle.add(new Paragraph(""));
+        document.add(docTitle);
+        Paragraph statusTitle = new Paragraph("Status pracowników:", titleFont);
+        statusTitle.add(new Paragraph(""));
+        statusTitle.add(new Paragraph(""));
+        document.add(statusTitle);
+        PdfPTable table1 = new PdfPTable(8);
+        table1.setWidthPercentage(500 / 5.23f);
+        table1.addCell(getNormalCell("Id_pracownika",  8));
+        table1.addCell(getNormalCell("Imie i nazwisko",  8));
+        table1.addCell(getNormalCell("Staz pracy", 8));
+        table1.addCell(getNormalCell("nr. tel.", 8));
+        table1.addCell(getNormalCell("Wynagrodzenie", 8));
+        table1.addCell(getNormalCell("Stanowisko", 8));
+        table1.addCell(getNormalCell("Specjalizacja", 8));
+        table1.addCell(getNormalCell("Status", 8));
+        document.add(table1);
+
+        try {
+            Connection conn = dc.Connect();
+            ResultSet rs = conn.createStatement().executeQuery("select id_pracownik,concat(users.imie,' ',users.nazwisko),staz_pracy,nr_tel,wynagrodzenie,stanowisko,specjalizacja, status from pracownik,users where users.id_user=pracownik.id_user");
+            while (rs.next()) {
+                PdfPTable table = new PdfPTable(8);
+                table.setWidthPercentage(500 / 5.23f);
+                for (int aw = 0; aw < 8; aw++) {
+                    table.addCell(getNormalCell(rs.getString(aw + 1),8));
+                }
+                document.add(table);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        Paragraph dodaneTitle = new Paragraph("Dodane zadania z ostatnich 24H:", titleFont);
+        dodaneTitle.add(new Paragraph(""));
+        dodaneTitle.add(new Paragraph(""));
+        document.add(dodaneTitle);
+        PdfPTable table2 = new PdfPTable(6);
+        table2.setWidthPercentage(375 / 5.23f);
+        table2.addCell(getNormalCell("Id_zadania",  8));
+        table2.addCell(getNormalCell("Imie i nazwisko",  8));
+        table2.addCell(getNormalCell("Samochod", 8));
+        table2.addCell(getNormalCell("Do zrobienia", 8));
+        table2.addCell(getNormalCell("Specjalizacja", 8));
+        table2.addCell(getNormalCell("Data dodania", 8));
+        document.add(table2);
+
+        try {
+            Connection conn = dc.Connect();
+            ResultSet rs = conn.createStatement().executeQuery("select listazadan.id_zadania, concat(users.imie,' ',users.nazwisko),zlecenia.name_car,listazadan.to_do,listazadan.specjalizacja,listazadan.data_dodawania from listazadan, zlecenia, users,pracownik where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and pracownik.id_user=users.id_user  and DATE_SUB(CURDATE(),INTERVAL 1 DAY)<=listazadan.data_dodawania");
+            while (rs.next()) {
+                PdfPTable table = new PdfPTable(6);
+                table.setWidthPercentage(375 / 5.23f);
+                for (int aw = 0; aw < 6; aw++) {
+                    table.addCell(getNormalCell(rs.getString(aw + 1),8));
+                }
+                document.add(table);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        Paragraph dodaneZlTitle = new Paragraph("Dodane Zlecenia z ostatnich 24H:", titleFont);
+        dodaneZlTitle.add(new Paragraph(""));
+        dodaneZlTitle.add(new Paragraph(""));
+        document.add(dodaneZlTitle);
+        PdfPTable table4 = new PdfPTable(7);
+        table4.setWidthPercentage(437 / 5.23f);
+        table4.addCell(getNormalCell("Id_zlecenia",  8));
+        table4.addCell(getNormalCell("Samochod",  8));
+        table4.addCell(getNormalCell("Owner", 8));
+        table4.addCell(getNormalCell("Nr. tel.", 8));
+        table4.addCell(getNormalCell("Do zrobienia", 8));
+        table4.addCell(getNormalCell("Stan samochodu", 8));
+        table4.addCell(getNormalCell("Data dodania", 8));
+        document.add(table4);
+
+        try {
+            Connection conn = dc.Connect();
+            ResultSet rs = conn.createStatement().executeQuery("select * from  zlecenia where  DATE_SUB(CURDATE(),INTERVAL 1 DAY)<=zlecenia.data_dodawania");
+            while (rs.next()) {
+                PdfPTable table = new PdfPTable(7);
+                table.setWidthPercentage(437 / 5.23f);
+                for (int aw = 0; aw < 7; aw++) {
+                    table.addCell(getNormalCell(rs.getString(aw + 1),8));
+                }
+                document.add(table);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        
+        Paragraph wykonanieTitle = new Paragraph("Zakonczone zadania z ostatnich 24H:", titleFont);
+        wykonanieTitle.add(new Paragraph(""));
+        wykonanieTitle.add(new Paragraph(""));
+        document.add(wykonanieTitle);
+        PdfPTable table3 = new PdfPTable(4);
+        table3.setWidthPercentage(250 / 5.23f);
+        table3.addCell(getNormalCell("Id_zadania",  8));
+        table3.addCell(getNormalCell("Imie i nazwisko",  8));
+        table3.addCell(getNormalCell("Samochod", 8));
+        table3.addCell(getNormalCell("Do zrobienia", 8));
+        document.add(table3);
+
+        try {
+            Connection conn = dc.Connect();
+            ResultSet rs = conn.createStatement().executeQuery("select listazadan.id_zadania, concat(users.imie,' ',users.nazwisko),zlecenia.name_car,listazadan.to_do from listazadan, users,pracownik,zlecenia where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and pracownik.id_user=users.id_user and listazadan.stan_zadania='Zakonczone'");
+            while (rs.next()) {
+                PdfPTable table = new PdfPTable(4);
+                table.setWidthPercentage(250 / 5.23f);
+                for (int aw = 0; aw < 4; aw++) {
+                    table.addCell(getNormalCell(rs.getString(aw + 1),8));
+                }
+                document.add(table);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        }
+        document.close();
+
+    }
+
+    public static PdfPCell getNormalCell(String string, float size)
+            throws DocumentException, IOException {
+        if (string != null && "".equals(string)) {
+            return new PdfPCell();
+        } 
+
+        Font f= FontFactory.getFont("Arial");
+        f.setSize(size);
+        PdfPCell cell = new PdfPCell(new Phrase(string, f));
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        return cell;
+    }
+
+    @FXML
     private void odswiezClick(ActionEvent event) {
 
         try {
@@ -137,7 +311,7 @@ public class FXMLDyrektorController implements Initializable {
             listaZadan = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
+                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -154,18 +328,18 @@ public class FXMLDyrektorController implements Initializable {
         coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
 
         tablePracownik.setItems(listaZadan);
-        
 
     }
-     @FXML
+
+    @FXML
     private void wczytajBaze() {
-     
+
         try {
             Connection conn = dc.Connect();
             listaZadan = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("select users.imie,users.nazwisko,pracownik.staz_pracy,pracownik.nr_tel,pracownik.wynagrodzenie,pracownik.specjalizacja,pracownik.stanowisko,users.login,users.password from users,pracownik where users.id_user=pracownik.id_user");
             while (rs.next()) {
-                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getString(9)));
+                listaZadan.add(new ListaPracownikow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             }
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
@@ -182,9 +356,9 @@ public class FXMLDyrektorController implements Initializable {
         coulumHaslo.setCellValueFactory(new PropertyValueFactory<>("Haslo"));
         tablePracownik.setItems(null);
         tablePracownik.setItems(listaZadan);
-        
 
     }
+
     @FXML
     private void wczytajAction(MouseEvent event) {
         int selectedIndex = tablePracownik.getSelectionModel().getSelectedIndex();
@@ -192,7 +366,7 @@ public class FXMLDyrektorController implements Initializable {
         Nazwisko2Field.setText(columnNazwisko.getCellData(selectedIndex));
         StazPracy2Field.setText(columnStaz.getCellData(selectedIndex));
         NrTel2Field.setText(columnNumer.getCellData(selectedIndex));
-        Wynagrodzenie2Field.setText(columnWynagrodzenie.getCellData(selectedIndex));      
+        Wynagrodzenie2Field.setText(columnWynagrodzenie.getCellData(selectedIndex));
         Login2Field.setText(coulumLogin.getCellData(selectedIndex));
         ZmiennaLogin = coulumLogin.getCellData(selectedIndex);
         Haslo2Field.setText(coulumHaslo.getCellData(selectedIndex));
@@ -257,8 +431,8 @@ public class FXMLDyrektorController implements Initializable {
                     temp = rs.getString(1);
                 }
 
-                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',stan_user='" + (String)comboStanowisko.getValue() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "',password='"+Haslo2Field.getText() +"' where login='" + ZmiennaLogin + "'");
-                st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + (String)comboStanowisko.getValue() + "',specjalizacja='" + (String)comboSpecjalizacja.getValue() + "' where id_user='" + temp + "'");
+                st.executeUpdate("update users set imie='" + Imie2Field.getText() + "',stan_user='" + (String) comboStanowisko.getValue() + "',nazwisko='" + Nazwisko2Field.getText() + "',login='" + Login2Field.getText() + "',password='" + Haslo2Field.getText() + "' where login='" + ZmiennaLogin + "'");
+                st.executeUpdate("update pracownik set staz_pracy='" + StazPracy2Field.getText() + "',nr_tel='" + NrTel2Field.getText() + "',wynagrodzenie='" + Wynagrodzenie2Field.getText() + "',stanowisko='" + (String) comboStanowisko.getValue() + "',specjalizacja='" + (String) comboSpecjalizacja.getValue() + "' where id_user='" + temp + "'");
 
             } catch (SQLException e) {
                 System.err.println("Error" + e);
@@ -300,7 +474,7 @@ public class FXMLDyrektorController implements Initializable {
 
     @FXML
     private void onkoEdycji(ActionEvent event) throws IOException {
-        
+
         Parent loader = FXMLLoader.load(getClass().getResource("edycjaPracownika.fxml"));
         Scene edit_scene = new Scene(loader);
         Stage edit_stage = new Stage();
@@ -311,7 +485,7 @@ public class FXMLDyrektorController implements Initializable {
         edit_stage.initModality(Modality.APPLICATION_MODAL);
         edit_stage.initOwner(edycja.getScene().getWindow());
         edit_stage.showAndWait();
-        
+
     }
 
     @FXML
@@ -332,15 +506,12 @@ public class FXMLDyrektorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
-        
-       try{     
-           wczytajBaze();
-       }
-       catch(Exception e){
-           
-       }
-   
-      
-           
+
+        try {
+            wczytajBaze();
+        } catch (Exception e) {
+
+        }
+
     }
 }

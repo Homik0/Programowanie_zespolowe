@@ -1,10 +1,21 @@
 package programowanie_zespolowe;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +32,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 /**
  * FXML Controller class
  *
@@ -33,7 +43,8 @@ public class FXML_LogowanieController implements Initializable {
     private dbConnection dc;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-
+    
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -43,7 +54,10 @@ public class FXML_LogowanieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         dc = new dbConnection();
+                
+
     }
+
     @FXML
     private Label error;
 
@@ -112,7 +126,7 @@ public class FXML_LogowanieController implements Initializable {
                             stage.sizeToScene();
                             stage.setTitle("Panel Kierownika");
                             stage.show();
-
+                            
                         }
 
                     }
@@ -133,7 +147,6 @@ public class FXML_LogowanieController implements Initializable {
             String userName = login.getText().trim();
             String password = passwordfx.getText().trim();
             Connection conn = dc.Connect();
-
             String sql = "SELECT stan_user FROM users WHERE login = '"
                     + userName
                     + "' AND password = '"
@@ -180,7 +193,7 @@ public class FXML_LogowanieController implements Initializable {
                                 stage.sizeToScene();
                                 stage.setTitle("Panel Kierownika");
                                 stage.show();
-
+                                
                             }
 
                         }
