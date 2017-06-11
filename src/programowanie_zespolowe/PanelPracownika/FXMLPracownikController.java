@@ -20,6 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import static programowanie_zespolowe.FXML_LogowanieController.passwordP;
+import static programowanie_zespolowe.FXML_LogowanieController.userNameP;
 import programowanie_zespolowe.dbConnection;
 import programowanie_zespolowe.Programowanie_zespolowe;
 
@@ -51,7 +53,7 @@ public class FXMLPracownikController implements Initializable {
         try {
             Connection conn = dc.Connect();
             listaSamochodow = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("select zlecenia.name_car, zlecenia.owner, listazadan.to_do,listazadan.data_dodawania,listazadan.stan_zadania from listazadan, zlecenia, pracownik,users where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and users.id_user=pracownik.id_user and users.login='" + programowanie_zespolowe.FXML_LogowanieController.userNameP + "'and users.password='" + programowanie_zespolowe.FXML_LogowanieController.passwordP + "'");
+            ResultSet rs = conn.createStatement().executeQuery("select zlecenia.name_car, zlecenia.owner, listazadan.to_do,listazadan.data_dodawania,listazadan.stan_zadania from listazadan, zlecenia, pracownik,users where listazadan.id_zlecenia=zlecenia.id_zlecenia and listazadan.id_pracownik=pracownik.id_pracownik and users.id_user=pracownik.id_user and users.login='" +userNameP + "'and users.password='" + passwordP + "'");
             while (rs.next()) {
                 listaSamochodow.add(new ListaSamochodow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
@@ -73,23 +75,22 @@ public class FXMLPracownikController implements Initializable {
     @FXML
     private void zakonczZadania(ActionEvent event) throws IOException {
         int selectedIndex = tableCar.getSelectionModel().getSelectedIndex();
-        String Data = (columnTodo.getCellData(selectedIndex));
+        String Data = (columnData.getCellData(selectedIndex));
         String idZadania = "";
-        System.out.println(Data);
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();
             try {
-                ResultSet rs = conn.createStatement().executeQuery("select id_zadania from listazadan where to_do='" + Data + "'");
+                ResultSet rs = conn.createStatement().executeQuery("select id_zadania from listazadan where data_dodawania='" + Data + "'");
                 if (rs.next()) {
 
                     idZadania = rs.getString(1);
-                    System.out.println(idZadania);
                 }
             } catch (SQLException e) {
                 System.err.println("Error" + e);
             }
             st.executeUpdate("update listazadan SET stan_zadania='Zakonczone' where id_zadania='" + idZadania + "'");
+            st.executeUpdate("update pracownik, users SET pracownik.status='Jeszcze nie przydzielony' where users.id_user=pracownik.id_user and users.login='" + userNameP + "'and users.password='" + passwordP + "'");
         } catch (SQLException ex) {
             System.err.println("Error" + ex);
         }

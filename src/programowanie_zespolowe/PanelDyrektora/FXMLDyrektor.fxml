@@ -60,6 +60,7 @@
                             </items>
                         </ComboBox>
                         <TextField fx:id="Haslo2Field" layoutX="728.0" layoutY="340.0" prefHeight="25.0" prefWidth="70.0" promptText="Hasło" />
+                  <Button layoutX="457.0" layoutY="376.0" mnemonicParsing="false" onAction="#GenerowanieRaportów" text="Raport" />
                     </children>
                 </AnchorPane>
             </content>

@@ -469,7 +469,6 @@ public class FXMLKierownikController implements Initializable {
         stage.setTitle("Logowanie");
         stage.show();
     }
-
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
