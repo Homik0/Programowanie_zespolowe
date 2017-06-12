@@ -23,20 +23,8 @@ public class DataBase {
     private final dbConnection dc;
 
     public DataBase(String urlDB, String userDB, String passwordDB) {
-
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection conn1 = DriverManager.getConnection(urlDB, userDB, passwordDB);
-            Statement stDB = conn1.createStatement();
-
-            stDB.executeUpdate("CREATE DATABASE IF NOT EXISTS warsztat");
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(dbConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         dc = new dbConnection();
-        createAdmin();
+//        createAdmin();
     }
 
     public void createTable(String fileName) {
@@ -62,7 +50,7 @@ public class DataBase {
         }
     }
 
-    private void createAdmin() {
+    public void createAdmin() {
         try {
             Connection conn = dc.Connect();
             Statement st = conn.createStatement();

@@ -67,6 +67,17 @@ public class Programowanie_zespolowe extends Application {
      *
      */
     public static void main(String[] args) throws IOException {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection conn1 = DriverManager.getConnection("jdbc:mariadb://localhost:3306/", "root", "root");
+            Statement stDB = conn1.createStatement();
+
+            stDB.executeUpdate("CREATE DATABASE IF NOT EXISTS warsztat");
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(dbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String users = "createUsers.txt";
         String pracownik = "createPracownik.txt";
         String zlecenia = "createZlecenia.txt";
@@ -81,6 +92,7 @@ public class Programowanie_zespolowe extends Application {
         warsztat.createTable(pracownik);
         warsztat.createTable(zlecenia);
         warsztat.createTable(zadania);
+        warsztat.createAdmin();
 
         launch(args);
     }
